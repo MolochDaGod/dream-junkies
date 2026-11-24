@@ -1,0 +1,1063 @@
+{
+  "layer": "game",
+  "base": "Stick Wars: Legacy",
+  "rule": "One lane. One statue. The statue is a generation captain NFT. Troops are trained by that captain, not picked from a second army book.",
+  "keyPass": {
+    "id": "gen0",
+    "name": "Golden Trident",
+    "count": 666,
+    "portraitVideo": "https://media.base44.com/videos/public/6ac25d429e02c0bfd4facc6a/29f33a5cf__users_ca83bd92-7b77-49ea-9427-96310363b4c3_generated_26396ec8-f11f-41c5-ab41-c0183904e62a_generated_video.mp4",
+    "law": "Holding a Golden Trident is the key pass into later generations. It is a relic, not a captain."
+  },
+  "currencies": {
+    "dream": {
+      "id": "DREAM",
+      "spendsOn": "Training a troop from the captain's tree."
+    },
+    "essence": {
+      "id": "DREAM_ESSENCE",
+      "spendsOn": "Upgrading a trained troop. Each upgrade also consumes that captain's lore item."
+    }
+  },
+  "match": {
+    "player": "Choose one captain you hold.",
+    "enemy": "Season one default enemy statue is Tengu Legends. A mirror match is any other captain.",
+    "win": "Destroy the enemy statue. Same win as Stick Wars Legacy."
+  },
+  "captains": [
+    {
+      "id": "oze",
+      "gen": 1,
+      "name": "Oze",
+      "assetKey": "gen1_oze",
+      "role": "Warrior king",
+      "power": "Founder of Rem Forge",
+      "realm": "rem-forge",
+      "bias": "line",
+      "blurb": "The warrior who left Aurelia with Wu and raised the first forge.",
+      "portrait": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/4e6ff79ca_2e0178ec-5fcb-4f94-851c-40713551c4c4.jpeg",
+      "layer": "game",
+      "statue": "Stick Wars Legacy statue, replaced by this generation character.",
+      "tree": [
+        {
+          "tier": 1,
+          "stickRole": "miner",
+          "name": "Oze Miner",
+          "duty": "Works the line's purse.",
+          "skill": "Anvil Pace",
+          "unlocksPrevious": null,
+          "train": {
+            "dream": 40
+          },
+          "upgrade": {
+            "essence": 12,
+            "dream": 10,
+            "loreItem": "Rem Forge Ingot"
+          }
+        },
+        {
+          "tier": 2,
+          "stickRole": "swordwrath",
+          "name": "Oze Line",
+          "duty": "Marches and strikes in melee.",
+          "skill": "Forge Cut",
+          "unlocksPrevious": 1,
+          "train": {
+            "dream": 55
+          },
+          "upgrade": {
+            "essence": 18,
+            "dream": 18,
+            "loreItem": "Rem Forge Ingot"
+          }
+        },
+        {
+          "tier": 3,
+          "stickRole": "archidon",
+          "name": "Oze Mark",
+          "duty": "Holds range behind the line.",
+          "skill": "Ridge Shot",
+          "unlocksPrevious": 2,
+          "train": {
+            "dream": 70
+          },
+          "upgrade": {
+            "essence": 24,
+            "dream": 26,
+            "loreItem": "Rem Forge Ingot"
+          }
+        },
+        {
+          "tier": 4,
+          "stickRole": "spearton",
+          "name": "Oze Wall",
+          "duty": "The shield that keeps the march alive.",
+          "skill": "Anvil Wall",
+          "unlocksPrevious": 3,
+          "train": {
+            "dream": 85
+          },
+          "upgrade": {
+            "essence": 30,
+            "dream": 34,
+            "loreItem": "Rem Forge Ingot"
+          }
+        },
+        {
+          "tier": 5,
+          "stickRole": "captain-rite",
+          "name": "Oze Rite",
+          "duty": "The captain's own skill. It does not summon a body. It trains the troops already on the field.",
+          "skill": "King's Judgment",
+          "unlocksPrevious": 4,
+          "train": null,
+          "upgrade": {
+            "essence": 36,
+            "dream": 42,
+            "loreItem": "Rem Forge Ingot"
+          }
+        }
+      ]
+    },
+    {
+      "id": "wu",
+      "gen": 1,
+      "name": "Wu",
+      "assetKey": "gen1_wu",
+      "role": "Queen",
+      "power": "Founder of Rem Forge",
+      "realm": "rem-forge",
+      "bias": "rite",
+      "blurb": "The princess of Aurelia. Petitioners still come before Queen Wu.",
+      "portrait": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/14fe8d5a2_11609596-1c1c-436a-a455-ae2e2296d9d6.jpeg",
+      "layer": "game",
+      "statue": "Stick Wars Legacy statue, replaced by this generation character.",
+      "tree": [
+        {
+          "tier": 1,
+          "stickRole": "miner",
+          "name": "Wu Miner",
+          "duty": "Works the line's purse.",
+          "skill": "Court Levy",
+          "unlocksPrevious": null,
+          "train": {
+            "dream": 40
+          },
+          "upgrade": {
+            "essence": 12,
+            "dream": 10,
+            "loreItem": "Queen's Seal"
+          }
+        },
+        {
+          "tier": 2,
+          "stickRole": "swordwrath",
+          "name": "Wu Line",
+          "duty": "Marches and strikes in melee.",
+          "skill": "Petition Line",
+          "unlocksPrevious": 1,
+          "train": {
+            "dream": 55
+          },
+          "upgrade": {
+            "essence": 18,
+            "dream": 18,
+            "loreItem": "Queen's Seal"
+          }
+        },
+        {
+          "tier": 3,
+          "stickRole": "archidon",
+          "name": "Wu Mark",
+          "duty": "Holds range behind the line.",
+          "skill": "Silk Mark",
+          "unlocksPrevious": 2,
+          "train": {
+            "dream": 70
+          },
+          "upgrade": {
+            "essence": 24,
+            "dream": 26,
+            "loreItem": "Queen's Seal"
+          }
+        },
+        {
+          "tier": 4,
+          "stickRole": "spearton",
+          "name": "Wu Wall",
+          "duty": "The shield that keeps the march alive.",
+          "skill": "Throne Wall",
+          "unlocksPrevious": 3,
+          "train": {
+            "dream": 85
+          },
+          "upgrade": {
+            "essence": 30,
+            "dream": 34,
+            "loreItem": "Queen's Seal"
+          }
+        },
+        {
+          "tier": 5,
+          "stickRole": "captain-rite",
+          "name": "Wu Rite",
+          "duty": "The captain's own skill. It does not summon a body. It trains the troops already on the field.",
+          "skill": "Wu's Audience",
+          "unlocksPrevious": 4,
+          "train": null,
+          "upgrade": {
+            "essence": 36,
+            "dream": 42,
+            "loreItem": "Queen's Seal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bloom-mind",
+      "gen": 2,
+      "name": "Bloom Mind",
+      "assetKey": "gen2_bloom_mind",
+      "role": "First child",
+      "power": "Peace and wind",
+      "realm": "bloom-mind",
+      "bias": "mark",
+      "blurb": "Child of the royal family. The wind answers when the line would rather rest.",
+      "portrait": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/0afaeacd0_c5d1cd9f-ded8-4600-b45f-3089fa630910.jpeg",
+      "layer": "game",
+      "statue": "Stick Wars Legacy statue, replaced by this generation character.",
+      "tree": [
+        {
+          "tier": 1,
+          "stickRole": "miner",
+          "name": "Bloom Mind Miner",
+          "duty": "Works the line's purse.",
+          "skill": "Wind Pocket",
+          "unlocksPrevious": null,
+          "train": {
+            "dream": 50
+          },
+          "upgrade": {
+            "essence": 16,
+            "dream": 10,
+            "loreItem": "Wind Ribbon"
+          }
+        },
+        {
+          "tier": 2,
+          "stickRole": "swordwrath",
+          "name": "Bloom Mind Line",
+          "duty": "Marches and strikes in melee.",
+          "skill": "Still Cut",
+          "unlocksPrevious": 1,
+          "train": {
+            "dream": 65
+          },
+          "upgrade": {
+            "essence": 22,
+            "dream": 18,
+            "loreItem": "Wind Ribbon"
+          }
+        },
+        {
+          "tier": 3,
+          "stickRole": "archidon",
+          "name": "Bloom Mind Mark",
+          "duty": "Holds range behind the line.",
+          "skill": "Gale Shot",
+          "unlocksPrevious": 2,
+          "train": {
+            "dream": 80
+          },
+          "upgrade": {
+            "essence": 28,
+            "dream": 26,
+            "loreItem": "Wind Ribbon"
+          }
+        },
+        {
+          "tier": 4,
+          "stickRole": "spearton",
+          "name": "Bloom Mind Wall",
+          "duty": "The shield that keeps the march alive.",
+          "skill": "Peace Wall",
+          "unlocksPrevious": 3,
+          "train": {
+            "dream": 95
+          },
+          "upgrade": {
+            "essence": 34,
+            "dream": 34,
+            "loreItem": "Wind Ribbon"
+          }
+        },
+        {
+          "tier": 5,
+          "stickRole": "captain-rite",
+          "name": "Bloom Mind Rite",
+          "duty": "The captain's own skill. It does not summon a body. It trains the troops already on the field.",
+          "skill": "Bloom Wind",
+          "unlocksPrevious": 4,
+          "train": null,
+          "upgrade": {
+            "essence": 40,
+            "dream": 42,
+            "loreItem": "Wind Ribbon"
+          }
+        }
+      ]
+    },
+    {
+      "id": "memory-core",
+      "gen": 2,
+      "name": "Memory Core",
+      "assetKey": "gen2_memory_core",
+      "role": "First child",
+      "power": "Mind and memory",
+      "realm": "memory-core",
+      "bias": "rite",
+      "blurb": "Child of the royal family. What this captain remembers, the troops repeat.",
+      "portrait": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/c7afcdb2e_7354e7ff-de1c-41c1-9eea-1e9fd43ca4d5.jpeg",
+      "layer": "game",
+      "statue": "Stick Wars Legacy statue, replaced by this generation character.",
+      "tree": [
+        {
+          "tier": 1,
+          "stickRole": "miner",
+          "name": "Memory Core Miner",
+          "duty": "Works the line's purse.",
+          "skill": "Remembered Ore",
+          "unlocksPrevious": null,
+          "train": {
+            "dream": 50
+          },
+          "upgrade": {
+            "essence": 16,
+            "dream": 10,
+            "loreItem": "Memory Pearl"
+          }
+        },
+        {
+          "tier": 2,
+          "stickRole": "swordwrath",
+          "name": "Memory Core Line",
+          "duty": "Marches and strikes in melee.",
+          "skill": "Echo Strike",
+          "unlocksPrevious": 1,
+          "train": {
+            "dream": 65
+          },
+          "upgrade": {
+            "essence": 22,
+            "dream": 18,
+            "loreItem": "Memory Pearl"
+          }
+        },
+        {
+          "tier": 3,
+          "stickRole": "archidon",
+          "name": "Memory Core Mark",
+          "duty": "Holds range behind the line.",
+          "skill": "Taught Aim",
+          "unlocksPrevious": 2,
+          "train": {
+            "dream": 80
+          },
+          "upgrade": {
+            "essence": 28,
+            "dream": 26,
+            "loreItem": "Memory Pearl"
+          }
+        },
+        {
+          "tier": 4,
+          "stickRole": "spearton",
+          "name": "Memory Core Wall",
+          "duty": "The shield that keeps the march alive.",
+          "skill": "Unforgotten Wall",
+          "unlocksPrevious": 3,
+          "train": {
+            "dream": 95
+          },
+          "upgrade": {
+            "essence": 34,
+            "dream": 34,
+            "loreItem": "Memory Pearl"
+          }
+        },
+        {
+          "tier": 5,
+          "stickRole": "captain-rite",
+          "name": "Memory Core Rite",
+          "duty": "The captain's own skill. It does not summon a body. It trains the troops already on the field.",
+          "skill": "Core Memory",
+          "unlocksPrevious": 4,
+          "train": null,
+          "upgrade": {
+            "essence": 40,
+            "dream": 42,
+            "loreItem": "Memory Pearl"
+          }
+        }
+      ]
+    },
+    {
+      "id": "trea",
+      "gen": 3,
+      "name": "Trea",
+      "assetKey": "gen3_trea",
+      "role": "Twin sentinel",
+      "power": "Guardian of the northern territories",
+      "realm": "northern-treasury",
+      "bias": "wall",
+      "blurb": "Twin sentinel. Holds the cold border and the treasury beyond it.",
+      "portrait": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/1a35bbf92_23732f02-8a95-45f1-87c6-ef5657671a77.jpeg",
+      "layer": "game",
+      "statue": "Stick Wars Legacy statue, replaced by this generation character.",
+      "tree": [
+        {
+          "tier": 1,
+          "stickRole": "miner",
+          "name": "Trea Miner",
+          "duty": "Works the line's purse.",
+          "skill": "Cold Shift",
+          "unlocksPrevious": null,
+          "train": {
+            "dream": 60
+          },
+          "upgrade": {
+            "essence": 20,
+            "dream": 10,
+            "loreItem": "Treasury Stone"
+          }
+        },
+        {
+          "tier": 2,
+          "stickRole": "swordwrath",
+          "name": "Trea Line",
+          "duty": "Marches and strikes in melee.",
+          "skill": "Border Cut",
+          "unlocksPrevious": 1,
+          "train": {
+            "dream": 75
+          },
+          "upgrade": {
+            "essence": 26,
+            "dream": 18,
+            "loreItem": "Treasury Stone"
+          }
+        },
+        {
+          "tier": 3,
+          "stickRole": "archidon",
+          "name": "Trea Mark",
+          "duty": "Holds range behind the line.",
+          "skill": "Treasury Mark",
+          "unlocksPrevious": 2,
+          "train": {
+            "dream": 90
+          },
+          "upgrade": {
+            "essence": 32,
+            "dream": 26,
+            "loreItem": "Treasury Stone"
+          }
+        },
+        {
+          "tier": 4,
+          "stickRole": "spearton",
+          "name": "Trea Wall",
+          "duty": "The shield that keeps the march alive.",
+          "skill": "Twin Wall",
+          "unlocksPrevious": 3,
+          "train": {
+            "dream": 105
+          },
+          "upgrade": {
+            "essence": 38,
+            "dream": 34,
+            "loreItem": "Treasury Stone"
+          }
+        },
+        {
+          "tier": 5,
+          "stickRole": "captain-rite",
+          "name": "Trea Rite",
+          "duty": "The captain's own skill. It does not summon a body. It trains the troops already on the field.",
+          "skill": "Sentinel Hold",
+          "unlocksPrevious": 4,
+          "train": null,
+          "upgrade": {
+            "essence": 44,
+            "dream": 42,
+            "loreItem": "Treasury Stone"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sury",
+      "gen": 3,
+      "name": "Sury",
+      "assetKey": "gen3_sury",
+      "role": "Twin sentinel",
+      "power": "Guardian of the northern territories",
+      "realm": "northern-treasury",
+      "bias": "wall",
+      "blurb": "Twin sentinel. The other half of the northern guard.",
+      "portrait": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/e236c955d_ec454d13-378d-4d04-9680-c9c511caf20c.jpeg",
+      "layer": "game",
+      "statue": "Stick Wars Legacy statue, replaced by this generation character.",
+      "tree": [
+        {
+          "tier": 1,
+          "stickRole": "miner",
+          "name": "Sury Miner",
+          "duty": "Works the line's purse.",
+          "skill": "North Shift",
+          "unlocksPrevious": null,
+          "train": {
+            "dream": 60
+          },
+          "upgrade": {
+            "essence": 20,
+            "dream": 10,
+            "loreItem": "Northern Iron"
+          }
+        },
+        {
+          "tier": 2,
+          "stickRole": "swordwrath",
+          "name": "Sury Line",
+          "duty": "Marches and strikes in melee.",
+          "skill": "Twin Cut",
+          "unlocksPrevious": 1,
+          "train": {
+            "dream": 75
+          },
+          "upgrade": {
+            "essence": 26,
+            "dream": 18,
+            "loreItem": "Northern Iron"
+          }
+        },
+        {
+          "tier": 3,
+          "stickRole": "archidon",
+          "name": "Sury Mark",
+          "duty": "Holds range behind the line.",
+          "skill": "Watch Mark",
+          "unlocksPrevious": 2,
+          "train": {
+            "dream": 90
+          },
+          "upgrade": {
+            "essence": 32,
+            "dream": 26,
+            "loreItem": "Northern Iron"
+          }
+        },
+        {
+          "tier": 4,
+          "stickRole": "spearton",
+          "name": "Sury Wall",
+          "duty": "The shield that keeps the march alive.",
+          "skill": "Sister Wall",
+          "unlocksPrevious": 3,
+          "train": {
+            "dream": 105
+          },
+          "upgrade": {
+            "essence": 38,
+            "dream": 34,
+            "loreItem": "Northern Iron"
+          }
+        },
+        {
+          "tier": 5,
+          "stickRole": "captain-rite",
+          "name": "Sury Rite",
+          "duty": "The captain's own skill. It does not summon a body. It trains the troops already on the field.",
+          "skill": "Sentinel Call",
+          "unlocksPrevious": 4,
+          "train": null,
+          "upgrade": {
+            "essence": 44,
+            "dream": 42,
+            "loreItem": "Northern Iron"
+          }
+        }
+      ]
+    },
+    {
+      "id": "paradox-vein",
+      "gen": 4,
+      "name": "Paradox Vein",
+      "assetKey": "gen5_paradox_vein",
+      "role": "Bloodline of Bloom Mind",
+      "power": "Nature and the glitch in existence",
+      "realm": "paradox-vein",
+      "bias": "line",
+      "blurb": "South-west branch. Nature and a glitch in the march.",
+      "portrait": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/cf4719263_5fab4c6a-7519-45a1-806f-fda70937e270.jpeg",
+      "layer": "game",
+      "statue": "Stick Wars Legacy statue, replaced by this generation character.",
+      "tree": [
+        {
+          "tier": 1,
+          "stickRole": "miner",
+          "name": "Paradox Vein Miner",
+          "duty": "Works the line's purse.",
+          "skill": "Glitch Ore",
+          "unlocksPrevious": null,
+          "train": {
+            "dream": 70
+          },
+          "upgrade": {
+            "essence": 24,
+            "dream": 10,
+            "loreItem": "Glitch Seed"
+          }
+        },
+        {
+          "tier": 2,
+          "stickRole": "swordwrath",
+          "name": "Paradox Vein Line",
+          "duty": "Marches and strikes in melee.",
+          "skill": "Phase Cut",
+          "unlocksPrevious": 1,
+          "train": {
+            "dream": 85
+          },
+          "upgrade": {
+            "essence": 30,
+            "dream": 18,
+            "loreItem": "Glitch Seed"
+          }
+        },
+        {
+          "tier": 3,
+          "stickRole": "archidon",
+          "name": "Paradox Vein Mark",
+          "duty": "Holds range behind the line.",
+          "skill": "Bent Shot",
+          "unlocksPrevious": 2,
+          "train": {
+            "dream": 100
+          },
+          "upgrade": {
+            "essence": 36,
+            "dream": 26,
+            "loreItem": "Glitch Seed"
+          }
+        },
+        {
+          "tier": 4,
+          "stickRole": "spearton",
+          "name": "Paradox Vein Wall",
+          "duty": "The shield that keeps the march alive.",
+          "skill": "Root Wall",
+          "unlocksPrevious": 3,
+          "train": {
+            "dream": 115
+          },
+          "upgrade": {
+            "essence": 42,
+            "dream": 34,
+            "loreItem": "Glitch Seed"
+          }
+        },
+        {
+          "tier": 5,
+          "stickRole": "captain-rite",
+          "name": "Paradox Vein Rite",
+          "duty": "The captain's own skill. It does not summon a body. It trains the troops already on the field.",
+          "skill": "Vein Glitch",
+          "unlocksPrevious": 4,
+          "train": null,
+          "upgrade": {
+            "essence": 48,
+            "dream": 42,
+            "loreItem": "Glitch Seed"
+          }
+        }
+      ]
+    },
+    {
+      "id": "abyss-echo",
+      "gen": 4,
+      "name": "Abyss Echo",
+      "assetKey": "gen5_abyss_echo",
+      "role": "Bloodline of Bloom Mind",
+      "power": "The sea",
+      "realm": "abyss-echo",
+      "bias": "mark",
+      "blurb": "The expedition west of memory. The sea is the ranged line.",
+      "portrait": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b7096ffc6_084fbc64-f8bc-4996-8d9b-61044bdfb278.jpeg",
+      "layer": "game",
+      "statue": "Stick Wars Legacy statue, replaced by this generation character.",
+      "tree": [
+        {
+          "tier": 1,
+          "stickRole": "miner",
+          "name": "Abyss Echo Miner",
+          "duty": "Works the line's purse.",
+          "skill": "Tide Pocket",
+          "unlocksPrevious": null,
+          "train": {
+            "dream": 70
+          },
+          "upgrade": {
+            "essence": 24,
+            "dream": 10,
+            "loreItem": "Sea Salt Relic"
+          }
+        },
+        {
+          "tier": 2,
+          "stickRole": "swordwrath",
+          "name": "Abyss Echo Line",
+          "duty": "Marches and strikes in melee.",
+          "skill": "Salt Cut",
+          "unlocksPrevious": 1,
+          "train": {
+            "dream": 85
+          },
+          "upgrade": {
+            "essence": 30,
+            "dream": 18,
+            "loreItem": "Sea Salt Relic"
+          }
+        },
+        {
+          "tier": 3,
+          "stickRole": "archidon",
+          "name": "Abyss Echo Mark",
+          "duty": "Holds range behind the line.",
+          "skill": "Sea Shot",
+          "unlocksPrevious": 2,
+          "train": {
+            "dream": 100
+          },
+          "upgrade": {
+            "essence": 36,
+            "dream": 26,
+            "loreItem": "Sea Salt Relic"
+          }
+        },
+        {
+          "tier": 4,
+          "stickRole": "spearton",
+          "name": "Abyss Echo Wall",
+          "duty": "The shield that keeps the march alive.",
+          "skill": "Breaker Wall",
+          "unlocksPrevious": 3,
+          "train": {
+            "dream": 115
+          },
+          "upgrade": {
+            "essence": 42,
+            "dream": 34,
+            "loreItem": "Sea Salt Relic"
+          }
+        },
+        {
+          "tier": 5,
+          "stickRole": "captain-rite",
+          "name": "Abyss Echo Rite",
+          "duty": "The captain's own skill. It does not summon a body. It trains the troops already on the field.",
+          "skill": "Abyss Tide",
+          "unlocksPrevious": 4,
+          "train": null,
+          "upgrade": {
+            "essence": 48,
+            "dream": 42,
+            "loreItem": "Sea Salt Relic"
+          }
+        }
+      ]
+    },
+    {
+      "id": "light-sector",
+      "gen": 5,
+      "name": "Light Sector",
+      "assetKey": "gen4_light_sector",
+      "role": "Son of Memory Core",
+      "power": "Thunder",
+      "realm": "light-sector",
+      "bias": "mark",
+      "blurb": "One brother. Thunder. A turning point of the chronicle.",
+      "portrait": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/3c1129197_4e9713bf-5e18-4749-ab00-1ce37e2cb9cc.jpeg",
+      "layer": "game",
+      "statue": "Stick Wars Legacy statue, replaced by this generation character.",
+      "tree": [
+        {
+          "tier": 1,
+          "stickRole": "miner",
+          "name": "Light Sector Miner",
+          "duty": "Works the line's purse.",
+          "skill": "Storm Ore",
+          "unlocksPrevious": null,
+          "train": {
+            "dream": 80
+          },
+          "upgrade": {
+            "essence": 28,
+            "dream": 10,
+            "loreItem": "Thunder Brand"
+          }
+        },
+        {
+          "tier": 2,
+          "stickRole": "swordwrath",
+          "name": "Light Sector Line",
+          "duty": "Marches and strikes in melee.",
+          "skill": "Arc Cut",
+          "unlocksPrevious": 1,
+          "train": {
+            "dream": 95
+          },
+          "upgrade": {
+            "essence": 34,
+            "dream": 18,
+            "loreItem": "Thunder Brand"
+          }
+        },
+        {
+          "tier": 3,
+          "stickRole": "archidon",
+          "name": "Light Sector Mark",
+          "duty": "Holds range behind the line.",
+          "skill": "Thunder Shot",
+          "unlocksPrevious": 2,
+          "train": {
+            "dream": 110
+          },
+          "upgrade": {
+            "essence": 40,
+            "dream": 26,
+            "loreItem": "Thunder Brand"
+          }
+        },
+        {
+          "tier": 4,
+          "stickRole": "spearton",
+          "name": "Light Sector Wall",
+          "duty": "The shield that keeps the march alive.",
+          "skill": "Bright Wall",
+          "unlocksPrevious": 3,
+          "train": {
+            "dream": 125
+          },
+          "upgrade": {
+            "essence": 46,
+            "dream": 34,
+            "loreItem": "Thunder Brand"
+          }
+        },
+        {
+          "tier": 5,
+          "stickRole": "captain-rite",
+          "name": "Light Sector Rite",
+          "duty": "The captain's own skill. It does not summon a body. It trains the troops already on the field.",
+          "skill": "Light Sector",
+          "unlocksPrevious": 4,
+          "train": null,
+          "upgrade": {
+            "essence": 52,
+            "dream": 42,
+            "loreItem": "Thunder Brand"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fear-pool",
+      "gen": 5,
+      "name": "Fear Pool",
+      "assetKey": "gen4_fear_pool",
+      "role": "Son of Memory Core",
+      "power": "Fire",
+      "realm": "fear-pool",
+      "bias": "line",
+      "blurb": "The other brother. Fire. Tengu are born from the dark around this pool.",
+      "portrait": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/615a54f49_371627bc-35ac-4ef1-b2fc-3713a47b09d7.jpeg",
+      "layer": "game",
+      "statue": "Stick Wars Legacy statue, replaced by this generation character.",
+      "tree": [
+        {
+          "tier": 1,
+          "stickRole": "miner",
+          "name": "Fear Pool Miner",
+          "duty": "Works the line's purse.",
+          "skill": "Ash Pocket",
+          "unlocksPrevious": null,
+          "train": {
+            "dream": 80
+          },
+          "upgrade": {
+            "essence": 28,
+            "dream": 10,
+            "loreItem": "Fear Ash"
+          }
+        },
+        {
+          "tier": 2,
+          "stickRole": "swordwrath",
+          "name": "Fear Pool Line",
+          "duty": "Marches and strikes in melee.",
+          "skill": "Burning Cut",
+          "unlocksPrevious": 1,
+          "train": {
+            "dream": 95
+          },
+          "upgrade": {
+            "essence": 34,
+            "dream": 18,
+            "loreItem": "Fear Ash"
+          }
+        },
+        {
+          "tier": 3,
+          "stickRole": "archidon",
+          "name": "Fear Pool Mark",
+          "duty": "Holds range behind the line.",
+          "skill": "Cinder Shot",
+          "unlocksPrevious": 2,
+          "train": {
+            "dream": 110
+          },
+          "upgrade": {
+            "essence": 40,
+            "dream": 26,
+            "loreItem": "Fear Ash"
+          }
+        },
+        {
+          "tier": 4,
+          "stickRole": "spearton",
+          "name": "Fear Pool Wall",
+          "duty": "The shield that keeps the march alive.",
+          "skill": "Fear Wall",
+          "unlocksPrevious": 3,
+          "train": {
+            "dream": 125
+          },
+          "upgrade": {
+            "essence": 46,
+            "dream": 34,
+            "loreItem": "Fear Ash"
+          }
+        },
+        {
+          "tier": 5,
+          "stickRole": "captain-rite",
+          "name": "Fear Pool Rite",
+          "duty": "The captain's own skill. It does not summon a body. It trains the troops already on the field.",
+          "skill": "Pool Fire",
+          "unlocksPrevious": 4,
+          "train": null,
+          "upgrade": {
+            "essence": 52,
+            "dream": 42,
+            "loreItem": "Fear Ash"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tengu",
+      "gen": 6,
+      "name": "Tengu Legends",
+      "assetKey": "gen6_tengu_legends",
+      "role": "Creature legion",
+      "power": "Corrupted dreams",
+      "realm": "tengu",
+      "bias": "line",
+      "blurb": "Not ordinary warriors. Creatures of corrupted dreams around Fear Pool. Playable captain, and the season-one enemy legion.",
+      "portrait": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/ba12811d7_a096d4e0-b371-40e2-8d15-8974275e0a22.jpeg",
+      "layer": "game",
+      "statue": "Stick Wars Legacy statue, replaced by this generation character.",
+      "tree": [
+        {
+          "tier": 1,
+          "stickRole": "miner",
+          "name": "Tengu Legends Miner",
+          "duty": "Works the line's purse.",
+          "skill": "Stolen Dreams",
+          "unlocksPrevious": null,
+          "train": {
+            "dream": 90
+          },
+          "upgrade": {
+            "essence": 32,
+            "dream": 10,
+            "loreItem": "Tengu Mask"
+          }
+        },
+        {
+          "tier": 2,
+          "stickRole": "swordwrath",
+          "name": "Tengu Legends Line",
+          "duty": "Marches and strikes in melee.",
+          "skill": "Beak Cut",
+          "unlocksPrevious": 1,
+          "train": {
+            "dream": 105
+          },
+          "upgrade": {
+            "essence": 38,
+            "dream": 18,
+            "loreItem": "Tengu Mask"
+          }
+        },
+        {
+          "tier": 3,
+          "stickRole": "archidon",
+          "name": "Tengu Legends Mark",
+          "duty": "Holds range behind the line.",
+          "skill": "Dark Mark",
+          "unlocksPrevious": 2,
+          "train": {
+            "dream": 120
+          },
+          "upgrade": {
+            "essence": 44,
+            "dream": 26,
+            "loreItem": "Tengu Mask"
+          }
+        },
+        {
+          "tier": 4,
+          "stickRole": "spearton",
+          "name": "Tengu Legends Wall",
+          "duty": "The shield that keeps the march alive.",
+          "skill": "Mask Wall",
+          "unlocksPrevious": 3,
+          "train": {
+            "dream": 135
+          },
+          "upgrade": {
+            "essence": 50,
+            "dream": 34,
+            "loreItem": "Tengu Mask"
+          }
+        },
+        {
+          "tier": 5,
+          "stickRole": "captain-rite",
+          "name": "Tengu Legends Rite",
+          "duty": "The captain's own skill. It does not summon a body. It trains the troops already on the field.",
+          "skill": "Corrupted Dream",
+          "unlocksPrevious": 4,
+          "train": null,
+          "upgrade": {
+            "essence": 56,
+            "dream": 42,
+            "loreItem": "Tengu Mask"
+          }
+        }
+      ]
+    }
+  ]
+}

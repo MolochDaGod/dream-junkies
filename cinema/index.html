@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dream Junkies — Chronicle Cinema</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Ma+Shan+Zheng&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="cinema.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <p class="mark">梦境编年史</p>
+      <p class="brand">Dream Junkies</p>
+      <p id="where" class="where">The chronicle</p>
+      <a class="where" href="./talk.html">Igbo talk</a>
+    </header>
+
+    <main id="stage" aria-live="polite">
+      <div class="letter letter-top"></div>
+      <div id="frame">
+        <video id="motion" playsinline preload="auto"></video>
+        <div id="plate" hidden>
+          <img id="art" alt="" draggable="false" />
+        </div>
+        <section id="card" hidden></section>
+        <section id="roster" hidden></section>
+      </div>
+      <div class="letter letter-bottom"></div>
+      <div id="caption">
+        <p id="kicker"></p>
+        <h1 id="line"></h1>
+        <p id="sub"></p>
+      </div>
+    </main>
+
+    <footer class="hud">
+      <div class="transport" role="group" aria-label="Playback">
+        <button type="button" id="prev">Previous</button>
+        <button type="button" id="play">Pause</button>
+        <button type="button" id="next">Next</button>
+        <button type="button" id="mute">Sound on</button>
+        <button type="button" id="skip">Skip chapter</button>
+        <button type="button" id="captains">Captains</button>
+      </div>
+      <p id="count"></p>
+      <div id="bar" aria-hidden="true"><span id="bar-fill"></span></div>
+    </footer>
+
+    <nav id="drawer" aria-label="Chapters"></nav>
+  </div>
+  <audio id="voice" preload="auto"></audio>
+  <script src="chronicle.js"></script>
+  <script src="cinema.js"></script>
+</body>
+</html>

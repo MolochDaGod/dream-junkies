@@ -1,0 +1,1378 @@
+{
+  "source": {
+    "manga": "https://dreamjunkies.site/manga",
+    "whitepaper": "https://dreamjunkies.site/whitepaper",
+    "pulled": "2026-11-23",
+    "appId": "6ac25d429e02c0bfd4facc6a",
+    "note": "Text, plates, portraits, and motion are the published Dream Junkies chronicle. Game captains are a separate layer in captains.json."
+  },
+  "prose": {
+    "aurelia": "Long before the kingdoms of Earth were given their names, before roads crossed the mountains and before the seven realms were divided by blood and power, there existed a distant world known as Aurelia.",
+    "founders": "From Aurelia came Wu and Oze, accompanied by twenty-seven loyal souls. They abandoned the life that had been chosen for them and followed a different path — the path of their own dreams.",
+    "entranceCompanions": "Together they fled its fall with twenty-nine loyal companions.",
+    "remForge": "They eventually discovered a mysterious land beneath enormous mountains and forests. They named it Rem Forge.",
+    "name": "Dream Junkies is the chronicle of those who refuse to abandon their dreams.",
+    "game": "The greatest chapter of the Dream Junkies universe is planned to arrive through the Dream Junkies War — where players enter the seven realms and experience the conflict that shaped the Dreamverse."
+  },
+  "utility": [
+    "🎁 1 Free Mint of a Dream Junkie NFT on every new Generation (GEN)",
+    "💰 5% Monthly Revenue Share from all DreamStake games",
+    "🪙 $DREAM Token Airdrop eligibility",
+    "📈 Early Access to new products, features & drops",
+    "🎡 1 Free Play every week on DreamStake games",
+    "🎊 Yearly anniversary rewards"
+  ],
+  "generations": [
+    {
+      "id": "gen0",
+      "tag": "🔱 GEN0",
+      "title": "The Golden Trident",
+      "subtitle": "666 ancient relics — the beginning.",
+      "body": "Holding a Golden Trident represents a connection to the First Dreamers and the twenty-seven original bloodlines that travelled from Aurelia to Rem Forge. The Golden Trident serves as the gateway into the Dreamverse — hold one and receive a key pass for future generations.",
+      "assets": [
+        {
+          "key": "gen0",
+          "label": "Official Golden Trident artwork"
+        }
+      ]
+    },
+    {
+      "id": "gen1",
+      "tag": "👑 GEN1",
+      "title": "Oze & Wu",
+      "subtitle": "The Founders of Rem Forge",
+      "body": "Oze and Wu are the ancient King and Queen who established Rem Forge and began the bloodlines that would eventually shape the seven realms. This generation introduces two distinct NFT art styles, representing the two founders. Their story forms the foundation of the Dream Junkies chronicle.",
+      "assets": [
+        {
+          "key": "gen1_oze",
+          "label": "Official Oze artwork"
+        },
+        {
+          "key": "gen1_wu",
+          "label": "Official Wu artwork"
+        }
+      ]
+    },
+    {
+      "id": "gen2",
+      "tag": "🌸👁️ GEN2",
+      "title": "Bloom Mind & Memory Core",
+      "subtitle": "The First Children",
+      "body": "Bloom Mind & Memory Core are the first two children of the royal family. Bloom Mind carries the power of peace and wind. Memory Core carries the power of the mind and memory. Two characters. Two powers. Two distinct NFT art styles. Their generation begins the expansion of the royal bloodline beyond Rem Forge.",
+      "assets": [
+        {
+          "key": "gen2_bloom_mind",
+          "label": "Official Bloom Mind artwork"
+        },
+        {
+          "key": "gen2_memory_core",
+          "label": "Official Memory Core artwork"
+        }
+      ]
+    },
+    {
+      "id": "gen3",
+      "tag": "🪨 GEN3",
+      "title": "Trea & Sury",
+      "subtitle": "The Twin Sentinels",
+      "body": "Trea and Sury are the twins of the royal family. Together, they become guardians of the northern territories and protect the ancient Treasury. This generation uses one core artistic style while introducing both male and female interpretations of the twins. Their story represents protection, loyalty and the defense of the Dreamverse.",
+      "assets": [
+        {
+          "key": "gen3_trea",
+          "label": "Official Trea artwork"
+        },
+        {
+          "key": "gen3_sury",
+          "label": "Official Sury artwork"
+        }
+      ]
+    },
+    {
+      "id": "gen4",
+      "tag": "☘️🌊 GEN4",
+      "title": "Paradox Vein & Abyss Echo",
+      "subtitle": "The Bloodline of Bloom Mind",
+      "body": "Paradox Vein and Abyss Echo represent another branch of the royal bloodline. Paradox Vein carries the mysterious power of nature and the glitch in existence. Abyss Echo carries the power of the sea. Their generation introduces two distinct NFT art styles and expands the Dreamverse into territories beyond the original royal lands.",
+      "assets": [
+        {
+          "key": "gen5_paradox_vein",
+          "label": "Official Paradox Vein artwork"
+        },
+        {
+          "key": "gen5_abyss_echo",
+          "label": "Official Abyss Echo artwork"
+        }
+      ]
+    },
+    {
+      "id": "gen5",
+      "tag": "⚡️🔥 GEN5",
+      "title": "Light Sector & Fear Pool",
+      "subtitle": "The Sons of Memory Core",
+      "body": "Two brothers. Two paths. Two completely different destinies. Light Sector inherits the power of thunder. Fear Pool inherits the power of fire. This generation introduces two distinct NFT art styles. Their conflict becomes one of the major turning points in Dream Junkies history.",
+      "assets": [
+        {
+          "key": "gen4_light_sector",
+          "label": "Official Light Sector artwork"
+        },
+        {
+          "key": "gen4_fear_pool",
+          "label": "Official Fear Pool artwork"
+        }
+      ]
+    },
+    {
+      "id": "gen6",
+      "tag": "👺 GEN6",
+      "title": "Tengu Legends",
+      "subtitle": "The Creatures of Fear Pool",
+      "body": "The Tengu Legends are not ordinary warriors. They are creatures born from corrupted dreams, darkness and the negative energy surrounding Fear Pool. Their existence changes the balance of the seven realms. GEN6 introduces a unified creature-based NFT art style representing the Tengu species.",
+      "assets": [
+        {
+          "key": "gen6_tengu_legends",
+          "label": "Official Tengu Legends artwork"
+        }
+      ]
+    }
+  ],
+  "portraits": {
+    "gen0": null,
+    "gen1_oze": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/4e6ff79ca_2e0178ec-5fcb-4f94-851c-40713551c4c4.jpeg",
+    "gen1_wu": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/14fe8d5a2_11609596-1c1c-436a-a455-ae2e2296d9d6.jpeg",
+    "gen2_bloom_mind": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/0afaeacd0_c5d1cd9f-ded8-4600-b45f-3089fa630910.jpeg",
+    "gen2_memory_core": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/c7afcdb2e_7354e7ff-de1c-41c1-9eea-1e9fd43ca4d5.jpeg",
+    "gen3_trea": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/1a35bbf92_23732f02-8a95-45f1-87c6-ef5657671a77.jpeg",
+    "gen3_sury": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/e236c955d_ec454d13-378d-4d04-9680-c9c511caf20c.jpeg",
+    "gen4_light_sector": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/3c1129197_4e9713bf-5e18-4749-ab00-1ce37e2cb9cc.jpeg",
+    "gen4_fear_pool": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/615a54f49_371627bc-35ac-4ef1-b2fc-3713a47b09d7.jpeg",
+    "gen5_paradox_vein": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/cf4719263_5fab4c6a-7519-45a1-806f-fda70937e270.jpeg",
+    "gen5_abyss_echo": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b7096ffc6_084fbc64-f8bc-4996-8d9b-61044bdfb278.jpeg",
+    "gen6_tengu_legends": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/ba12811d7_a096d4e0-b371-40e2-8d15-8974275e0a22.jpeg",
+    "seven_realms_map": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b68c05654_9eb3a8f7-6508-489e-8e3a-dbfd08d8c30b.jpeg",
+    "seven_realms_atlas": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/51e0ed6d1_IMG_6253.jpeg",
+    "seven_realms_illustrated": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/504379971_76E3F37B-F2B6-4670-85A7-E871061EF762.png"
+  },
+  "portraitVideo": {
+    "gen0": "https://media.base44.com/videos/public/6ac25d429e02c0bfd4facc6a/29f33a5cf__users_ca83bd92-7b77-49ea-9427-96310363b4c3_generated_26396ec8-f11f-41c5-ab41-c0183904e62a_generated_video.mp4"
+  },
+  "motion": {
+    "narration": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/37fc66829_speech.mp3",
+    "entrance": [
+      "https://media.base44.com/videos/public/6ac25d429e02c0bfd4facc6a/7f08cc4d1_Aurelia_Reveal.mp4",
+      "https://media.base44.com/videos/public/6ac25d429e02c0bfd4facc6a/b8f866c55_Seven_Realms.mp4",
+      "https://media.base44.com/videos/public/6ac25d429e02c0bfd4facc6a/a4568ad02_Title_Cloud_Reveal.mp4"
+    ],
+    "entranceCaptions": [
+      "Long before the seven realms were named, there was Aurelia.",
+      "A princess named Wu. A warrior named Oze.",
+      "Together they fled its fall with twenty-nine loyal companions.",
+      "The land they found became Rem Forge. The chronicle begins here."
+    ],
+    "bookOpening": "https://media.base44.com/videos/public/6ac25d429e02c0bfd4facc6a/bba7d6353_Book_Opening.mp4"
+  },
+  "stills": {
+    "pageTile": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/a173e7a2b_parchment-scroll.jpg/v1/fill/w_1100,h_1100,al_c,q_72,usm_0.66_1.00_0.01,enc_webp,quality_auto/parchment-tile.webp",
+    "whitepaperBg": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/5850f638b_AD1C60BE-A381-4E2C-A995-AAC1D83B0DC8.png/v1/fill/w_800,h_1200,al_c,q_74,usm_0.66_1.00_0.01,enc_webp,quality_auto/dj-page.webp",
+    "pageScroll": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/a173e7a2b_parchment-scroll.jpg",
+    "coverArt": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/94afe76e5_generated_image.png/v1/fill/w_700,h_900,al_c,q_82,usm_0.66_1.00_0.01,enc_webp,quality_auto/book-cover.webp",
+    "coverWhitepaper": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/fc6dd905c_FA29A3F8-93F7-4FD2-A511-7936A1AF5A30.png",
+    "coverManga": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/4c8c127c7_43D36F9A-FBF4-42EE-8D27-2BB3C52D74D7.png",
+    "bookCover": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/94afe76e5_generated_image.png",
+    "battlefield": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/63719d5ab_generated_image.png",
+    "village": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/1096aa5fe_generated_image.png",
+    "kingdomMist": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/78b56fe1e_generated_image.png",
+    "introGate": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/94fb5510c_generated_8cb005d5.png",
+    "visionDreamers": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/01b00fbad_generated_4d56b6f0.png",
+    "bloodlineTree": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b1cf592a3_generated_febee088.png",
+    "dreamCoin": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/3c1879c47_generated_71a582a6.png",
+    "marketplace": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/1afd4ff5b_generated_9424f286.png",
+    "dreamStake": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/798ea17c6_generated_e1eb6cdf.png",
+    "dreamersPurpose": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/37d91b315_generated_image.png",
+    "generationsTree": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/2ff2a9fd0_generated_image.png",
+    "chronicleRuins": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/90fb84b83_generated_image.png",
+    "sevenRealmsMap": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/660d4713f_generated_image.png",
+    "generationsAscent": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/08d2b84e4_generated_image.png",
+    "collectionChronicle": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/50200879c_generated_image.png",
+    "bloodlineHall": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/5cc49293c_generated_image.png",
+    "economyToken": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/144847b5c_generated_image.png",
+    "economyTrade": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/e7d8dc4e5_generated_image.png",
+    "utilityGoldenTrident": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/4c3199f75_generated_image.png",
+    "roadmap": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/a14ec286b_WhatsAppImage2026-10-19at155110.jpeg",
+    "gen1_oze": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/4e6ff79ca_2e0178ec-5fcb-4f94-851c-40713551c4c4.jpeg",
+    "gen1_wu": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/14fe8d5a2_11609596-1c1c-436a-a455-ae2e2296d9d6.jpeg",
+    "gen2_bloom_mind": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/0afaeacd0_c5d1cd9f-ded8-4600-b45f-3089fa630910.jpeg",
+    "gen2_memory_core": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/c7afcdb2e_7354e7ff-de1c-41c1-9eea-1e9fd43ca4d5.jpeg",
+    "gen3_trea": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/1a35bbf92_23732f02-8a95-45f1-87c6-ef5657671a77.jpeg",
+    "gen3_sury": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/e236c955d_ec454d13-378d-4d04-9680-c9c511caf20c.jpeg",
+    "gen4_light_sector": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/3c1129197_4e9713bf-5e18-4749-ab00-1ce37e2cb9cc.jpeg",
+    "gen4_fear_pool": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/615a54f49_371627bc-35ac-4ef1-b2fc-3713a47b09d7.jpeg",
+    "gen5_paradox_vein": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/cf4719263_5fab4c6a-7519-45a1-806f-fda70937e270.jpeg",
+    "gen5_abyss_echo": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b7096ffc6_084fbc64-f8bc-4996-8d9b-61044bdfb278.jpeg",
+    "gen6_tengu_legends": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/ba12811d7_a096d4e0-b371-40e2-8d15-8974275e0a22.jpeg",
+    "seven_realms_map": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b68c05654_9eb3a8f7-6508-489e-8e3a-dbfd08d8c30b.jpeg",
+    "seven_realms_atlas": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/51e0ed6d1_IMG_6253.jpeg",
+    "seven_realms_illustrated": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/504379971_76E3F37B-F2B6-4670-85A7-E871061EF762.png",
+    "logo": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/c4ac61ef0_IMG_5341.png"
+  },
+  "chapters": [
+    {
+      "id": "prologue",
+      "label": "Prologue",
+      "title": "Before the Seven Realms",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/d59519a6f_c91a96c2-929e-4c03-a436-bed6843b2e9a.jpeg",
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/929812a74_d754b467-5fcc-4ae9-9551-9913dcc42202.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-1",
+      "label": "Chapter 1",
+      "title": "The Affair in Aurelia",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/4c3f7f87e_c37c3505-1edd-48c4-ae14-ba1bd396860a.jpeg",
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/62844e863_cac26edb-5f53-411c-a8a8-048943d53414.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-2",
+      "label": "Chapter 2",
+      "title": "The Golden Trident",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/e9d1366be_4b2a8535-3440-434f-b90f-21cab772366d.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-3",
+      "label": "Chapter 3",
+      "title": "The Bloodline Mark of Aurelia",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/1a5a33c7e_0ed0dc55-7e1d-458e-b27a-e6c8318bc731.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-4",
+      "label": "Chapter 4",
+      "title": "The Chronicle of Veyron",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b28475e21_a0343a45-5d78-4c38-b2f5-366f68c5b261.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-5",
+      "label": "Chapter 5",
+      "title": "The Burden Entrusted to Zareth",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/8a6cfa9b2_ff0c6ea0-b6cb-4f3c-a402-8a7af6bdda0f.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-6",
+      "label": "Chapter 6",
+      "title": "The Escape from Aurelia",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/2aadec47c_ce2b063c-08a1-42dc-9a4e-856a1013ece8.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-7",
+      "label": "Chapter 7",
+      "title": "The Map of Forgotten Paths",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/9d1a1bda8_f7623ea0-0d2d-4be6-b873-573554860823.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-8",
+      "label": "Chapter 8",
+      "title": "Our New Beginning",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/18ad4ed57_995cd880-9892-46f9-a0f9-eb5da5bd2e0e.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-9",
+      "label": "Chapter 9",
+      "title": "The Mission",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/6303e40cd_fe7f6d12-756c-4ec6-a9ff-d7c27fcdfa55.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-10",
+      "label": "Chapter 10",
+      "title": "The Four Children",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/05fc53936_e5a8429a-5103-4eb4-9c40-00551aaaa306.jpeg",
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/e6e2759b9_9b0e4ef2-c6b5-4b6a-9162-bd6350ec9dc6.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-11",
+      "label": "Chapter 11",
+      "title": "The King's Judgment",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/59b30f472_5a29ec2a-6dac-49c1-9766-c4a717b58ead.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-12",
+      "label": "Chapter 12",
+      "title": "The Big Decision",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/c6b75a44d_2364254c-3d2f-4e48-9df5-69feb9c554c3.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-13",
+      "label": "Chapter 13",
+      "title": "The Central of Power",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/c23ae0823_a26c8666-96bb-4b4c-bdfe-669cbd217971.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-14",
+      "label": "Chapter 14",
+      "title": "The Request Before Queen Wu",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/aaa6c6ef4_211d5d99-1e49-45c1-b00a-3e9cbd93a39c.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-15",
+      "label": "Chapter 15",
+      "title": "The Unknown Generation",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/ee169f7dd_a5e2dc50-4d68-4bd6-b647-6f278052458f.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-16",
+      "label": "Chapter 16",
+      "title": "Ravien the Messenger House",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/dbb136503_8c49f472-8e3a-49fe-a5bc-b1d5aa4a957b.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-17",
+      "label": "Chapter 17",
+      "title": "The Departure",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/cfa9892b6_d778fc8a-a24d-4fc5-9a20-70e5c0eda985.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-18",
+      "label": "Chapter 18",
+      "title": "The Offer",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/05936d4d0_d36114ce-ae7a-435c-a54e-8bf667166492.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-19",
+      "label": "Chapter 19",
+      "title": "The House of Memory",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/a2ceab400_cc4f51b2-2447-4a01-a110-142234df39b9.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-20",
+      "label": "Chapter 20",
+      "title": "The House of Bloom",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/ac4e9aa4c_b1582fbf-5815-4f2b-8833-467d607acfc9.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-21",
+      "label": "Chapter 21",
+      "title": "The Two Brothers",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/bf6210367_02e73e88-7640-4a1b-a8ce-1329a0d384d7.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-22",
+      "label": "Chapter 22",
+      "title": "The Guardians of the North",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/edbfa09ac_1e70c02e-a9d3-429d-9687-0b02b04ace3c.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-23",
+      "label": "Chapter 23",
+      "title": "The Tale of Valken and Ryoka",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/a56a4e9a7_daab9696-09f4-4c41-8bc9-9af464e654d8.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-24",
+      "label": "Chapter 24",
+      "title": "Veyron's Last Words",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/961abc4b5_d05a7de5-a948-4447-8021-f4a24bffbc78.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-25",
+      "label": "Chapter 25",
+      "title": "The First Attack",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b8577c321_cad22ea4-bc04-4b1f-814e-7cab984e1566.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-26",
+      "label": "Chapter 26",
+      "title": "The Ice Man",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b766c1f69_c856f884-41e0-4e6c-9556-f03d589b7356.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-27",
+      "label": "Chapter 27",
+      "title": "Missing",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/8876e8ca7_4eedf781-9cdb-44b0-9765-b2e5ae0b68c2.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-28",
+      "label": "Chapter 28",
+      "title": "The Anger",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/f602b80ff_0dfa9a82-48f9-40df-b60e-c393c2308d81.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-29",
+      "label": "Chapter 29",
+      "title": "Torven, the Greedy Deceiver",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/2cbe9df0f_6ac0ffb9-4ef5-459a-bdc4-af7112cd45a2.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-30",
+      "label": "Chapter 30",
+      "title": "The Dark Afternoon",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/df3d72760_471c300e-a4cf-4a45-99bd-a4d7d4b88dc4.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-31",
+      "label": "Chapter 31",
+      "title": "The Revenge",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/9eeeedd11_73fcbdc0-18be-4ba2-9075-700c1246a874.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-32",
+      "label": "Chapter 32",
+      "title": "The King's Final Decree",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/d41b8fbfb_2d76487c-609b-4d22-9f10-ce72a751f129.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-33",
+      "label": "Chapter 33",
+      "title": "The Moonless Ambush",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/e8247c26c_05c9c63a-616e-4b8d-956f-5c80cfb057b0.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-34",
+      "label": "Chapter 34",
+      "title": "Evils",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/efaf6abe6_81eee9ab-80c2-47b0-9fb6-b9f01c3c32b7.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-35",
+      "label": "Chapter 35",
+      "title": "The Plan",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/52f282b14_90be1222-b401-4126-920f-8a8a4be5de71.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-36",
+      "label": "Chapter 36",
+      "title": "Reports",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/23a8402de_0cf327c7-600f-4eb6-a9f6-c4cb57d9119f.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-37",
+      "label": "Chapter 37",
+      "title": "Reinforcements",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b4ad88fc1_0d18373f-2796-4288-9f9c-ccf3c34f5b13.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-38",
+      "label": "Chapter 38",
+      "title": "The Great War",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/54d22e5cd_675a4207-4c54-47c8-9784-5b43d06bcea9.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-39",
+      "label": "Chapter 39",
+      "title": "Legendary",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/66fbf805c_51ce58b1-d5e8-4e38-9ccb-acae26021c08.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-40",
+      "label": "Chapter 40",
+      "title": "Day of Revelation",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/526adf127_e15bc562-0d61-4647-8e56-ddd4735e2b02.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-41",
+      "label": "Chapter 41",
+      "title": "Betrayal",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/efb4aaf9f_af8ec6bb-18fe-40ba-b617-1abaa8417345.jpeg"
+      ]
+    },
+    {
+      "id": "chapter-42",
+      "label": "Chapter 42",
+      "title": "The Royal Conflict",
+      "pages": [
+        "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/aa23cdbc8_5e77a839-3659-4fe7-b78e-fa02182951eb.jpeg"
+      ]
+    }
+  ],
+  "plates": [
+    {
+      "chapterId": "prologue",
+      "chapterLabel": "Prologue",
+      "chapterTitle": "Before the Seven Realms",
+      "pageNumber": 1,
+      "pageCount": 2,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/d59519a6f_c91a96c2-929e-4c03-a436-bed6843b2e9a.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4c2da8ad9_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/8770c7753_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "prologue",
+      "chapterLabel": "Prologue",
+      "chapterTitle": "Before the Seven Realms",
+      "pageNumber": 2,
+      "pageCount": 2,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/929812a74_d754b467-5fcc-4ae9-9551-9913dcc42202.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/6aef5b931_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-1",
+      "chapterLabel": "Chapter 1",
+      "chapterTitle": "The Affair in Aurelia",
+      "pageNumber": 1,
+      "pageCount": 2,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/4c3f7f87e_c37c3505-1edd-48c4-ae14-ba1bd396860a.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/c38b0e9b5_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/95aa1057b_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-1",
+      "chapterLabel": "Chapter 1",
+      "chapterTitle": "The Affair in Aurelia",
+      "pageNumber": 2,
+      "pageCount": 2,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/62844e863_cac26edb-5f53-411c-a8a8-048943d53414.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/c4fcfe38a_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-2",
+      "chapterLabel": "Chapter 2",
+      "chapterTitle": "The Golden Trident",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/e9d1366be_4b2a8535-3440-434f-b90f-21cab772366d.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/34f9c47a4_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/f3170f474_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-3",
+      "chapterLabel": "Chapter 3",
+      "chapterTitle": "The Bloodline Mark of Aurelia",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/1a5a33c7e_0ed0dc55-7e1d-458e-b27a-e6c8318bc731.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/9f091e122_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a7fc7b0f5_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-4",
+      "chapterLabel": "Chapter 4",
+      "chapterTitle": "The Chronicle of Veyron",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b28475e21_a0343a45-5d78-4c38-b2f5-366f68c5b261.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/699ef446a_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/f62e3b4ee_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-5",
+      "chapterLabel": "Chapter 5",
+      "chapterTitle": "The Burden Entrusted to Zareth",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/8a6cfa9b2_ff0c6ea0-b6cb-4f3c-a402-8a7af6bdda0f.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/564820ada_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/78833df87_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-6",
+      "chapterLabel": "Chapter 6",
+      "chapterTitle": "The Escape from Aurelia",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/2aadec47c_ce2b063c-08a1-42dc-9a4e-856a1013ece8.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/12658a8dd_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/858adb48b_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-7",
+      "chapterLabel": "Chapter 7",
+      "chapterTitle": "The Map of Forgotten Paths",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/9d1a1bda8_f7623ea0-0d2d-4be6-b873-573554860823.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/d330144d0_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/7c52357c2_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-8",
+      "chapterLabel": "Chapter 8",
+      "chapterTitle": "Our New Beginning",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/18ad4ed57_995cd880-9892-46f9-a0f9-eb5da5bd2e0e.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/f81781cf5_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/64000dd00_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-9",
+      "chapterLabel": "Chapter 9",
+      "chapterTitle": "The Mission",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/6303e40cd_fe7f6d12-756c-4ec6-a9ff-d7c27fcdfa55.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/82cd9612d_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/23900419c_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-10",
+      "chapterLabel": "Chapter 10",
+      "chapterTitle": "The Four Children",
+      "pageNumber": 1,
+      "pageCount": 2,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/05fc53936_e5a8429a-5103-4eb4-9c40-00551aaaa306.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/ee38fd5bc_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/aed28284f_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-10",
+      "chapterLabel": "Chapter 10",
+      "chapterTitle": "The Four Children",
+      "pageNumber": 2,
+      "pageCount": 2,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/e6e2759b9_9b0e4ef2-c6b5-4b6a-9162-bd6350ec9dc6.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/e8fd662e7_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-11",
+      "chapterLabel": "Chapter 11",
+      "chapterTitle": "The King's Judgment",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/59b30f472_5a29ec2a-6dac-49c1-9766-c4a717b58ead.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a32876a8e_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/dbf913323_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-12",
+      "chapterLabel": "Chapter 12",
+      "chapterTitle": "The Big Decision",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/c6b75a44d_2364254c-3d2f-4e48-9df5-69feb9c554c3.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/393228719_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/b9849f2c6_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-13",
+      "chapterLabel": "Chapter 13",
+      "chapterTitle": "The Central of Power",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/c23ae0823_a26c8666-96bb-4b4c-bdfe-669cbd217971.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/101af4096_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/17edb5a4b_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-14",
+      "chapterLabel": "Chapter 14",
+      "chapterTitle": "The Request Before Queen Wu",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/aaa6c6ef4_211d5d99-1e49-45c1-b00a-3e9cbd93a39c.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/38ea3ed78_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4c4a974b6_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-15",
+      "chapterLabel": "Chapter 15",
+      "chapterTitle": "The Unknown Generation",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/ee169f7dd_a5e2dc50-4d68-4bd6-b647-6f278052458f.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/c2e612d57_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/b1672a56d_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-16",
+      "chapterLabel": "Chapter 16",
+      "chapterTitle": "Ravien the Messenger House",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/dbb136503_8c49f472-8e3a-49fe-a5bc-b1d5aa4a957b.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/6157705d9_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/7aeb99773_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-17",
+      "chapterLabel": "Chapter 17",
+      "chapterTitle": "The Departure",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/cfa9892b6_d778fc8a-a24d-4fc5-9a20-70e5c0eda985.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/fb51b1fdb_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/0ce39107f_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-18",
+      "chapterLabel": "Chapter 18",
+      "chapterTitle": "The Offer",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/05936d4d0_d36114ce-ae7a-435c-a54e-8bf667166492.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4470f0981_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a4cf3b482_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-19",
+      "chapterLabel": "Chapter 19",
+      "chapterTitle": "The House of Memory",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/a2ceab400_cc4f51b2-2447-4a01-a110-142234df39b9.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/71c8a3664_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/b0fcf67c8_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-20",
+      "chapterLabel": "Chapter 20",
+      "chapterTitle": "The House of Bloom",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/ac4e9aa4c_b1582fbf-5815-4f2b-8833-467d607acfc9.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4cc4e48ef_speech.mp3",
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a2412ab39_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-21",
+      "chapterLabel": "Chapter 21",
+      "chapterTitle": "The Two Brothers",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/bf6210367_02e73e88-7640-4a1b-a8ce-1329a0d384d7.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/97e749e85_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-22",
+      "chapterLabel": "Chapter 22",
+      "chapterTitle": "The Guardians of the North",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/edbfa09ac_1e70c02e-a9d3-429d-9687-0b02b04ace3c.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/907f4a403_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-23",
+      "chapterLabel": "Chapter 23",
+      "chapterTitle": "The Tale of Valken and Ryoka",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/a56a4e9a7_daab9696-09f4-4c41-8bc9-9af464e654d8.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/45ea600c6_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-24",
+      "chapterLabel": "Chapter 24",
+      "chapterTitle": "Veyron's Last Words",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/961abc4b5_d05a7de5-a948-4447-8021-f4a24bffbc78.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/ca5dc8521_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-25",
+      "chapterLabel": "Chapter 25",
+      "chapterTitle": "The First Attack",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b8577c321_cad22ea4-bc04-4b1f-814e-7cab984e1566.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a24a36392_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-26",
+      "chapterLabel": "Chapter 26",
+      "chapterTitle": "The Ice Man",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b766c1f69_c856f884-41e0-4e6c-9556-f03d589b7356.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/3d1459d5a_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-27",
+      "chapterLabel": "Chapter 27",
+      "chapterTitle": "Missing",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/8876e8ca7_4eedf781-9cdb-44b0-9765-b2e5ae0b68c2.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/2ddc7086c_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-28",
+      "chapterLabel": "Chapter 28",
+      "chapterTitle": "The Anger",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/f602b80ff_0dfa9a82-48f9-40df-b60e-c393c2308d81.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4854b553e_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-29",
+      "chapterLabel": "Chapter 29",
+      "chapterTitle": "Torven, the Greedy Deceiver",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/2cbe9df0f_6ac0ffb9-4ef5-459a-bdc4-af7112cd45a2.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/84f46e96c_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-30",
+      "chapterLabel": "Chapter 30",
+      "chapterTitle": "The Dark Afternoon",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/df3d72760_471c300e-a4cf-4a45-99bd-a4d7d4b88dc4.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/54003e993_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-31",
+      "chapterLabel": "Chapter 31",
+      "chapterTitle": "The Revenge",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/9eeeedd11_73fcbdc0-18be-4ba2-9075-700c1246a874.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/07c7f59c4_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-32",
+      "chapterLabel": "Chapter 32",
+      "chapterTitle": "The King's Final Decree",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/d41b8fbfb_2d76487c-609b-4d22-9f10-ce72a751f129.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/bb12afdf4_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-33",
+      "chapterLabel": "Chapter 33",
+      "chapterTitle": "The Moonless Ambush",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/e8247c26c_05c9c63a-616e-4b8d-956f-5c80cfb057b0.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/bd3a44ede_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-34",
+      "chapterLabel": "Chapter 34",
+      "chapterTitle": "Evils",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/efaf6abe6_81eee9ab-80c2-47b0-9fb6-b9f01c3c32b7.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/2b6356034_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-35",
+      "chapterLabel": "Chapter 35",
+      "chapterTitle": "The Plan",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/52f282b14_90be1222-b401-4126-920f-8a8a4be5de71.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/0454c5c5e_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-36",
+      "chapterLabel": "Chapter 36",
+      "chapterTitle": "Reports",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/23a8402de_0cf327c7-600f-4eb6-a9f6-c4cb57d9119f.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/080440d26_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-37",
+      "chapterLabel": "Chapter 37",
+      "chapterTitle": "Reinforcements",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b4ad88fc1_0d18373f-2796-4288-9f9c-ccf3c34f5b13.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/f210a2efd_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-38",
+      "chapterLabel": "Chapter 38",
+      "chapterTitle": "The Great War",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/54d22e5cd_675a4207-4c54-47c8-9784-5b43d06bcea9.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/dc37e0481_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-39",
+      "chapterLabel": "Chapter 39",
+      "chapterTitle": "Legendary",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/66fbf805c_51ce58b1-d5e8-4e38-9ccb-acae26021c08.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/8dfe6e62c_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-40",
+      "chapterLabel": "Chapter 40",
+      "chapterTitle": "Day of Revelation",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/526adf127_e15bc562-0d61-4647-8e56-ddd4735e2b02.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/37a0bc3e7_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-41",
+      "chapterLabel": "Chapter 41",
+      "chapterTitle": "Betrayal",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/efb4aaf9f_af8ec6bb-18fe-40ba-b617-1abaa8417345.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/70d45b96d_speech.mp3"
+      ]
+    },
+    {
+      "chapterId": "chapter-42",
+      "chapterLabel": "Chapter 42",
+      "chapterTitle": "The Royal Conflict",
+      "pageNumber": 1,
+      "pageCount": 1,
+      "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/aa23cdbc8_5e77a839-3659-4fe7-b78e-fa02182951eb.jpeg",
+      "speech": [
+        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4e2b66229_speech.mp3"
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "aurelia",
+      "name": "Aurelia",
+      "mark": "奥",
+      "x": 26,
+      "y": 63,
+      "chapter": "chapter-1",
+      "note": "The homeland left behind, where the affair, the golden trident and the bloodline mark began."
+    },
+    {
+      "id": "eastern-lands",
+      "name": "The Eastern Lands",
+      "mark": "東",
+      "x": 79,
+      "y": 47,
+      "chapter": "chapter-4",
+      "note": "Veyron's hidden settlement, kept beyond the eastern roads."
+    },
+    {
+      "id": "rem-forge",
+      "name": "Rem Forge",
+      "mark": "鍛",
+      "x": 53,
+      "y": 56,
+      "chapter": "chapter-8",
+      "note": "The new kingdom raised after the escape from Aurelia — the first forge of the dreamers."
+    },
+    {
+      "id": "northern-wilds",
+      "name": "The Northern Wilds",
+      "mark": "北",
+      "x": 45,
+      "y": 20,
+      "chapter": "chapter-13",
+      "note": "The cold border held by Trea and Sury, and the treasury that lies beyond it."
+    },
+    {
+      "id": "south-west",
+      "name": "The South-West",
+      "mark": "脉",
+      "x": 33,
+      "y": 80,
+      "chapter": "chapter-18",
+      "note": "The territory granted to Paradox Vein."
+    },
+    {
+      "id": "north-west",
+      "name": "The North-West",
+      "mark": "憶",
+      "x": 19,
+      "y": 36,
+      "chapter": "chapter-19",
+      "note": "The house of memory, and the expedition given to Abyss Echo."
+    },
+    {
+      "id": "west",
+      "name": "The West",
+      "mark": "花",
+      "x": 70,
+      "y": 74,
+      "chapter": "chapter-20",
+      "note": "The house of bloom — the last seat granted among the realms."
+    }
+  ],
+  "houses": [
+    {
+      "id": "northern-treasury",
+      "name": "The Northern Treasury",
+      "kind": "Realm",
+      "x": 50,
+      "y": 20
+    },
+    {
+      "id": "tenzi",
+      "name": "Tenzi House",
+      "kind": "Noble House",
+      "x": 38,
+      "y": 12
+    },
+    {
+      "id": "trel-sury",
+      "name": "Trel & Sury",
+      "kind": "Noble House",
+      "x": 44,
+      "y": 28
+    },
+    {
+      "id": "light-sector",
+      "name": "Light Sector",
+      "kind": "Realm",
+      "x": 62,
+      "y": 22
+    },
+    {
+      "id": "kenzai",
+      "name": "Kenzai House",
+      "kind": "Noble House",
+      "x": 70,
+      "y": 12
+    },
+    {
+      "id": "abyss-echo",
+      "name": "Abyss Echo",
+      "kind": "Realm",
+      "x": 22,
+      "y": 42
+    },
+    {
+      "id": "kaori",
+      "name": "Kaori House",
+      "kind": "Noble House",
+      "x": 33,
+      "y": 50
+    },
+    {
+      "id": "bloom-mind",
+      "name": "Bloom Mind",
+      "kind": "Realm",
+      "x": 47,
+      "y": 44
+    },
+    {
+      "id": "memory-core",
+      "name": "Memory Core",
+      "kind": "Realm",
+      "x": 44,
+      "y": 58
+    },
+    {
+      "id": "rem-forge",
+      "name": "Rem Forge",
+      "kind": "Realm",
+      "x": 55,
+      "y": 52
+    },
+    {
+      "id": "ravien",
+      "name": "Ravien House",
+      "kind": "Noble House",
+      "x": 64,
+      "y": 48
+    },
+    {
+      "id": "paradox-vein",
+      "name": "Paradox Vein",
+      "kind": "Realm",
+      "x": 28,
+      "y": 63
+    },
+    {
+      "id": "torven",
+      "name": "Torven House",
+      "kind": "Noble House",
+      "x": 45,
+      "y": 66
+    },
+    {
+      "id": "fear-pool",
+      "name": "Fear Pool",
+      "kind": "Realm",
+      "x": 58,
+      "y": 62
+    },
+    {
+      "id": "ryoka",
+      "name": "Ryoka House",
+      "kind": "Noble House",
+      "x": 70,
+      "y": 58
+    },
+    {
+      "id": "tengu",
+      "name": "Tengu Legends",
+      "kind": "Realm",
+      "x": 76,
+      "y": 68
+    },
+    {
+      "id": "differsweas-sea",
+      "name": "Differsweas Sea",
+      "kind": "Water",
+      "x": 12,
+      "y": 48
+    },
+    {
+      "id": "mid-ocean",
+      "name": "The Mid Ocean",
+      "kind": "Water",
+      "x": 52,
+      "y": 70
+    },
+    {
+      "id": "eastern-ocean",
+      "name": "Eastern Ocean",
+      "kind": "Water",
+      "x": 86,
+      "y": 55
+    }
+  ],
+  "finale": {
+    "label": "End of Season One",
+    "overline": "Here the chronicle rests",
+    "title": "End of Season One",
+    "note": "The scroll of the Seven Realms closes here. What follows is still being written."
+  },
+  "narration": {
+    "page": {
+      "prologue:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/8770c7753_speech.mp3",
+      "prologue:2": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/6aef5b931_speech.mp3",
+      "chapter-1:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/95aa1057b_speech.mp3",
+      "chapter-1:2": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/c4fcfe38a_speech.mp3",
+      "chapter-2:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/f3170f474_speech.mp3",
+      "chapter-3:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a7fc7b0f5_speech.mp3",
+      "chapter-4:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/f62e3b4ee_speech.mp3",
+      "chapter-5:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/78833df87_speech.mp3",
+      "chapter-6:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/858adb48b_speech.mp3",
+      "chapter-7:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/7c52357c2_speech.mp3",
+      "chapter-8:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/64000dd00_speech.mp3",
+      "chapter-9:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/23900419c_speech.mp3",
+      "chapter-10:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/aed28284f_speech.mp3",
+      "chapter-10:2": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/e8fd662e7_speech.mp3",
+      "chapter-11:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/dbf913323_speech.mp3",
+      "chapter-12:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/b9849f2c6_speech.mp3",
+      "chapter-13:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/17edb5a4b_speech.mp3",
+      "chapter-14:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4c4a974b6_speech.mp3",
+      "chapter-15:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/b1672a56d_speech.mp3",
+      "chapter-16:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/7aeb99773_speech.mp3",
+      "chapter-17:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/0ce39107f_speech.mp3",
+      "chapter-18:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a4cf3b482_speech.mp3",
+      "chapter-19:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/b0fcf67c8_speech.mp3",
+      "chapter-20:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a2412ab39_speech.mp3",
+      "chapter-21:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/97e749e85_speech.mp3",
+      "chapter-22:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/907f4a403_speech.mp3",
+      "chapter-23:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/45ea600c6_speech.mp3",
+      "chapter-24:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/ca5dc8521_speech.mp3",
+      "chapter-25:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a24a36392_speech.mp3",
+      "chapter-26:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/3d1459d5a_speech.mp3",
+      "chapter-27:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/2ddc7086c_speech.mp3",
+      "chapter-28:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4854b553e_speech.mp3",
+      "chapter-29:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/84f46e96c_speech.mp3",
+      "chapter-30:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/54003e993_speech.mp3",
+      "chapter-31:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/07c7f59c4_speech.mp3",
+      "chapter-32:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/bb12afdf4_speech.mp3",
+      "chapter-33:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/bd3a44ede_speech.mp3",
+      "chapter-34:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/2b6356034_speech.mp3",
+      "chapter-35:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/0454c5c5e_speech.mp3",
+      "chapter-36:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/080440d26_speech.mp3",
+      "chapter-37:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/f210a2efd_speech.mp3",
+      "chapter-38:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/dc37e0481_speech.mp3",
+      "chapter-39:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/8dfe6e62c_speech.mp3",
+      "chapter-40:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/37a0bc3e7_speech.mp3",
+      "chapter-41:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/70d45b96d_speech.mp3",
+      "chapter-42:1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4e2b66229_speech.mp3"
+    },
+    "chapterOpen": {
+      "prologue": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4c2da8ad9_speech.mp3",
+      "chapter-1": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/c38b0e9b5_speech.mp3",
+      "chapter-2": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/34f9c47a4_speech.mp3",
+      "chapter-3": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/9f091e122_speech.mp3",
+      "chapter-4": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/699ef446a_speech.mp3",
+      "chapter-5": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/564820ada_speech.mp3",
+      "chapter-6": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/12658a8dd_speech.mp3",
+      "chapter-7": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/d330144d0_speech.mp3",
+      "chapter-8": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/f81781cf5_speech.mp3",
+      "chapter-9": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/82cd9612d_speech.mp3",
+      "chapter-10": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/ee38fd5bc_speech.mp3",
+      "chapter-11": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a32876a8e_speech.mp3",
+      "chapter-12": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/393228719_speech.mp3",
+      "chapter-13": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/101af4096_speech.mp3",
+      "chapter-14": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/38ea3ed78_speech.mp3",
+      "chapter-15": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/c2e612d57_speech.mp3",
+      "chapter-16": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/6157705d9_speech.mp3",
+      "chapter-17": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/fb51b1fdb_speech.mp3",
+      "chapter-18": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4470f0981_speech.mp3",
+      "chapter-19": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/71c8a3664_speech.mp3",
+      "chapter-20": "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4cc4e48ef_speech.mp3"
+    }
+  },
+  "currenciesPublished": {
+    "dream": "$DREAM — whitepaper ecosystem token. Supply, vesting, and contract are still marked to be provided on the live site.",
+    "essence": "Dream Essence is not a published token on the whitepaper. It is the war-layer material spent to upgrade troops with lore items."
+  }
+}

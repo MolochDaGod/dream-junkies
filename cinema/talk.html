@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dream Junkies — Live talk</title>
+  <link rel="stylesheet" href="cinema.css" />
+  <style>
+    body { margin: 0; background: #0c0806; color: #f3e6c8; font-family: "EB Garamond", Georgia, serif; }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 1.2rem 1rem 2rem; }
+    h1 { font-family: Cinzel, Georgia, serif; letter-spacing: 0.12em; color: #e8ce8f; font-size: 1.4rem; }
+    .row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    label { color: #a58a56; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.72rem; }
+    input, select, textarea {
+      background: #17100a; color: #f3e6c8; border: 1px solid rgba(232, 206, 143, 0.35);
+      border-radius: 4px; padding: 0.4rem 0.55rem; font: inherit;
+    }
+    textarea { width: 100%; min-height: 4.5rem; }
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    @media (max-width: 700px) { .cols { grid-template-columns: 1fr; } }
+    .log { min-height: 12rem; background: #120d09; border: 1px solid rgba(232, 206, 143, 0.2); padding: 0.7rem; }
+    .log p { margin: 0.35rem 0; }
+    .mine { color: #d8bd94; }
+    .theirs { color: #f3e6c8; }
+    .status { color: #a58a56; }
+    a { color: #e8ce8f; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="mark">梦境编年史</p>
+    <h1>Live talk</h1>
+    <p>Igbo players and everyone else share one match room. English is the middle and stays on the worker. The other player receives only their language. Your own line does not come back.</p>
+    <div class="row">
+      <label for="room">Room</label>
+      <input id="room" value="match-1" autocomplete="off" />
+      <label for="lang">Your language</label>
+      <select id="lang">
+        <option value="ig" selected>Igbo (Nigeria)</option>
+        <option value="en">English</option>
+        <option value="yo">Yoruba</option>
+        <option value="ha">Hausa</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+        <option value="pt">Portuguese</option>
+        <option value="zh">Chinese</option>
+      </select>
+      <button type="button" id="join">Join</button>
+      <button type="button" id="mic">Speak</button>
+    </div>
+    <p id="status" class="status">Not joined.</p>
+    <form id="say-form">
+      <textarea id="say" placeholder="Say a line. The other party hears the translation."></textarea>
+      <div class="row" style="margin-top:0.5rem">
+        <button type="submit">Send</button>
+        <a href="./index.html">Chronicle cinema</a>
+      </div>
+    </form>
+    <div class="cols">
+      <section>
+        <h2>You sent</h2>
+        <div id="mine" class="log"></div>
+      </section>
+      <section>
+        <h2>From the other party</h2>
+        <div id="theirs" class="log"></div>
+      </section>
+    </div>
+    <details style="margin-top:1.2rem">
+      <summary>Development translate</summary>
+      <p>This calls <code>POST /v1/translate</code>. The middle English line is hidden unless you ask for it.</p>
+      <div class="row">
+        <select id="dev-from"><option value="ig">ig</option><option value="en">en</option></select>
+        <select id="dev-to"><option value="en">en</option><option value="ig" selected>ig</option></select>
+        <label><input id="dev-debug" type="checkbox" /> show middle</label>
+      </div>
+      <textarea id="dev-text">The king left Aurelia.</textarea>
+      <button type="button" id="dev-run">Translate</button>
+      <pre id="dev-out"></pre>
+    </details>
+  </div>
+  <script>
+    const statusEl = document.getElementById("status");
+    const mineEl = document.getElementById("mine");
+    const theirsEl = document.getElementById("theirs");
+    let socket = null;
+    let heard = 0;
+
+    function line(parent, text, cls) {
+      const p = document.createElement("p");
+      p.className = cls;
+      p.textContent = text;
+      parent.appendChild(p);
+    }
+
+    function speak(text, lang) {
+      if (!window.speechSynthesis) return;
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = lang === "ig" ? "ig-NG" : lang;
+      window.speechSynthesis.speak(utter);
+    }
+
+    document.getElementById("join").addEventListener("click", () => {
+      if (socket) socket.close();
+      const room = document.getElementById("room").value.trim().toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 48) || "match-1";
+      document.getElementById("room").value = room;
+      const lang = document.getElementById("lang").value;
+      const proto = location.protocol === "https:" ? "wss:" : "ws:";
+      socket = new WebSocket(proto + "//" + location.host + "/v1/talk/" + room + "?lang=" + encodeURIComponent(lang));
+      statusEl.textContent = "Joining " + room + " as " + lang + "…";
+      socket.addEventListener("open", () => { statusEl.textContent = "Live in " + room + "."; });
+      socket.addEventListener("close", () => { statusEl.textContent = "Left the room."; });
+      socket.addEventListener("message", (event) => {
+        const msg = JSON.parse(event.data);
+        if (msg.type === "joined") statusEl.textContent = "Joined as " + msg.lang + ".";
+        if (msg.type === "sent") statusEl.textContent = "Sent. Waiting on the other party.";
+        if (msg.type === "missed") statusEl.textContent = "That line did not cross. Nothing was sent raw.";
+        if (msg.type === "hear") {
+          heard += 1;
+          line(theirsEl, msg.text, "theirs");
+          speak(msg.text, msg.lang);
+        }
+      });
+    });
+
+    document.getElementById("say-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const text = document.getElementById("say").value.trim();
+      if (!text || !socket || socket.readyState !== 1) return;
+      socket.send(JSON.stringify({ type: "say", text }));
+      line(mineEl, text, "mine");
+      document.getElementById("say").value = "";
+    });
+
+    document.getElementById("mic").addEventListener("click", () => {
+      const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!Rec) {
+        statusEl.textContent = "This browser has no speech recognizer. Type the line.";
+        return;
+      }
+      const lang = document.getElementById("lang").value;
+      const rec = new Rec();
+      rec.lang = lang === "ig" ? "ig-NG" : lang;
+      rec.onresult = (event) => {
+        document.getElementById("say").value = event.results[0][0].transcript;
+      };
+      rec.onerror = () => { statusEl.textContent = "Mic did not catch a line. Type it."; };
+      rec.start();
+      statusEl.textContent = "Listening…";
+    });
+
+    document.getElementById("dev-run").addEventListener("click", async () => {
+      const debug = document.getElementById("dev-debug").checked ? "?debug=1" : "";
+      const res = await fetch("/v1/translate" + debug, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          text: document.getElementById("dev-text").value,
+          from: document.getElementById("dev-from").value,
+          to: document.getElementById("dev-to").value
+        })
+      });
+      document.getElementById("dev-out").textContent = await res.text();
+    });
+  </script>
+</body>
+</html>
