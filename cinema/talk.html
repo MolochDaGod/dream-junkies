@@ -3,164 +3,449 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dream Junkies — Live talk</title>
-  <link rel="stylesheet" href="cinema.css" />
+  <meta name="theme-color" content="#07110c" />
+  <meta name="description" content="BridgeTalk live translator. Other players hear only their language." />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <title>BridgeTalk</title>
   <style>
-    body { margin: 0; background: #0c0806; color: #f3e6c8; font-family: "EB Garamond", Georgia, serif; }
-    .wrap { max-width: 880px; margin: 0 auto; padding: 1.2rem 1rem 2rem; }
-    h1 { font-family: Cinzel, Georgia, serif; letter-spacing: 0.12em; color: #e8ce8f; font-size: 1.4rem; }
-    .row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
-    label { color: #a58a56; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.72rem; }
-    input, select, textarea {
-      background: #17100a; color: #f3e6c8; border: 1px solid rgba(232, 206, 143, 0.35);
-      border-radius: 4px; padding: 0.4rem 0.55rem; font: inherit;
+    :root {
+      --ink: #07110c;
+      --panel: #102117;
+      --line: rgba(228, 195, 106, 0.35);
+      --gold: #e4c36a;
+      --green: #3dff9a;
+      --paper: #e7f6ec;
+      --dim: #8eaa96;
+      --warn: #ffb020;
     }
-    textarea { width: 100%; min-height: 4.5rem; }
-    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
-    @media (max-width: 700px) { .cols { grid-template-columns: 1fr; } }
-    .log { min-height: 12rem; background: #120d09; border: 1px solid rgba(232, 206, 143, 0.2); padding: 0.7rem; }
-    .log p { margin: 0.35rem 0; }
-    .mine { color: #d8bd94; }
-    .theirs { color: #f3e6c8; }
-    .status { color: #a58a56; }
-    a { color: #e8ce8f; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: var(--ink); color: var(--paper); }
+    body { font-family: "Segoe UI", system-ui, sans-serif; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    button, input, select, textarea {
+      background: #0b1912;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.65rem 0.75rem;
+    }
+    button { cursor: pointer; }
+    button.primary, button.ptt { background: #123222; color: var(--green); border-color: var(--green); }
+    button.ptt { width: 100%; min-height: 4.6rem; font-size: 1.15rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    button.ptt[aria-pressed="true"] { background: var(--green); color: #06210f; }
+    a { color: var(--gold); }
+    h1 { font-size: 1.7rem; letter-spacing: 0.14em; text-transform: uppercase; margin: 0.2rem 0; }
+    h1 span { color: var(--green); }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 1.2rem 1rem 2.5rem; }
+    .mark { color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase; font-size: 0.72rem; margin: 0; }
+    .lede { color: var(--dim); line-height: 1.45; }
+    .row { display: flex; flex-wrap: wrap; gap: 0.55rem; align-items: center; }
+    label { display: grid; gap: 0.25rem; color: var(--dim); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    label input, label select { text-transform: none; letter-spacing: 0; color: var(--paper); }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 0.9rem; margin-top: 0.8rem; }
+    .players { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 0.2rem 0.55rem; color: var(--gold); font-size: 0.82rem; }
+    .feed p { margin: 0.45rem 0; line-height: 1.35; }
+    .mine { color: var(--gold); }
+    .middle { color: var(--dim); font-size: 0.92rem; }
+    .theirs { color: var(--paper); }
+    .approx { color: var(--warn); font-size: 0.75rem; margin-left: 0.35rem; }
+    .callouts { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .callouts button { padding: 0.45rem 0.6rem; }
+    .status { color: var(--dim); min-height: 1.2rem; }
+    textarea { width: 100%; min-height: 4.2rem; }
+    body.overlay .wrap { display: none; }
+    #overlay {
+      display: none;
+      position: fixed;
+      left: 1rem;
+      top: 1rem;
+      width: min(28rem, calc(100vw - 2rem));
+      max-height: 46vh;
+      overflow: auto;
+      z-index: 20;
+      background: rgba(7, 17, 12, 0.78);
+      border: 1px solid rgba(61, 255, 154, 0.45);
+      border-radius: 14px;
+      padding: 0.55rem 0.7rem 0.7rem;
+      backdrop-filter: blur(6px);
+    }
+    body.overlay #overlay { display: block; }
+    #overlay header { display: flex; justify-content: space-between; gap: 0.5rem; cursor: grab; color: var(--green); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .warn { color: var(--warn); font-size: 0.85rem; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <p class="mark">梦境编年史</p>
-    <h1>Live talk</h1>
-    <p>Igbo players and everyone else share one match room. English is the middle and stays on the worker. The other player receives only their language. Your own line does not come back.</p>
-    <div class="row">
-      <label for="room">Room</label>
-      <input id="room" value="match-1" autocomplete="off" />
-      <label for="lang">Your language</label>
-      <select id="lang">
-        <option value="ig" selected>Igbo (Nigeria)</option>
-        <option value="en">English</option>
-        <option value="yo">Yoruba</option>
-        <option value="ha">Hausa</option>
-        <option value="fr">French</option>
-        <option value="es">Spanish</option>
-        <option value="pt">Portuguese</option>
-        <option value="zh">Chinese</option>
-      </select>
-      <button type="button" id="join">Join</button>
-      <button type="button" id="mic">Speak</button>
-    </div>
-    <p id="status" class="status">Not joined.</p>
-    <form id="say-form">
-      <textarea id="say" placeholder="Say a line. The other party hears the translation."></textarea>
-      <div class="row" style="margin-top:0.5rem">
-        <button type="submit">Send</button>
-        <a href="./index.html">Chronicle cinema</a>
-      </div>
-    </form>
-    <div class="cols">
-      <section>
-        <h2>You sent</h2>
-        <div id="mine" class="log"></div>
-      </section>
-      <section>
-        <h2>From the other party</h2>
-        <div id="theirs" class="log"></div>
-      </section>
-    </div>
-    <details style="margin-top:1.2rem">
-      <summary>Development translate</summary>
-      <p>This calls <code>POST /v1/translate</code>. The middle English line is hidden unless you ask for it.</p>
+    <p class="mark">Dream Junkies</p>
+    <h1>Bridge<span>Talk</span></h1>
+    <p class="lede">You speak your language. The other player receives only theirs. English is the middle, and only you see it, so you can check the meaning. Your raw line is not sent across.</p>
+
+    <section id="home" class="card">
       <div class="row">
-        <select id="dev-from"><option value="ig">ig</option><option value="en">en</option></select>
-        <select id="dev-to"><option value="en">en</option><option value="ig" selected>ig</option></select>
-        <label><input id="dev-debug" type="checkbox" /> show middle</label>
+        <button type="button" class="primary" id="create">Create room</button>
+        <label>Room code
+          <input id="code" maxlength="6" autocomplete="off" placeholder="6 letters" />
+        </label>
+        <button type="button" id="go-setup">Join</button>
       </div>
-      <textarea id="dev-text">The king left Aurelia.</textarea>
-      <button type="button" id="dev-run">Translate</button>
-      <pre id="dev-out"></pre>
-    </details>
+      <p class="status" id="home-status"></p>
+      <p><a href="./index.html">Chronicle cinema</a></p>
+    </section>
+
+    <section id="setup" class="card" hidden>
+      <div class="row">
+        <label>Name
+          <input id="name" maxlength="24" value="Player" />
+        </label>
+        <label>I speak
+          <select id="speak"></select>
+        </label>
+        <label>I hear
+          <select id="hear"></select>
+        </label>
+      </div>
+      <p class="warn" id="pcm-note" hidden>Nigerian Pidgin has hand-written callouts. A free sentence uses the English middle and shows approx, because the translation model has no Pidgin.</p>
+      <p class="warn">Igbo voice recognition is patchy. Callout buttons and typing stay exact when the mic misses.</p>
+      <div class="row">
+        <button type="button" class="primary" id="enter">Enter room</button>
+        <button type="button" id="back-home">Back</button>
+      </div>
+    </section>
+
+    <section id="live" hidden>
+      <div class="card">
+        <div class="row">
+          <strong id="room-label"></strong>
+          <button type="button" id="copy">Copy invite</button>
+          <button type="button" id="leave">Leave</button>
+        </div>
+        <div id="players" class="players"></div>
+        <p class="status" id="status">Connecting…</p>
+      </div>
+      <div class="card">
+        <button type="button" class="ptt" id="ptt" aria-pressed="false">Hold to talk</button>
+        <form id="say-form">
+          <textarea id="say" placeholder="Or type. The other party does not see this text."></textarea>
+          <div class="row" style="margin-top:0.5rem">
+            <button type="submit" class="primary">Send</button>
+          </div>
+        </form>
+        <div id="callouts" class="callouts" style="margin-top:0.7rem"></div>
+      </div>
+      <div class="card">
+        <h2>You</h2>
+        <div id="mine" class="feed"></div>
+        <h2>From the other party</h2>
+        <div id="theirs" class="feed"></div>
+      </div>
+      <div class="card" id="settings">
+        <h2>Settings</h2>
+        <div class="row">
+          <label><input id="tts" type="checkbox" checked /> Speak incoming lines</label>
+          <label>Volume <input id="volume" type="range" min="0" max="1" step="0.05" value="0.8" /></label>
+          <label><input id="filter" type="checkbox" /> Filter profanity on output</label>
+          <label><input id="overlay-toggle" type="checkbox" /> Caption overlay</label>
+          <label><input id="mock" type="checkbox" /> Mock translation</label>
+        </div>
+        <p class="lede">The overlay floats inside this browser tab. A full-screen game needs a desktop wrapper to keep captions on top. Nothing here stores audio or the chat after you leave.</p>
+      </div>
+    </section>
   </div>
+
+  <aside id="overlay" aria-live="polite">
+    <header>
+      <span id="drag">BridgeTalk captions</span>
+      <button type="button" id="overlay-exit">Close</button>
+    </header>
+    <div id="overlay-feed" class="feed"></div>
+  </aside>
+
   <script>
+    const SPEAK = {
+      ig: "ig-NG", yo: "yo-NG", ha: "ha-NG", en: "en-US", pcm: "en-NG",
+      fr: "fr-FR", es: "es-MX", pt: "pt-BR", zh: "zh-CN", ja: "ja-JP",
+      ar: "ar-SA", de: "de-DE", hi: "hi-IN", ko: "ko-KR", ru: "ru-RU", sw: "sw-KE"
+    };
+    const FALLBACK_LANGS = [
+      { code: "ig", name: "Igbo" }, { code: "en", name: "English" },
+      { code: "pcm", name: "Nigerian Pidgin" }, { code: "yo", name: "Yoruba" },
+      { code: "ha", name: "Hausa" }, { code: "fr", name: "French" },
+      { code: "es", name: "Spanish" }, { code: "pt", name: "Portuguese" }
+    ];
+    const home = document.getElementById("home");
+    const setup = document.getElementById("setup");
+    const live = document.getElementById("live");
+    const speakSel = document.getElementById("speak");
+    const hearSel = document.getElementById("hear");
     const statusEl = document.getElementById("status");
     const mineEl = document.getElementById("mine");
     const theirsEl = document.getElementById("theirs");
+    const overlayFeed = document.getElementById("overlay-feed");
     let socket = null;
-    let heard = 0;
+    let room = "";
+    let callouts = [];
+    let recognizer = null;
 
-    function line(parent, text, cls) {
+    function show(which) {
+      home.hidden = which !== "home";
+      setup.hidden = which !== "setup";
+      live.hidden = which !== "live";
+    }
+
+    function fillLanguages(list) {
+      for (const select of [speakSel, hearSel]) {
+        select.replaceChildren();
+        for (const lang of list) {
+          const option = document.createElement("option");
+          option.value = lang.code;
+          option.textContent = lang.name;
+          select.appendChild(option);
+        }
+        select.value = "ig";
+      }
+    }
+
+    function saved(key, fallback) {
+      try { return localStorage.getItem(key) || fallback; } catch { return fallback; }
+    }
+    function store(key, value) {
+      try { localStorage.setItem(key, value); } catch { /* private mode */ }
+    }
+
+    function line(parent, text, cls, approx) {
       const p = document.createElement("p");
       p.className = cls;
       p.textContent = text;
+      if (approx) {
+        const tag = document.createElement("span");
+        tag.className = "approx";
+        tag.textContent = "⚠ approx";
+        p.appendChild(tag);
+      }
       parent.appendChild(p);
+      parent.scrollTop = parent.scrollHeight;
     }
 
-    function speak(text, lang) {
-      if (!window.speechSynthesis) return;
+    function speakLine(text, lang) {
+      if (!document.getElementById("tts").checked || !window.speechSynthesis) return;
       const utter = new SpeechSynthesisUtterance(text);
-      utter.lang = lang === "ig" ? "ig-NG" : lang;
+      utter.lang = SPEAK[lang] || lang;
+      utter.volume = Number(document.getElementById("volume").value);
       window.speechSynthesis.speak(utter);
     }
 
-    document.getElementById("join").addEventListener("click", () => {
+    function sendSetup() {
+      if (!socket || socket.readyState !== 1) return;
+      socket.send(JSON.stringify({
+        type: "setup",
+        name: document.getElementById("name").value,
+        speak: speakSel.value,
+        hear: hearSel.value,
+        filter: document.getElementById("filter").checked,
+        mock: document.getElementById("mock").checked
+      }));
+    }
+
+    function connect() {
       if (socket) socket.close();
-      const room = document.getElementById("room").value.trim().toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 48) || "match-1";
-      document.getElementById("room").value = room;
-      const lang = document.getElementById("lang").value;
+      mineEl.replaceChildren();
+      theirsEl.replaceChildren();
+      overlayFeed.replaceChildren();
+      const params = new URLSearchParams({
+        speak: speakSel.value,
+        hear: hearSel.value,
+        name: document.getElementById("name").value,
+        filter: document.getElementById("filter").checked ? "1" : "0",
+        mock: document.getElementById("mock").checked ? "1" : "0"
+      });
       const proto = location.protocol === "https:" ? "wss:" : "ws:";
-      socket = new WebSocket(proto + "//" + location.host + "/v1/talk/" + room + "?lang=" + encodeURIComponent(lang));
-      statusEl.textContent = "Joining " + room + " as " + lang + "…";
-      socket.addEventListener("open", () => { statusEl.textContent = "Live in " + room + "."; });
+      socket = new WebSocket(proto + "//" + location.host + "/v1/talk/" + room + "?" + params.toString());
+      statusEl.textContent = "Joining " + room + "…";
+      socket.addEventListener("open", () => { statusEl.textContent = "Live in " + room.toUpperCase() + "."; });
       socket.addEventListener("close", () => { statusEl.textContent = "Left the room."; });
       socket.addEventListener("message", (event) => {
         const msg = JSON.parse(event.data);
-        if (msg.type === "joined") statusEl.textContent = "Joined as " + msg.lang + ".";
-        if (msg.type === "sent") statusEl.textContent = "Sent. Waiting on the other party.";
-        if (msg.type === "missed") statusEl.textContent = "That line did not cross. Nothing was sent raw.";
-        if (msg.type === "hear") {
-          heard += 1;
-          line(theirsEl, msg.text, "theirs");
-          speak(msg.text, msg.lang);
+        if (msg.type === "joined") statusEl.textContent = "Joined as " + msg.speak + " → " + msg.hear + ".";
+        if (msg.type === "roster") {
+          const box = document.getElementById("players");
+          box.replaceChildren();
+          for (const player of msg.players || []) {
+            const pill = document.createElement("span");
+            pill.className = "pill";
+            pill.textContent = player.name + " · " + player.speak + "→" + player.hear;
+            box.appendChild(pill);
+          }
         }
+        if (msg.type === "sent") {
+          line(mineEl, "Middle: " + msg.pivot, "middle", msg.approx);
+        }
+        if (msg.type === "missed") statusEl.textContent = "That line did not cross. Nothing raw was sent.";
+        if (msg.type === "hear") {
+          const who = (msg.name || "Player") + ": " + msg.text;
+          line(theirsEl, who, "theirs", msg.approx);
+          line(overlayFeed, who, "theirs", msg.approx);
+          speakLine(msg.text, msg.lang);
+        }
+        if (msg.type === "error") statusEl.textContent = msg.error;
       });
+    }
+
+    function sendText(text) {
+      const clean = text.trim();
+      if (!clean || !socket || socket.readyState !== 1) return;
+      socket.send(JSON.stringify({ type: "say", text: clean }));
+      line(mineEl, "You: " + clean, "mine", false);
+    }
+
+    document.getElementById("create").addEventListener("click", async () => {
+      const res = await fetch("/v1/rooms", { method: "POST" });
+      const body = await res.json();
+      document.getElementById("code").value = body.code;
+      room = body.code;
+      show("setup");
+    });
+
+    document.getElementById("go-setup").addEventListener("click", () => {
+      room = document.getElementById("code").value.trim().toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 6);
+      if (room.length !== 6) {
+        document.getElementById("home-status").textContent = "Use the 6-character code.";
+        return;
+      }
+      document.getElementById("code").value = room;
+      show("setup");
+    });
+
+    document.getElementById("back-home").addEventListener("click", () => show("home"));
+    document.getElementById("enter").addEventListener("click", () => {
+      store("bt-name", document.getElementById("name").value);
+      store("bt-speak", speakSel.value);
+      store("bt-hear", hearSel.value);
+      document.getElementById("room-label").textContent = room.toUpperCase();
+      show("live");
+      connect();
+    });
+
+    document.getElementById("copy").addEventListener("click", async () => {
+      const link = location.origin + "/talk?room=" + room;
+      try { await navigator.clipboard.writeText(link); statusEl.textContent = "Invite copied."; }
+      catch { statusEl.textContent = link; }
+    });
+
+    document.getElementById("leave").addEventListener("click", () => {
+      if (socket) socket.close();
+      show("home");
     });
 
     document.getElementById("say-form").addEventListener("submit", (event) => {
       event.preventDefault();
-      const text = document.getElementById("say").value.trim();
-      if (!text || !socket || socket.readyState !== 1) return;
-      socket.send(JSON.stringify({ type: "say", text }));
-      line(mineEl, text, "mine");
+      sendText(document.getElementById("say").value);
       document.getElementById("say").value = "";
     });
 
-    document.getElementById("mic").addEventListener("click", () => {
+    function stopMic() {
+      document.getElementById("ptt").setAttribute("aria-pressed", "false");
+      if (recognizer) {
+        try { recognizer.stop(); } catch { /* already stopped */ }
+      }
+    }
+
+    document.getElementById("ptt").addEventListener("pointerdown", (event) => {
+      event.preventDefault();
       const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!Rec) {
         statusEl.textContent = "This browser has no speech recognizer. Type the line.";
+        document.getElementById("say").focus();
         return;
       }
-      const lang = document.getElementById("lang").value;
-      const rec = new Rec();
-      rec.lang = lang === "ig" ? "ig-NG" : lang;
-      rec.onresult = (event) => {
-        document.getElementById("say").value = event.results[0][0].transcript;
+      recognizer = new Rec();
+      recognizer.lang = SPEAK[speakSel.value] || speakSel.value;
+      recognizer.onresult = (ev) => {
+        sendText(ev.results[0][0].transcript || "");
       };
-      rec.onerror = () => { statusEl.textContent = "Mic did not catch a line. Type it."; };
-      rec.start();
+      recognizer.onerror = () => { statusEl.textContent = "Mic missed that. Type it, or use a callout."; };
+      recognizer.start();
+      document.getElementById("ptt").setAttribute("aria-pressed", "true");
       statusEl.textContent = "Listening…";
     });
+    document.getElementById("ptt").addEventListener("pointerup", stopMic);
+    document.getElementById("ptt").addEventListener("pointercancel", stopMic);
 
-    document.getElementById("dev-run").addEventListener("click", async () => {
-      const debug = document.getElementById("dev-debug").checked ? "?debug=1" : "";
-      const res = await fetch("/v1/translate" + debug, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          text: document.getElementById("dev-text").value,
-          from: document.getElementById("dev-from").value,
-          to: document.getElementById("dev-to").value
-        })
+    function paintCallouts() {
+      const box = document.getElementById("callouts");
+      box.replaceChildren();
+      const lang = speakSel.value || "en";
+      for (const callout of callouts) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = callout.text[lang] || callout.text.en;
+        button.addEventListener("click", () => {
+          if (!socket || socket.readyState !== 1) return;
+          socket.send(JSON.stringify({ type: "callout", id: callout.id }));
+          line(mineEl, "You: " + (callout.text[lang] || callout.text.en), "mine", false);
+        });
+        box.appendChild(button);
+      }
+    }
+
+    for (const id of ["filter", "mock", "speak", "hear"]) {
+      document.getElementById(id).addEventListener("change", () => {
+        if (id === "speak" || id === "hear") {
+          document.getElementById("pcm-note").hidden = speakSel.value !== "pcm" && hearSel.value !== "pcm";
+          paintCallouts();
+        }
+        store("bt-" + id, document.getElementById(id).type === "checkbox"
+          ? String(document.getElementById(id).checked)
+          : document.getElementById(id).value);
+        sendSetup();
       });
-      document.getElementById("dev-out").textContent = await res.text();
+    }
+    document.getElementById("name").addEventListener("change", sendSetup);
+
+    document.getElementById("overlay-toggle").addEventListener("change", () => {
+      document.body.classList.toggle("overlay", document.getElementById("overlay-toggle").checked);
+    });
+    document.getElementById("overlay-exit").addEventListener("click", () => {
+      document.getElementById("overlay-toggle").checked = false;
+      document.body.classList.remove("overlay");
+    });
+
+    const drag = document.getElementById("drag");
+    const panel = document.getElementById("overlay");
+    let dragging = null;
+    drag.addEventListener("pointerdown", (event) => {
+      dragging = { x: event.clientX, y: event.clientY, left: panel.offsetLeft, top: panel.offsetTop };
+      drag.setPointerCapture(event.pointerId);
+    });
+    drag.addEventListener("pointermove", (event) => {
+      if (!dragging) return;
+      panel.style.left = (dragging.left + event.clientX - dragging.x) + "px";
+      panel.style.top = (dragging.top + event.clientY - dragging.y) + "px";
+    });
+    drag.addEventListener("pointerup", () => { dragging = null; });
+
+    const params = new URLSearchParams(location.search);
+    if (params.get("mock") === "1") document.getElementById("mock").checked = true;
+    document.getElementById("name").value = saved("bt-name", "Player");
+    fillLanguages(FALLBACK_LANGS);
+
+    Promise.all([
+      fetch("/v1/languages").then((res) => res.json()).catch(() => null),
+      fetch("/v1/callouts").then((res) => res.json()).catch(() => null)
+    ]).then(([langs, calls]) => {
+      if (langs && langs.languages) fillLanguages(langs.languages);
+      speakSel.value = saved("bt-speak", "ig");
+      hearSel.value = saved("bt-hear", "ig");
+      if (!speakSel.value) speakSel.value = "ig";
+      if (!hearSel.value) hearSel.value = "ig";
+      document.getElementById("pcm-note").hidden = speakSel.value !== "pcm" && hearSel.value !== "pcm";
+      callouts = (calls && calls.callouts) || [];
+      paintCallouts();
+      const preset = (params.get("room") || "").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 6);
+      if (preset.length === 6) {
+        room = preset;
+        document.getElementById("code").value = preset;
+        show("setup");
+      }
     });
   </script>
 </body>

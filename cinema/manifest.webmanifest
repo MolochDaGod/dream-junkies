@@ -1,0 +1,9 @@
+{
+  "name": "BridgeTalk",
+  "short_name": "BridgeTalk",
+  "start_url": "/talk",
+  "display": "standalone",
+  "background_color": "#07110c",
+  "theme_color": "#07110c",
+  "description": "Live game translator. Other players receive only their language."
+}

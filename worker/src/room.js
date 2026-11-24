@@ -1,5 +1,15 @@
 import { DurableObject } from "cloudflare:workers";
-import { canon, forListener, hearPacket, sentPacket } from "./translate.js";
+import { filterProfanity } from "./glossary.js";
+import { bridgeMessage, canon, hearPacket, renderFor, sentPacket } from "./translate.js";
+
+function cleanName(value) {
+  const name = String(value || "").replace(/[\u0000-\u001f]/g, "").trim().slice(0, 24);
+  return name || "Player";
+}
+
+function flag(value) {
+  return value === true || value === 1 || value === "1" || value === "true";
+}
 
 export class TalkRoom extends DurableObject {
   constructor(ctx, env) {
@@ -12,14 +22,42 @@ export class TalkRoom extends DurableObject {
     this.ctx.setWebSocketAutoResponse(new WebSocketRequestResponsePair("ping", "pong"));
   }
 
+  roster() {
+    const players = [];
+    for (const [ws, session] of this.sessions) {
+      if (ws.readyState !== 1) continue;
+      players.push({
+        id: session.id,
+        name: session.name,
+        speak: session.speak,
+        hear: session.hear
+      });
+    }
+    return { type: "roster", players };
+  }
+
+  broadcast(payload) {
+    const raw = JSON.stringify(payload);
+    for (const [ws] of this.sessions) {
+      if (ws.readyState === 1) ws.send(raw);
+    }
+  }
+
+  save(ws, session) {
+    ws.serializeAttachment(session);
+    this.sessions.set(ws, session);
+  }
+
   async fetch(request) {
     if (request.headers.get("Upgrade") !== "websocket") {
       return new Response("Expected websocket", { status: 426 });
     }
     const url = new URL(request.url);
-    let lang = "en";
+    let speak = "ig";
+    let hear = "ig";
     try {
-      lang = canon(url.searchParams.get("lang") || "en");
+      speak = canon(url.searchParams.get("speak") || url.searchParams.get("lang") || "ig");
+      hear = canon(url.searchParams.get("hear") || url.searchParams.get("lang") || speak);
     } catch {
       return Response.json({ error: "unsupported language" }, { status: 400 });
     }
@@ -28,10 +66,23 @@ export class TalkRoom extends DurableObject {
     const client = pair[0];
     const server = pair[1];
     this.ctx.acceptWebSocket(server);
-    const session = { id: crypto.randomUUID(), lang };
-    server.serializeAttachment(session);
-    this.sessions.set(server, session);
-    server.send(JSON.stringify({ type: "joined", id: session.id, lang }));
+    const session = {
+      id: crypto.randomUUID(),
+      name: cleanName(url.searchParams.get("name")),
+      speak,
+      hear,
+      filter: flag(url.searchParams.get("filter")),
+      mock: flag(url.searchParams.get("mock"))
+    };
+    this.save(server, session);
+    server.send(JSON.stringify({
+      type: "joined",
+      id: session.id,
+      name: session.name,
+      speak: session.speak,
+      hear: session.hear
+    }));
+    this.broadcast(this.roster());
     return new Response(null, { status: 101, webSocket: client });
   }
 
@@ -47,43 +98,82 @@ export class TalkRoom extends DurableObject {
       return;
     }
 
-    if (data.type === "lang") {
+    if (data.type === "setup" || data.type === "lang") {
       try {
-        session.lang = canon(data.lang);
+        if (data.speak || data.lang) session.speak = canon(data.speak || data.lang);
+        if (data.hear || data.lang) session.hear = canon(data.hear || data.lang);
       } catch {
         ws.send(JSON.stringify({ type: "error", error: "unsupported language" }));
         return;
       }
-      ws.serializeAttachment(session);
-      this.sessions.set(ws, session);
-      ws.send(JSON.stringify({ type: "lang", lang: session.lang }));
+      if (data.name != null) session.name = cleanName(data.name);
+      if (data.filter != null) session.filter = flag(data.filter);
+      if (data.mock != null) session.mock = flag(data.mock);
+      this.save(ws, session);
+      ws.send(JSON.stringify({
+        type: "setup",
+        name: session.name,
+        speak: session.speak,
+        hear: session.hear,
+        filter: session.filter,
+        mock: session.mock
+      }));
+      this.broadcast(this.roster());
       return;
     }
 
-    if (data.type !== "say") return;
+    if (data.type !== "say" && data.type !== "callout") return;
     const text = String(data.text || "").trim().slice(0, 500);
-    if (!text) return;
+    const calloutId = data.type === "callout" ? String(data.id || "") : "";
+    if (!text && !calloutId) return;
 
     const id = crypto.randomUUID();
-    ws.send(JSON.stringify(sentPacket(id)));
+    let bridged;
+    try {
+      bridged = await bridgeMessage(this.env.AI, text, session.speak, {
+        mock: session.mock,
+        calloutId
+      });
+    } catch {
+      ws.send(JSON.stringify({ type: "missed", id }));
+      return;
+    }
 
-    const byLang = new Map();
+    const pivot = session.filter ? filterProfanity(bridged.pivot) : bridged.pivot;
+    ws.send(JSON.stringify(sentPacket({
+      id,
+      pivot,
+      confidence: bridged.confidence,
+      approx: bridged.approx
+    })));
+
+    const groups = new Map();
     for (const [peerWs, peer] of this.sessions) {
       if (peerWs === ws || peerWs.readyState !== 1) continue;
-      const list = byLang.get(peer.lang) || [];
-      list.push(peerWs);
-      byLang.set(peer.lang, list);
+      const key = `${peer.hear}:${peer.filter ? "1" : "0"}`;
+      const group = groups.get(key) || { hear: peer.hear, filter: peer.filter, sockets: [] };
+      group.sockets.push(peerWs);
+      groups.set(key, group);
     }
 
-    for (const [lang, sockets] of byLang) {
+    let failed = 0;
+    for (const group of groups.values()) {
       try {
-        const translated = await forListener(this.env.AI, text, session.lang, lang);
-        const packet = JSON.stringify(hearPacket(translated.forListener, lang));
-        for (const peerWs of sockets) peerWs.send(packet);
+        const rendered = await renderFor(this.env.AI, bridged, group.hear, { filter: group.filter });
+        const packet = JSON.stringify(hearPacket({
+          text: rendered.text,
+          lang: rendered.lang,
+          confidence: rendered.confidence,
+          approx: rendered.approx,
+          name: session.name,
+          ts: Date.now()
+        }));
+        for (const peerWs of group.sockets) peerWs.send(packet);
       } catch {
-        ws.send(JSON.stringify({ type: "missed", id }));
+        failed += 1;
       }
     }
+    if (failed > 0) ws.send(JSON.stringify({ type: "missed", id }));
   }
 
   async webSocketClose(ws, code, reason) {
@@ -93,5 +183,6 @@ export class TalkRoom extends DurableObject {
     } catch {
       /* already closed */
     }
+    this.broadcast(this.roster());
   }
 }
