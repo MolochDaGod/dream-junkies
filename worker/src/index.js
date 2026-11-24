@@ -60,10 +60,6 @@ export default {
       return stub.fetch(request);
     }
 
-    if (url.pathname === "/talk") {
-      return Response.redirect(new URL("/talk.html", url).toString(), 302);
-    }
-
     return env.ASSETS.fetch(request);
   }
 };

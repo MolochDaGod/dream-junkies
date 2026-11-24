@@ -13,7 +13,7 @@
   "assets": {
     "directory": "../cinema",
     "binding": "ASSETS",
-    "run_worker_first": ["/v1/*", "/talk"]
+    "run_worker_first": ["/v1/*"]
   },
   "durable_objects": {
     "bindings": [
