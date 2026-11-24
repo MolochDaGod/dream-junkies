@@ -1,0 +1,12 @@
+{
+  "name": "dream-junkies",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5179 --open /cinema/play.html",
+    "test": "node --test cinema/play-sim.test.mjs worker/src/wire.test.mjs"
+  },
+  "devDependencies": {
+    "vite": "6.4.1"
+  }
+}

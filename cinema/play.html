@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#07110c" />
+  <title>Dream Lane</title>
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <style>
+    :root { --ink: #07110c; --gold: #e4c36a; --green: #3dff9a; --paper: #e7f6ec; --dim: #8eaa96; --line: rgba(228, 195, 106, 0.35); }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: var(--ink); color: var(--paper); font-family: "Segoe UI", system-ui, sans-serif; }
+    #view { display: block; width: 100%; height: 100%; }
+    button { font: inherit; color: inherit; background: #102117; border: 1px solid var(--line); border-radius: 12px; padding: 0.55rem 0.7rem; cursor: pointer; }
+    button:hover { border-color: var(--green); }
+    a { color: var(--gold); }
+    #gate, #hud, #end {
+      position: fixed; z-index: 2; pointer-events: none;
+    }
+    #gate {
+      inset: 0; display: grid; place-items: center; padding: 1.2rem;
+      background: rgba(7, 17, 12, 0.72); pointer-events: auto;
+    }
+    #gate[hidden], #end[hidden] { display: none; }
+    .panel { width: min(920px, 100%); }
+    h1 { margin: 0.1rem 0; letter-spacing: 0.14em; text-transform: uppercase; font-size: 1.5rem; }
+    h1 span { color: var(--green); }
+    .lede { color: var(--dim); max-width: 40rem; }
+    .roster { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 0.55rem; margin-top: 0.8rem; }
+    .roster button { text-align: left; padding: 0.45rem; }
+    .roster img { width: 100%; height: 92px; object-fit: cover; border-radius: 8px; display: block; background: #0b1912; }
+    .roster strong { display: block; margin-top: 0.35rem; }
+    .roster span { color: var(--dim); font-size: 0.78rem; }
+    #hud { left: 0; right: 0; top: 0; display: grid; gap: 0.4rem; padding: 0.6rem; }
+    .bar, .dock { pointer-events: auto; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+    .pill { background: rgba(7, 17, 12, 0.78); border: 1px solid var(--line); border-radius: 999px; padding: 0.25rem 0.6rem; font-size: 0.82rem; }
+    .hp { height: 8px; width: 120px; background: #1a120f; border-radius: 99px; overflow: hidden; display: inline-block; vertical-align: middle; }
+    .hp i { display: block; height: 100%; background: var(--green); width: 100%; }
+    .hp.foe i { background: #d4657a; }
+    #log { color: var(--gold); min-height: 1.2rem; text-shadow: 0 1px 2px #000; }
+    #end { inset: 0; display: grid; place-items: center; background: rgba(7, 17, 12, 0.55); pointer-events: auto; }
+    #end .panel { background: #102117; border: 1px solid var(--line); border-radius: 16px; padding: 1rem 1.1rem; }
+  </style>
+</head>
+<body>
+  <canvas id="view"></canvas>
+  <section id="gate">
+    <div class="panel">
+      <p class="lede">Dream Junkies</p>
+      <h1>Dream <span>Lane</span></h1>
+      <p class="lede">One lane, like Stick Wars: Legacy. Your statue is the captain you hold. Tengu Legends holds the far end. Walk in third person. Train the line with $DREAM. Upgrade it with Dream Essence and that captain's lore item.</p>
+      <div id="roster" class="roster"></div>
+      <p class="lede"><a href="./">Chronicle</a> · <a href="./talk">BridgeTalk</a></p>
+    </div>
+  </section>
+  <div id="hud" hidden>
+    <div class="bar">
+      <span class="pill" id="you-name"></span>
+      <span class="hp" id="you-hp"><i></i></span>
+      <span class="pill" id="foe-name"></span>
+      <span class="hp foe" id="foe-hp"><i></i></span>
+      <span class="pill" id="purse"></span>
+    </div>
+    <div class="dock" id="tree"></div>
+    <p id="log"></p>
+  </div>
+  <section id="end" hidden>
+    <div class="panel">
+      <h1 id="end-title"></h1>
+      <p class="lede" id="end-copy"></p>
+      <button type="button" id="again">Choose another captain</button>
+    </div>
+  </section>
+  <script>
+    window.addEventListener("error", (event) => {
+      const roster = document.querySelector("#roster");
+      if (roster && roster.childElementCount === 0) roster.textContent = event.message || "The lane did not start.";
+    });
+  </script>
+  <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.185.0/build/three.module.js" } }
+  </script>
+  <script type="module" src="./play.js"></script>
+</body>
+</html>

@@ -4,6 +4,22 @@ Chronicle cinema and live match talk.
 
 The cinema plays the published manga from dreamjunkies.site. Captains are the generation characters for a Stick Wars: Legacy retelling.
 
+World and biome law is not this repository. That catalog lives in ObjectStore (`F:\GitHub\ObjectStore`), on `info.grudge-studio.com` and `objectstore.grudge-studio.com`.
+
+## Chronicle voice
+
+The four opening films have no audio stream. The player speaks `cinema/voice/open-0.mp3` through `open-3.mp3` over them. Those lines are the on-screen captions. The third line also keeps the published bloodline sentence. Plate narration is `cinema/voice/pXX-Y.mp3`, taken from the published clips and spelled with the chronicle names. The speaker is Workers AI `@cf/deepgram/aura-1`, voice `zeus`. A short line does not cut the picture. If the browser blocks autoplay, the control reads Hear it.
+
+`motion.narration` is still the old Base44 file. The cinema does not play it. Prose founders stay twenty-seven loyal souls. The entrance caption stays twenty-nine loyal companions.
+
+`/favicon.ico` is the icon for the cinema, Dream Lane, and BridgeTalk.
+
+## Dream Lane
+
+`/play` is the lane. One statue is the captain you hold, from `data/captains.json`. The far statue is Tengu Legends, unless you hold Tengu, in which case it is Oze. Training spends $DREAM. An upgrade spends Dream Essence, a little $DREAM, and one of that captain's lore items. The tier-5 rite does not summon a body.
+
+This repository is the OhMyGrudge web game. `npm run dev` previews `cinema/play.html`. The same page is served by worker `dream-junkies-talk`, and `GET /v1/captains` is the army book. The camera is the Grudge third-person orbit: click the field to look, WASD walks with the camera, 1–4 train, U upgrades the nearest troop, R is the rite. The figures are lane markers about 1.8 m tall. They are not a Warlords play body.
+
 ## BridgeTalk
 
 Worker `dream-junkies-talk` uses Workers AI `@cf/meta/m2m100-1.2b`. There is no API key. `.env.example` is empty of secrets on purpose. `?mock=1` skips the model.

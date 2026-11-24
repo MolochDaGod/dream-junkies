@@ -1,3 +1,4 @@
+import captains from "../../data/captains.json" with { type: "json" };
 import { CALLOUTS, roomCode } from "./glossary.js";
 import { Lexicon, loadEntries } from "./lexicon.js";
 import { LANGUAGES, MIDDLE, forListener } from "./translate.js";
@@ -31,6 +32,10 @@ export default {
     }
 
     const url = new URL(request.url);
+
+    if (url.pathname === "/v1/captains" && request.method === "GET") {
+      return json(captains);
+    }
 
     if (url.pathname === "/v1/languages" && request.method === "GET") {
       return json({ middle: MIDDLE, languages: LANGUAGES });

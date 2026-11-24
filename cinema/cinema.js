@@ -24,6 +24,7 @@
     chapterId: "open"
   });
 
+  const openingVoice = motion.openingVoice || [];
   entrance.forEach((src, i) => {
     beats.push({
       kind: "motion",
@@ -31,7 +32,8 @@
       kicker: "Opening",
       title: captions[i] || "Aurelia",
       sub: "",
-      maxMs: 14000,
+      speech: openingVoice[i] ? [openingVoice[i]] : [],
+      maxMs: 7000,
       chapterId: "open"
     });
   });
@@ -43,7 +45,8 @@
       kicker: "The book",
       title: captions[3] || "The chronicle begins here.",
       sub: "Rem Forge",
-      maxMs: 12000,
+      speech: openingVoice[3] ? [openingVoice[3]] : [],
+      maxMs: 7000,
       chapterId: "open"
     });
   }
@@ -166,15 +169,23 @@
     const b = beats[beat];
     if (!playing) return;
     if (b.kind === "motion") {
+      motionEl.muted = true;
       motionEl.onended = () => finish(my);
       const play = motionEl.play();
       if (play && play.catch) {
         play.catch(() => {
           if (my !== token) return;
-          motionEl.muted = true;
+          timer = setTimeout(() => finish(my), b.maxMs || 7000);
+        });
+      }
+      if (!muted && b.speech && b.speech.length) {
+        speechAt = 0;
+        voice.src = b.speech[0];
+        voice.onended = null;
+        voice.play().catch(() => {
+          if (my !== token) return;
           muted = true;
           muteBtn.textContent = "Hear it";
-          motionEl.play().catch(() => { timer = setTimeout(() => finish(my), 2800); });
         });
       }
       timer = setTimeout(() => finish(my), b.maxMs);
@@ -316,7 +327,7 @@
 
     if (b.kind === "motion") {
       motionEl.hidden = false;
-      motionEl.muted = muted;
+      motionEl.muted = true;
       motionEl.src = b.src;
     } else if (b.kind === "plate") {
       plateEl.hidden = false;
@@ -363,8 +374,9 @@
     const b = beats[beat];
     if (b.kind === "motion") {
       motionEl.play().catch(() => {});
+      if (!muted && b.speech && b.speech.length) voice.play().catch(() => {});
       motionEl.onended = () => finish(my);
-      timer = setTimeout(() => finish(my), b.maxMs || 14000);
+      timer = setTimeout(() => finish(my), b.maxMs || 7000);
       return;
     }
     if (b.kind === "plate" && !muted && b.speech.length && speechAt < b.speech.length && voice.src) {
@@ -401,9 +413,9 @@
   muteBtn.addEventListener("click", () => {
     muted = !muted;
     muteBtn.textContent = muted ? "Sound off" : "Sound on";
-    motionEl.muted = muted;
     voice.muted = muted;
     if (muted) voice.pause();
+    else if (beats[beat].speech && beats[beat].speech.length) voice.play().catch(() => {});
   });
 
   window.addEventListener("keydown", (event) => {

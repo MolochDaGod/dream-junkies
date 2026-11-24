@@ -168,7 +168,13 @@
       "Together they fled its fall with twenty-nine loyal companions.",
       "The land they found became Rem Forge. The chronicle begins here."
     ],
-    "bookOpening": "https://media.base44.com/videos/public/6ac25d429e02c0bfd4facc6a/bba7d6353_Book_Opening.mp4"
+    "bookOpening": "https://media.base44.com/videos/public/6ac25d429e02c0bfd4facc6a/bba7d6353_Book_Opening.mp4",
+    "openingVoice": [
+      "./voice/open-0.mp3",
+      "./voice/open-1.mp3",
+      "./voice/open-2.mp3",
+      "./voice/open-3.mp3"
+    ]
   },
   "stills": {
     "pageTile": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/a173e7a2b_parchment-scroll.jpg/v1/fill/w_1100,h_1100,al_c,q_72,usm_0.66_1.00_0.01,enc_webp,quality_auto/parchment-tile.webp",
@@ -572,8 +578,8 @@
       "pageCount": 2,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/d59519a6f_c91a96c2-929e-4c03-a436-bed6843b2e9a.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4c2da8ad9_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/8770c7753_speech.mp3"
+        "./voice/p00-0.mp3",
+        "./voice/p00-1.mp3"
       ]
     },
     {
@@ -584,7 +590,7 @@
       "pageCount": 2,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/929812a74_d754b467-5fcc-4ae9-9551-9913dcc42202.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/6aef5b931_speech.mp3"
+        "./voice/p01-0.mp3"
       ]
     },
     {
@@ -595,8 +601,8 @@
       "pageCount": 2,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/4c3f7f87e_c37c3505-1edd-48c4-ae14-ba1bd396860a.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/c38b0e9b5_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/95aa1057b_speech.mp3"
+        "./voice/p02-0.mp3",
+        "./voice/p02-1.mp3"
       ]
     },
     {
@@ -607,7 +613,7 @@
       "pageCount": 2,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/62844e863_cac26edb-5f53-411c-a8a8-048943d53414.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/c4fcfe38a_speech.mp3"
+        "./voice/p03-0.mp3"
       ]
     },
     {
@@ -618,8 +624,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/e9d1366be_4b2a8535-3440-434f-b90f-21cab772366d.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/34f9c47a4_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/f3170f474_speech.mp3"
+        "./voice/p04-0.mp3",
+        "./voice/p04-1.mp3"
       ]
     },
     {
@@ -630,8 +636,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/1a5a33c7e_0ed0dc55-7e1d-458e-b27a-e6c8318bc731.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/9f091e122_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a7fc7b0f5_speech.mp3"
+        "./voice/p05-0.mp3",
+        "./voice/p05-1.mp3"
       ]
     },
     {
@@ -642,8 +648,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b28475e21_a0343a45-5d78-4c38-b2f5-366f68c5b261.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/699ef446a_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/f62e3b4ee_speech.mp3"
+        "./voice/p06-0.mp3",
+        "./voice/p06-1.mp3"
       ]
     },
     {
@@ -654,8 +660,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/8a6cfa9b2_ff0c6ea0-b6cb-4f3c-a402-8a7af6bdda0f.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/564820ada_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/78833df87_speech.mp3"
+        "./voice/p07-0.mp3",
+        "./voice/p07-1.mp3"
       ]
     },
     {
@@ -666,8 +672,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/2aadec47c_ce2b063c-08a1-42dc-9a4e-856a1013ece8.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/12658a8dd_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/858adb48b_speech.mp3"
+        "./voice/p08-0.mp3",
+        "./voice/p08-1.mp3"
       ]
     },
     {
@@ -678,8 +684,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/9d1a1bda8_f7623ea0-0d2d-4be6-b873-573554860823.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/d330144d0_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/7c52357c2_speech.mp3"
+        "./voice/p09-0.mp3",
+        "./voice/p09-1.mp3"
       ]
     },
     {
@@ -690,8 +696,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/18ad4ed57_995cd880-9892-46f9-a0f9-eb5da5bd2e0e.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/f81781cf5_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/64000dd00_speech.mp3"
+        "./voice/p10-0.mp3",
+        "./voice/p10-1.mp3"
       ]
     },
     {
@@ -702,8 +708,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/6303e40cd_fe7f6d12-756c-4ec6-a9ff-d7c27fcdfa55.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/82cd9612d_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/23900419c_speech.mp3"
+        "./voice/p11-0.mp3",
+        "./voice/p11-1.mp3"
       ]
     },
     {
@@ -714,8 +720,8 @@
       "pageCount": 2,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/05fc53936_e5a8429a-5103-4eb4-9c40-00551aaaa306.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/ee38fd5bc_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/aed28284f_speech.mp3"
+        "./voice/p12-0.mp3",
+        "./voice/p12-1.mp3"
       ]
     },
     {
@@ -726,7 +732,7 @@
       "pageCount": 2,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/e6e2759b9_9b0e4ef2-c6b5-4b6a-9162-bd6350ec9dc6.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/e8fd662e7_speech.mp3"
+        "./voice/p13-0.mp3"
       ]
     },
     {
@@ -737,8 +743,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/59b30f472_5a29ec2a-6dac-49c1-9766-c4a717b58ead.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a32876a8e_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/dbf913323_speech.mp3"
+        "./voice/p14-0.mp3",
+        "./voice/p14-1.mp3"
       ]
     },
     {
@@ -749,8 +755,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/c6b75a44d_2364254c-3d2f-4e48-9df5-69feb9c554c3.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/393228719_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/b9849f2c6_speech.mp3"
+        "./voice/p15-0.mp3",
+        "./voice/p15-1.mp3"
       ]
     },
     {
@@ -761,8 +767,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/c23ae0823_a26c8666-96bb-4b4c-bdfe-669cbd217971.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/101af4096_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/17edb5a4b_speech.mp3"
+        "./voice/p16-0.mp3",
+        "./voice/p16-1.mp3"
       ]
     },
     {
@@ -773,8 +779,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/aaa6c6ef4_211d5d99-1e49-45c1-b00a-3e9cbd93a39c.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/38ea3ed78_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4c4a974b6_speech.mp3"
+        "./voice/p17-0.mp3",
+        "./voice/p17-1.mp3"
       ]
     },
     {
@@ -785,8 +791,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/ee169f7dd_a5e2dc50-4d68-4bd6-b647-6f278052458f.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/c2e612d57_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/b1672a56d_speech.mp3"
+        "./voice/p18-0.mp3",
+        "./voice/p18-1.mp3"
       ]
     },
     {
@@ -797,8 +803,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/dbb136503_8c49f472-8e3a-49fe-a5bc-b1d5aa4a957b.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/6157705d9_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/7aeb99773_speech.mp3"
+        "./voice/p19-0.mp3",
+        "./voice/p19-1.mp3"
       ]
     },
     {
@@ -809,8 +815,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/cfa9892b6_d778fc8a-a24d-4fc5-9a20-70e5c0eda985.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/fb51b1fdb_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/0ce39107f_speech.mp3"
+        "./voice/p20-0.mp3",
+        "./voice/p20-1.mp3"
       ]
     },
     {
@@ -821,8 +827,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/05936d4d0_d36114ce-ae7a-435c-a54e-8bf667166492.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4470f0981_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a4cf3b482_speech.mp3"
+        "./voice/p21-0.mp3",
+        "./voice/p21-1.mp3"
       ]
     },
     {
@@ -833,8 +839,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/a2ceab400_cc4f51b2-2447-4a01-a110-142234df39b9.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/71c8a3664_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/b0fcf67c8_speech.mp3"
+        "./voice/p22-0.mp3",
+        "./voice/p22-1.mp3"
       ]
     },
     {
@@ -845,8 +851,8 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/ac4e9aa4c_b1582fbf-5815-4f2b-8833-467d607acfc9.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4cc4e48ef_speech.mp3",
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a2412ab39_speech.mp3"
+        "./voice/p23-0.mp3",
+        "./voice/p23-1.mp3"
       ]
     },
     {
@@ -857,7 +863,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/bf6210367_02e73e88-7640-4a1b-a8ce-1329a0d384d7.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/97e749e85_speech.mp3"
+        "./voice/p24-0.mp3"
       ]
     },
     {
@@ -868,7 +874,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/edbfa09ac_1e70c02e-a9d3-429d-9687-0b02b04ace3c.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/907f4a403_speech.mp3"
+        "./voice/p25-0.mp3"
       ]
     },
     {
@@ -879,7 +885,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/a56a4e9a7_daab9696-09f4-4c41-8bc9-9af464e654d8.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/45ea600c6_speech.mp3"
+        "./voice/p26-0.mp3"
       ]
     },
     {
@@ -890,7 +896,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/961abc4b5_d05a7de5-a948-4447-8021-f4a24bffbc78.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/ca5dc8521_speech.mp3"
+        "./voice/p27-0.mp3"
       ]
     },
     {
@@ -901,7 +907,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b8577c321_cad22ea4-bc04-4b1f-814e-7cab984e1566.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/a24a36392_speech.mp3"
+        "./voice/p28-0.mp3"
       ]
     },
     {
@@ -912,7 +918,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b766c1f69_c856f884-41e0-4e6c-9556-f03d589b7356.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/3d1459d5a_speech.mp3"
+        "./voice/p29-0.mp3"
       ]
     },
     {
@@ -923,7 +929,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/8876e8ca7_4eedf781-9cdb-44b0-9765-b2e5ae0b68c2.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/2ddc7086c_speech.mp3"
+        "./voice/p30-0.mp3"
       ]
     },
     {
@@ -934,7 +940,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/f602b80ff_0dfa9a82-48f9-40df-b60e-c393c2308d81.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4854b553e_speech.mp3"
+        "./voice/p31-0.mp3"
       ]
     },
     {
@@ -945,7 +951,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/2cbe9df0f_6ac0ffb9-4ef5-459a-bdc4-af7112cd45a2.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/84f46e96c_speech.mp3"
+        "./voice/p32-0.mp3"
       ]
     },
     {
@@ -956,7 +962,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/df3d72760_471c300e-a4cf-4a45-99bd-a4d7d4b88dc4.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/54003e993_speech.mp3"
+        "./voice/p33-0.mp3"
       ]
     },
     {
@@ -967,7 +973,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/9eeeedd11_73fcbdc0-18be-4ba2-9075-700c1246a874.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/07c7f59c4_speech.mp3"
+        "./voice/p34-0.mp3"
       ]
     },
     {
@@ -978,7 +984,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/d41b8fbfb_2d76487c-609b-4d22-9f10-ce72a751f129.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/bb12afdf4_speech.mp3"
+        "./voice/p35-0.mp3"
       ]
     },
     {
@@ -989,7 +995,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/e8247c26c_05c9c63a-616e-4b8d-956f-5c80cfb057b0.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/bd3a44ede_speech.mp3"
+        "./voice/p36-0.mp3"
       ]
     },
     {
@@ -1000,7 +1006,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/efaf6abe6_81eee9ab-80c2-47b0-9fb6-b9f01c3c32b7.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/2b6356034_speech.mp3"
+        "./voice/p37-0.mp3"
       ]
     },
     {
@@ -1011,7 +1017,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/52f282b14_90be1222-b401-4126-920f-8a8a4be5de71.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/0454c5c5e_speech.mp3"
+        "./voice/p38-0.mp3"
       ]
     },
     {
@@ -1022,7 +1028,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/23a8402de_0cf327c7-600f-4eb6-a9f6-c4cb57d9119f.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/080440d26_speech.mp3"
+        "./voice/p39-0.mp3"
       ]
     },
     {
@@ -1033,7 +1039,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/b4ad88fc1_0d18373f-2796-4288-9f9c-ccf3c34f5b13.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/f210a2efd_speech.mp3"
+        "./voice/p40-0.mp3"
       ]
     },
     {
@@ -1044,7 +1050,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/54d22e5cd_675a4207-4c54-47c8-9784-5b43d06bcea9.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/dc37e0481_speech.mp3"
+        "./voice/p41-0.mp3"
       ]
     },
     {
@@ -1055,7 +1061,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/66fbf805c_51ce58b1-d5e8-4e38-9ccb-acae26021c08.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/8dfe6e62c_speech.mp3"
+        "./voice/p42-0.mp3"
       ]
     },
     {
@@ -1066,7 +1072,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/526adf127_e15bc562-0d61-4647-8e56-ddd4735e2b02.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/37a0bc3e7_speech.mp3"
+        "./voice/p43-0.mp3"
       ]
     },
     {
@@ -1077,7 +1083,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/efb4aaf9f_af8ec6bb-18fe-40ba-b617-1abaa8417345.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/70d45b96d_speech.mp3"
+        "./voice/p44-0.mp3"
       ]
     },
     {
@@ -1088,7 +1094,7 @@
       "pageCount": 1,
       "image": "https://media.base44.com/images/public/6ac25d429e02c0bfd4facc6a/aa23cdbc8_5e77a839-3659-4fe7-b78e-fa02182951eb.jpeg",
       "speech": [
-        "https://media.base44.com/files/public/6ac25d429e02c0bfd4facc6a/4e2b66229_speech.mp3"
+        "./voice/p45-0.mp3"
       ]
     }
   ],
