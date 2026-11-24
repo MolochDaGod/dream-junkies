@@ -1,6 +1,8 @@
 /**
  * English is the middle ground.
- * Peers receive only their language. The pivot stays with the sender.
+ * Hear goes only to other players, in the language they hear.
+ * Captions go to everyone: English, plus the caption language they picked.
+ * Neither packet carries the raw source.
  * M2M100 returns no confidence score, so model lines are marked approx.
  * Nigerian Pidgin is glossary-only: the model has no pcm code.
  */
@@ -291,6 +293,22 @@ export function sentPacket(fields) {
     confidence: fields.confidence,
     approx: Boolean(fields.approx),
     trained: Boolean(fields.trained)
+  };
+}
+
+/** Room caption. `en` is the English line. `text` is the selected caption language. No raw source. */
+export function ccPacket(fields) {
+  return {
+    type: "cc",
+    id: fields.id,
+    name: fields.name,
+    text: fields.text,
+    lang: fields.lang,
+    en: fields.en,
+    enApprox: Boolean(fields.enApprox),
+    approx: Boolean(fields.approx),
+    trained: Boolean(fields.trained),
+    ts: fields.ts
   };
 }
 

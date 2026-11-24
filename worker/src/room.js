@@ -1,7 +1,7 @@
 import { DurableObject } from "cloudflare:workers";
 import { filterProfanity } from "./glossary.js";
 import { loadEntries } from "./lexicon.js";
-import { bridgeMessage, canon, hearPacket, renderFor, sentPacket } from "./translate.js";
+import { bridgeMessage, canon, ccPacket, hearPacket, MIDDLE, renderFor, sentPacket } from "./translate.js";
 
 function cleanName(value) {
   const name = String(value || "").replace(/[\u0000-\u001f]/g, "").trim().slice(0, 24);
@@ -58,6 +58,56 @@ export class TalkRoom extends DurableObject {
     }
   }
 
+  /** One render per language and filter. English is the pivot already computed. */
+  async caption(bridged, lang, filterOn) {
+    const target = lang || MIDDLE;
+    if (!bridged.renders) bridged.renders = new Map();
+    const key = `${target}:${filterOn ? "1" : "0"}`;
+    const hit = bridged.renders.get(key);
+    if (hit) return hit;
+    let rendered;
+    if (target === MIDDLE) {
+      rendered = {
+        text: filterOn ? filterProfanity(bridged.pivot) : bridged.pivot,
+        lang: MIDDLE,
+        confidence: bridged.confidence,
+        approx: Boolean(bridged.approx),
+        trained: Boolean(bridged.trained)
+      };
+    } else {
+      rendered = await renderFor(this.env.AI, bridged, target, { filter: filterOn });
+    }
+    bridged.renders.set(key, rendered);
+    return rendered;
+  }
+
+  captionPacket(id, name, ts, bridged, rendered, filterOn) {
+    return ccPacket({
+      id,
+      name,
+      text: rendered.text,
+      lang: rendered.lang,
+      en: filterOn ? filterProfanity(bridged.pivot) : bridged.pivot,
+      enApprox: bridged.approx,
+      approx: rendered.approx,
+      trained: rendered.trained,
+      ts
+    });
+  }
+
+  async replayCc(ws, session) {
+    const lang = session.cc || MIDDLE;
+    for (const [id, row] of this.recent) {
+      if (!row.bridged || ws.readyState !== 1) continue;
+      try {
+        const rendered = await this.caption(row.bridged, lang, session.filter);
+        ws.send(JSON.stringify(this.captionPacket(id, row.name, row.ts, row.bridged, rendered, session.filter)));
+      } catch {
+        /* This caption did not render. The raw line stays here. */
+      }
+    }
+  }
+
   async fetch(request) {
     if (request.headers.get("Upgrade") !== "websocket") {
       return new Response("Expected websocket", { status: 426 });
@@ -65,11 +115,18 @@ export class TalkRoom extends DurableObject {
     const url = new URL(request.url);
     let speak = "ig";
     let hear = "ig";
+    let cc = MIDDLE;
     try {
       speak = canon(url.searchParams.get("speak") || url.searchParams.get("lang") || "ig");
       hear = canon(url.searchParams.get("hear") || url.searchParams.get("lang") || speak);
     } catch {
       return Response.json({ error: "unsupported language" }, { status: 400 });
+    }
+    try {
+      const asked = url.searchParams.get("cc");
+      if (asked) cc = canon(asked);
+    } catch {
+      cc = MIDDLE;
     }
 
     const pair = new WebSocketPair();
@@ -81,6 +138,7 @@ export class TalkRoom extends DurableObject {
       name: cleanName(url.searchParams.get("name")),
       speak,
       hear,
+      cc,
       filter: flag(url.searchParams.get("filter")),
       mock: flag(url.searchParams.get("mock"))
     };
@@ -90,7 +148,8 @@ export class TalkRoom extends DurableObject {
       id: session.id,
       name: session.name,
       speak: session.speak,
-      hear: session.hear
+      hear: session.hear,
+      cc: session.cc
     }));
     this.broadcast(this.roster());
     return new Response(null, { status: 101, webSocket: client });
@@ -109,13 +168,21 @@ export class TalkRoom extends DurableObject {
     }
 
     if (data.type === "setup" || data.type === "lang") {
+      let speak = session.speak;
+      let hear = session.hear;
+      let cc = session.cc || MIDDLE;
       try {
-        if (data.speak || data.lang) session.speak = canon(data.speak || data.lang);
-        if (data.hear || data.lang) session.hear = canon(data.hear || data.lang);
+        if (data.speak || data.lang) speak = canon(data.speak || data.lang);
+        if (data.hear || data.lang) hear = canon(data.hear || data.lang);
+        if (data.cc) cc = canon(data.cc);
       } catch {
         ws.send(JSON.stringify({ type: "error", error: "unsupported language" }));
         return;
       }
+      const ccChanged = cc !== (session.cc || MIDDLE);
+      session.speak = speak;
+      session.hear = hear;
+      session.cc = cc;
       if (data.name != null) session.name = cleanName(data.name);
       if (data.filter != null) session.filter = flag(data.filter);
       if (data.mock != null) session.mock = flag(data.mock);
@@ -125,10 +192,12 @@ export class TalkRoom extends DurableObject {
         name: session.name,
         speak: session.speak,
         hear: session.hear,
+        cc: session.cc,
         filter: session.filter,
         mock: session.mock
       }));
       this.broadcast(this.roster());
+      if (ccChanged) await this.replayCc(ws, session);
       return;
     }
 
@@ -175,8 +244,17 @@ export class TalkRoom extends DurableObject {
       return;
     }
 
+    const ts = Date.now();
     const pivot = session.filter ? filterProfanity(bridged.pivot) : bridged.pivot;
-    this.remember(id, { owner: session.id, clean: bridged.clean, src: bridged.src, pivot: bridged.pivot });
+    this.remember(id, {
+      owner: session.id,
+      name: session.name,
+      ts,
+      clean: bridged.clean,
+      src: bridged.src,
+      pivot: bridged.pivot,
+      bridged
+    });
     ws.send(JSON.stringify(sentPacket({
       id,
       pivot,
@@ -185,32 +263,48 @@ export class TalkRoom extends DurableObject {
       trained: bridged.trained
     })));
 
-    const groups = new Map();
+    const hearGroups = new Map();
+    const ccGroups = new Map();
     for (const [peerWs, peer] of this.sessions) {
-      if (peerWs === ws || peerWs.readyState !== 1) continue;
-      const key = `${peer.hear}:${peer.filter ? "1" : "0"}`;
-      const group = groups.get(key) || { hear: peer.hear, filter: peer.filter, sockets: [] };
-      group.sockets.push(peerWs);
-      groups.set(key, group);
+      if (peerWs.readyState !== 1) continue;
+      const ccLang = peer.cc || MIDDLE;
+      const ccKey = `${ccLang}:${peer.filter ? "1" : "0"}`;
+      const ccGroup = ccGroups.get(ccKey) || { lang: ccLang, filter: peer.filter, sockets: [] };
+      ccGroup.sockets.push(peerWs);
+      ccGroups.set(ccKey, ccGroup);
+      if (peerWs === ws) continue;
+      const hearKey = `${peer.hear}:${peer.filter ? "1" : "0"}`;
+      const hearGroup = hearGroups.get(hearKey) || { hear: peer.hear, filter: peer.filter, sockets: [] };
+      hearGroup.sockets.push(peerWs);
+      hearGroups.set(hearKey, hearGroup);
     }
 
     let failed = 0;
-    for (const group of groups.values()) {
+    for (const group of hearGroups.values()) {
       try {
-        const rendered = await renderFor(this.env.AI, bridged, group.hear, { filter: group.filter });
+        const rendered = await this.caption(bridged, group.hear, group.filter);
         const packet = JSON.stringify(hearPacket({
           text: rendered.text,
           lang: rendered.lang,
           confidence: rendered.confidence,
           approx: rendered.approx,
           name: session.name,
-          ts: Date.now(),
+          ts,
           id,
           trained: rendered.trained
         }));
         for (const peerWs of group.sockets) peerWs.send(packet);
       } catch {
         failed += 1;
+      }
+    }
+    for (const group of ccGroups.values()) {
+      try {
+        const rendered = await this.caption(bridged, group.lang, group.filter);
+        const packet = JSON.stringify(this.captionPacket(id, session.name, ts, bridged, rendered, group.filter));
+        for (const peerWs of group.sockets) peerWs.send(packet);
+      } catch {
+        /* Caption failed. Nothing raw is sent. */
       }
     }
     if (failed > 0) ws.send(JSON.stringify({ type: "missed", id }));

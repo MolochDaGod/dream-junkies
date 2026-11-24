@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { filterProfanity, roomCode, splitCallouts } from "./glossary.js";
 import { upsert } from "./lexicon-logic.js";
-import { bridgeMessage, canon, forListener, hearPacket, renderFor, sentPacket } from "./translate.js";
+import { bridgeMessage, canon, ccPacket, forListener, hearPacket, renderFor, sentPacket } from "./translate.js";
 
 test("igbo and pidgin aliases land on the config codes", () => {
   assert.equal(canon("ig-NG"), "ig");
@@ -69,6 +69,28 @@ test("player packets never carry the source line or the pivot to peers", () => {
   assert.deepEqual(Object.keys(sent).sort(), ["approx", "confidence", "id", "pivot", "trained", "type"]);
   assert.equal(sent.pivot, "Heal me");
   assert.equal("text" in sent, false);
+});
+
+test("captions carry English and the chosen line, never the raw source", () => {
+  const cc = ccPacket({
+    id: "1",
+    name: "Ada",
+    text: "Cúrame",
+    lang: "es",
+    en: "Heal me",
+    enApprox: false,
+    approx: false,
+    trained: true,
+    ts: 1
+  });
+  assert.deepEqual(Object.keys(cc).sort(), ["approx", "en", "enApprox", "id", "lang", "name", "text", "trained", "ts", "type"]);
+  assert.equal(cc.type, "cc");
+  assert.equal(cc.en, "Heal me");
+  assert.equal(cc.text, "Cúrame");
+  assert.equal(cc.lang, "es");
+  assert.equal("source" in cc, false);
+  assert.equal("clean" in cc, false);
+  assert.equal("pivot" in cc, false);
 });
 
 test("a callout skips the model and stays hand-written", async () => {

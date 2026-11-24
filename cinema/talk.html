@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#07110c" />
-  <meta name="description" content="BridgeTalk live translator. Other players hear only their language." />
+  <meta name="description" content="BridgeTalk live translator. Captions in English, with a language switch. Other players hear only their language." />
   <link rel="manifest" href="./manifest.webmanifest" />
   <title>BridgeTalk</title>
   <style>
@@ -47,7 +47,8 @@
     .feed p { margin: 0.45rem 0; line-height: 1.35; }
     .mine { color: var(--gold); }
     .middle { color: var(--dim); font-size: 0.92rem; }
-    .theirs { color: var(--paper); }
+    .theirs, .cc { color: var(--paper); }
+    #cc-feed { max-height: 14rem; overflow: auto; }
     .approx { color: var(--warn); font-size: 0.75rem; margin-left: 0.35rem; }
     .callouts { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .callouts button { padding: 0.45rem 0.6rem; }
@@ -136,6 +137,16 @@
         <div id="callouts" class="callouts" style="margin-top:0.7rem"></div>
       </div>
       <div class="card">
+        <div class="row">
+          <h2>Captions</h2>
+          <label>Caption language
+            <select id="cc-lang" class="lang"></select>
+          </label>
+        </div>
+        <p class="lede">Every line in the room, written in English. Change the language to read that same track another way. The other party still only hears their language.</p>
+        <div id="cc-feed" class="feed"></div>
+      </div>
+      <div class="card">
         <h2>You</h2>
         <div id="mine" class="feed"></div>
         <h2>From the other party</h2>
@@ -150,7 +161,7 @@
           <label><input id="overlay-toggle" type="checkbox" /> Caption overlay</label>
           <label><input id="mock" type="checkbox" /> Mock translation</label>
         </div>
-        <p class="lede">The overlay floats inside this browser tab. A full-screen game needs a desktop wrapper to keep captions on top. Nothing here stores audio or the chat after you leave.</p>
+        <p class="lede">The overlay floats inside this browser tab and shows the caption track. A full-screen game needs a desktop wrapper to keep captions on top. Nothing here stores audio or the chat after you leave.</p>
         <div id="fix" hidden>
           <p id="fix-label" class="lede"></p>
           <input id="fix-text" />
@@ -226,7 +237,10 @@
     const statusEl = document.getElementById("status");
     const mineEl = document.getElementById("mine");
     const theirsEl = document.getElementById("theirs");
+    const ccFeed = document.getElementById("cc-feed");
+    const ccSel = document.getElementById("cc-lang");
     const overlayFeed = document.getElementById("overlay-feed");
+    const captions = new Map();
     let socket = null;
     let room = "";
     let callouts = [];
@@ -258,7 +272,26 @@
       languages = list;
       fillSelect(speakSel, "ig");
       fillSelect(hearSel, "ig");
-      for (const select of document.querySelectorAll("select.lang")) fillSelect(select);
+      for (const select of document.querySelectorAll("select.lang")) {
+        if (select.id === "cc-lang") continue;
+        fillSelect(select);
+      }
+      fillSelect(ccSel, ccSel.value || saved("bt-cc", "en"));
+    }
+
+    function paintCaptions() {
+      const lang = ccSel.value || "en";
+      const paint = (parent) => {
+        parent.replaceChildren();
+        for (const row of captions.values()) {
+          const useEn = lang === "en" || row.lang !== lang;
+          const text = useEn ? row.en : row.text;
+          const approx = useEn ? row.enApprox : row.approx;
+          line(parent, (row.name || "Player") + ": " + text, "cc", approx, { trained: row.trained });
+        }
+      };
+      paint(ccFeed);
+      paint(overlayFeed);
     }
 
     function saved(key, fallback) {
@@ -319,6 +352,7 @@
         name: document.getElementById("name").value,
         speak: speakSel.value,
         hear: hearSel.value,
+        cc: ccSel.value || "en",
         filter: document.getElementById("filter").checked,
         mock: document.getElementById("mock").checked
       }));
@@ -328,10 +362,13 @@
       if (socket) socket.close();
       mineEl.replaceChildren();
       theirsEl.replaceChildren();
+      captions.clear();
+      ccFeed.replaceChildren();
       overlayFeed.replaceChildren();
       const params = new URLSearchParams({
         speak: speakSel.value,
         hear: hearSel.value,
+        cc: ccSel.value || "en",
         name: document.getElementById("name").value,
         filter: document.getElementById("filter").checked ? "1" : "0",
         mock: document.getElementById("mock").checked ? "1" : "0"
@@ -339,11 +376,14 @@
       const proto = location.protocol === "https:" ? "wss:" : "ws:";
       socket = new WebSocket(proto + "//" + location.host + "/v1/talk/" + room + "?" + params.toString());
       statusEl.textContent = "Joining " + room + "…";
-      socket.addEventListener("open", () => { statusEl.textContent = "Live in " + room.toUpperCase() + "."; });
+      socket.addEventListener("open", () => {
+        statusEl.textContent = "Live in " + room.toUpperCase() + ".";
+        sendSetup();
+      });
       socket.addEventListener("close", () => { statusEl.textContent = "Left the room."; });
       socket.addEventListener("message", (event) => {
         const msg = JSON.parse(event.data);
-        if (msg.type === "joined") statusEl.textContent = "Joined as " + msg.speak + " → " + msg.hear + ".";
+        if (msg.type === "joined") statusEl.textContent = "Joined as " + msg.speak + " → " + msg.hear + ". Captions in " + (msg.cc || "en") + ".";
         if (msg.type === "roster") {
           const box = document.getElementById("players");
           box.replaceChildren();
@@ -361,8 +401,19 @@
         if (msg.type === "hear") {
           const who = (msg.name || "Player") + ": " + msg.text;
           line(theirsEl, who, "theirs", msg.approx, { id: msg.id, role: "hear", trained: msg.trained });
-          line(overlayFeed, who, "theirs", msg.approx);
           speakLine(msg.text, msg.lang);
+        }
+        if (msg.type === "cc") {
+          captions.set(msg.id, {
+            name: msg.name,
+            text: msg.text,
+            lang: msg.lang,
+            en: msg.en,
+            enApprox: msg.enApprox,
+            approx: msg.approx,
+            trained: msg.trained
+          });
+          paintCaptions();
         }
         if (msg.type === "trained") statusEl.textContent = "Saved. Next time that phrase uses your line.";
         if (msg.type === "error") statusEl.textContent = msg.error;
@@ -412,6 +463,9 @@
 
     document.getElementById("leave").addEventListener("click", () => {
       if (socket) socket.close();
+      captions.clear();
+      ccFeed.replaceChildren();
+      overlayFeed.replaceChildren();
       show("home");
     });
 
@@ -479,6 +533,11 @@
       });
     }
     document.getElementById("name").addEventListener("change", sendSetup);
+    ccSel.addEventListener("change", () => {
+      store("bt-cc", ccSel.value);
+      paintCaptions();
+      sendSetup();
+    });
 
     document.getElementById("overlay-toggle").addEventListener("change", () => {
       document.body.classList.toggle("overlay", document.getElementById("overlay-toggle").checked);
