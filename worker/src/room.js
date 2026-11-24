@@ -1,5 +1,6 @@
 import { DurableObject } from "cloudflare:workers";
 import { filterProfanity } from "./glossary.js";
+import { loadEntries } from "./lexicon.js";
 import { bridgeMessage, canon, hearPacket, renderFor, sentPacket } from "./translate.js";
 
 function cleanName(value) {
@@ -15,6 +16,7 @@ export class TalkRoom extends DurableObject {
   constructor(ctx, env) {
     super(ctx, env);
     this.sessions = new Map();
+    this.recent = new Map();
     for (const ws of this.ctx.getWebSockets()) {
       const attachment = ws.deserializeAttachment();
       if (attachment) this.sessions.set(ws, attachment);
@@ -46,6 +48,14 @@ export class TalkRoom extends DurableObject {
   save(ws, session) {
     ws.serializeAttachment(session);
     this.sessions.set(ws, session);
+  }
+
+  remember(id, row) {
+    this.recent.set(id, row);
+    while (this.recent.size > 40) {
+      const oldest = this.recent.keys().next().value;
+      this.recent.delete(oldest);
+    }
   }
 
   async fetch(request) {
@@ -122,6 +132,30 @@ export class TalkRoom extends DurableObject {
       return;
     }
 
+    if (data.type === "correct") {
+      const row = this.recent.get(String(data.id || ""));
+      if (!row) {
+        ws.send(JSON.stringify({ type: "error", error: "That line expired. Add it in Train." }));
+        return;
+      }
+      const lines = { [row.src]: row.clean, en: row.pivot };
+      if (session.id === row.owner && String(data.pivot || "").trim()) {
+        lines.en = String(data.pivot);
+      }
+      if (String(data.text || "").trim()) lines[session.hear] = String(data.text);
+      try {
+        const saved = await this.env.LEXICON.getByName("global").save({
+          kind: data.kind || "expression",
+          pivot: lines.en,
+          lines
+        });
+        ws.send(JSON.stringify({ type: "trained", id: saved.id, kind: saved.kind }));
+      } catch (err) {
+        ws.send(JSON.stringify({ type: "error", error: err.message || "could not save" }));
+      }
+      return;
+    }
+
     if (data.type !== "say" && data.type !== "callout") return;
     const text = String(data.text || "").trim().slice(0, 500);
     const calloutId = data.type === "callout" ? String(data.id || "") : "";
@@ -130,9 +164,11 @@ export class TalkRoom extends DurableObject {
     const id = crypto.randomUUID();
     let bridged;
     try {
+      const entries = await loadEntries(this.env);
       bridged = await bridgeMessage(this.env.AI, text, session.speak, {
         mock: session.mock,
-        calloutId
+        calloutId,
+        entries
       });
     } catch {
       ws.send(JSON.stringify({ type: "missed", id }));
@@ -140,11 +176,13 @@ export class TalkRoom extends DurableObject {
     }
 
     const pivot = session.filter ? filterProfanity(bridged.pivot) : bridged.pivot;
+    this.remember(id, { owner: session.id, clean: bridged.clean, src: bridged.src, pivot: bridged.pivot });
     ws.send(JSON.stringify(sentPacket({
       id,
       pivot,
       confidence: bridged.confidence,
-      approx: bridged.approx
+      approx: bridged.approx,
+      trained: bridged.trained
     })));
 
     const groups = new Map();
@@ -166,7 +204,9 @@ export class TalkRoom extends DurableObject {
           confidence: rendered.confidence,
           approx: rendered.approx,
           name: session.name,
-          ts: Date.now()
+          ts: Date.now(),
+          id,
+          trained: rendered.trained
         }));
         for (const peerWs of group.sockets) peerWs.send(packet);
       } catch {

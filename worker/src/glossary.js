@@ -11,7 +11,8 @@ export const CALLOUTS = [
       pcm: "Good game",
       fr: "Bien joué",
       es: "Buena partida",
-      pt: "Bom jogo"
+      pt: "Bom jogo",
+      zh: "打得好"
     }
   },
   {
@@ -24,7 +25,8 @@ export const CALLOUTS = [
       pcm: "Rush B",
       fr: "Rush B",
       es: "Rush B",
-      pt: "Rush B"
+      pt: "Rush B",
+      zh: "冲B"
     }
   },
   {
@@ -37,7 +39,8 @@ export const CALLOUTS = [
       pcm: "Abeg heal me",
       fr: "Soigne-moi",
       es: "Cúrame",
-      pt: "Cura-me"
+      pt: "Cura-me",
+      zh: "治疗我"
     }
   },
   {
@@ -50,7 +53,8 @@ export const CALLOUTS = [
       pcm: "Enemy dey for left",
       fr: "Ennemi à gauche",
       es: "Enemigo a la izquierda",
-      pt: "Inimigo à esquerda"
+      pt: "Inimigo à esquerda",
+      zh: "敌人在左边"
     }
   },
   {
@@ -63,7 +67,8 @@ export const CALLOUTS = [
       pcm: "Make we push",
       fr: "On pousse",
       es: "Empujad",
-      pt: "Avançar"
+      pt: "Avançar",
+      zh: "推进"
     }
   },
   {
@@ -76,7 +81,8 @@ export const CALLOUTS = [
       pcm: "Make we pull back",
       fr: "On se replie",
       es: "Retirada",
-      pt: "Recuar"
+      pt: "Recuar",
+      zh: "撤退"
     }
   },
   {
@@ -89,7 +95,8 @@ export const CALLOUTS = [
       pcm: "I need ammo",
       fr: "Besoin de munitions",
       es: "Necesito munición",
-      pt: "Preciso de munição"
+      pt: "Preciso de munição",
+      zh: "需要弹药"
     }
   }
 ];
@@ -140,17 +147,43 @@ export function calloutLine(callout, lang) {
   return callout.text[lang] || callout.text.en;
 }
 
-/** Split a line into callout spans and free-text spans. Longest phrase wins. */
-export function splitCallouts(text) {
+function keyTable(entries) {
+  const table = [];
+  const seen = new Set();
+  const add = (key, callout) => {
+    const clean = norm(key);
+    if (!clean || clean.length < 2) return;
+    const token = clean + (callout.trained ? "\0trained" : "\0built");
+    if (seen.has(token)) return;
+    seen.add(token);
+    table.push({ key: clean, callout });
+  };
+  for (const entry of entries || []) {
+    const callout = {
+      id: entry.id,
+      text: entry.text || {},
+      trained: true,
+      kind: entry.kind || "expression"
+    };
+    for (const line of Object.values(callout.text)) add(line, callout);
+  }
+  for (const entry of KEYS) add(entry.key, entry.callout);
+  table.sort((a, b) => b.key.length - a.key.length || Number(Boolean(b.callout.trained)) - Number(Boolean(a.callout.trained)));
+  return table;
+}
+
+/** Split a line into callout spans and free-text spans. Longest phrase wins. Trained lines win ties. */
+export function splitCallouts(text, entries = []) {
   const original = String(text || "").trim().replace(/\s+/g, " ");
   const source = original.toLowerCase();
+  const table = keyTable(entries);
   const parts = [];
   let i = 0;
   while (i < source.length) {
     while (i < source.length && !isWordChar(source[i])) i += 1;
     if (i >= source.length) break;
     let found = null;
-    for (const entry of KEYS) {
+    for (const entry of table) {
       if (!source.startsWith(entry.key, i)) continue;
       const end = i + entry.key.length;
       if (isWordChar(source[end])) continue;
@@ -167,7 +200,7 @@ export function splitCallouts(text) {
     while (j < source.length) {
       let next = false;
       if (isWordChar(source[j]) && !isWordChar(source[j - 1])) {
-        for (const entry of KEYS) {
+        for (const entry of table) {
           if (!source.startsWith(entry.key, j)) continue;
           if (isWordChar(source[j + entry.key.length])) continue;
           next = true;

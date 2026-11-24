@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { filterProfanity, roomCode, splitCallouts } from "./glossary.js";
+import { upsert } from "./lexicon-logic.js";
 import { bridgeMessage, canon, forListener, hearPacket, renderFor, sentPacket } from "./translate.js";
 
 test("igbo and pidgin aliases land on the config codes", () => {
@@ -57,12 +58,15 @@ test("player packets never carry the source line or the pivot to peers", () => {
     confidence: 1,
     approx: false,
     name: "Ada",
-    ts: 1
+    ts: 1,
+    id: "1",
+    trained: false
   });
-  assert.deepEqual(Object.keys(hear).sort(), ["approx", "confidence", "lang", "name", "text", "ts", "type"]);
+  assert.deepEqual(Object.keys(hear).sort(), ["approx", "confidence", "id", "lang", "name", "text", "trained", "ts", "type"]);
   assert.equal("pivot" in hear, false);
+  assert.equal("source" in hear, false);
   const sent = sentPacket({ id: "abc", pivot: "Heal me", confidence: 1, approx: false });
-  assert.deepEqual(Object.keys(sent).sort(), ["approx", "confidence", "id", "pivot", "type"]);
+  assert.deepEqual(Object.keys(sent).sort(), ["approx", "confidence", "id", "pivot", "trained", "type"]);
   assert.equal(sent.pivot, "Heal me");
   assert.equal("text" in sent, false);
 });
@@ -136,6 +140,46 @@ test("room codes are six unambiguous characters", () => {
   assert.equal(code, "aaaaaa");
   assert.equal(roomCode(() => 0.999).length, 6);
   assert.match(roomCode(Math.random), /^[abcdefghjkmnpqrstuvwxyz23456789]{6}$/);
+});
+
+test("a trained phrase skips the model", async () => {
+  let calls = 0;
+  const ai = { run() { calls += 1; return { translated_text: "no" }; } };
+  const entries = [{
+    id: "1",
+    kind: "jargon",
+    text: { en: "Well played", ig: "gg", es: "Bien jugado", zh: "打得漂亮" }
+  }];
+  const out = await forListener(ai, "gg", "ig", "zh", { entries });
+  assert.equal(out.forListener, "打得漂亮");
+  assert.equal(out.trained, true);
+  assert.equal(out.approx, false);
+  assert.equal(calls, 0);
+  assert.equal("middle" in out, false);
+});
+
+test("spanish, chinese, and italian resolve from the language list", () => {
+  assert.equal(canon("Spanish"), "es");
+  assert.equal(canon("zh-CN"), "zh");
+  assert.equal(canon("Italian"), "it");
+  assert.equal(canon("Filipino"), "tl");
+});
+
+test("a correction merges onto the same phrase", () => {
+  const first = upsert([], { kind: "word", pivot: "Heal me", lines: { ig: "Gwọọ m" } });
+  const second = upsert(first.entries, {
+    kind: "word",
+    pivot: "Heal me",
+    lines: { es: "Cúrame", zh: "治疗我" }
+  });
+  assert.equal(second.entries.length, 1);
+  assert.equal(second.saved.text.ig, "Gwọọ m");
+  assert.equal(second.saved.text.es, "Cúrame");
+  assert.equal(second.saved.text.zh, "治疗我");
+});
+
+test("a one-letter training phrase is rejected", () => {
+  assert.throws(() => upsert([], { kind: "word", pivot: "a", lines: { ig: "b" } }));
 });
 
 test("egg does not swallow the gg callout", () => {

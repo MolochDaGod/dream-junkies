@@ -1,8 +1,9 @@
 import { CALLOUTS, roomCode } from "./glossary.js";
+import { Lexicon, loadEntries } from "./lexicon.js";
 import { LANGUAGES, MIDDLE, forListener } from "./translate.js";
 import { TalkRoom } from "./room.js";
 
-export { TalkRoom };
+export { TalkRoom, Lexicon };
 export { roomCode };
 
 function json(body, status = 200) {
@@ -10,7 +11,7 @@ function json(body, status = 200) {
     status,
     headers: {
       "access-control-allow-origin": "*",
-      "access-control-allow-methods": "GET,POST,OPTIONS",
+      "access-control-allow-methods": "GET,POST,DELETE,OPTIONS",
       "access-control-allow-headers": "content-type"
     }
   });
@@ -23,7 +24,7 @@ export default {
         status: 204,
         headers: {
           "access-control-allow-origin": "*",
-          "access-control-allow-methods": "GET,POST,OPTIONS",
+          "access-control-allow-methods": "GET,POST,DELETE,OPTIONS",
           "access-control-allow-headers": "content-type"
         }
       });
@@ -39,6 +40,31 @@ export default {
       return json({
         callouts: CALLOUTS.map((callout) => ({ id: callout.id, text: callout.text }))
       });
+    }
+
+    if (url.pathname === "/v1/lexicon" && request.method === "GET") {
+      return json({ entries: await loadEntries(env) });
+    }
+
+    if (url.pathname === "/v1/lexicon" && request.method === "POST") {
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return json({ error: "bad json" }, 400);
+      }
+      try {
+        const entry = await env.LEXICON.getByName("global").save(body);
+        return json({ entry });
+      } catch (err) {
+        return json({ error: err.message || "bad entry" }, err.status || 400);
+      }
+    }
+
+    const lex = url.pathname.match(/^\/v1\/lexicon\/([A-Za-z0-9-]{1,80})$/);
+    if (lex && request.method === "DELETE") {
+      await env.LEXICON.getByName("global").remove(lex[1]);
+      return json({ ok: true });
     }
 
     if (url.pathname === "/v1/rooms" && request.method === "POST") {
@@ -57,7 +83,8 @@ export default {
         const result = await forListener(env.AI, body.text, body.from, body.to, {
           debug: url.searchParams.get("debug") === "1",
           mock: url.searchParams.get("mock") === "1" || body.mock === true,
-          filter: body.filter === true
+          filter: body.filter === true,
+          entries: await loadEntries(env)
         });
         return json(result);
       } catch (err) {

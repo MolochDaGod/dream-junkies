@@ -18,17 +18,45 @@ export const LANGUAGES = [
   { code: "pcm", name: "Nigerian Pidgin", region: "Nigeria", play: true, machine: false },
   { code: "yo", name: "Yoruba", region: "Nigeria", play: true, machine: true },
   { code: "ha", name: "Hausa", region: "Nigeria", play: true, machine: true },
-  { code: "fr", name: "French", play: true, machine: true },
   { code: "es", name: "Spanish", play: true, machine: true },
-  { code: "pt", name: "Portuguese", play: true, machine: true },
   { code: "zh", name: "Chinese", play: true, machine: true },
-  { code: "ja", name: "Japanese", play: true, machine: true },
+  { code: "fr", name: "French", play: true, machine: true },
+  { code: "pt", name: "Portuguese", play: true, machine: true },
+  { code: "af", name: "Afrikaans", play: true, machine: true },
   { code: "ar", name: "Arabic", play: true, machine: true },
+  { code: "bn", name: "Bengali", play: true, machine: true },
+  { code: "bg", name: "Bulgarian", play: true, machine: true },
+  { code: "ca", name: "Catalan", play: true, machine: true },
+  { code: "hr", name: "Croatian", play: true, machine: true },
+  { code: "cs", name: "Czech", play: true, machine: true },
+  { code: "da", name: "Danish", play: true, machine: true },
+  { code: "nl", name: "Dutch", play: true, machine: true },
+  { code: "fi", name: "Finnish", play: true, machine: true },
   { code: "de", name: "German", play: true, machine: true },
+  { code: "el", name: "Greek", play: true, machine: true },
+  { code: "he", name: "Hebrew", play: true, machine: true },
   { code: "hi", name: "Hindi", play: true, machine: true },
+  { code: "hu", name: "Hungarian", play: true, machine: true },
+  { code: "id", name: "Indonesian", play: true, machine: true },
+  { code: "it", name: "Italian", play: true, machine: true },
+  { code: "ja", name: "Japanese", play: true, machine: true },
   { code: "ko", name: "Korean", play: true, machine: true },
+  { code: "ms", name: "Malay", play: true, machine: true },
+  { code: "no", name: "Norwegian", play: true, machine: true },
+  { code: "fa", name: "Persian", play: true, machine: true },
+  { code: "pl", name: "Polish", play: true, machine: true },
+  { code: "ro", name: "Romanian", play: true, machine: true },
   { code: "ru", name: "Russian", play: true, machine: true },
-  { code: "sw", name: "Swahili", play: true, machine: true }
+  { code: "sk", name: "Slovak", play: true, machine: true },
+  { code: "sw", name: "Swahili", play: true, machine: true },
+  { code: "sv", name: "Swedish", play: true, machine: true },
+  { code: "tl", name: "Tagalog", play: true, machine: true },
+  { code: "ta", name: "Tamil", play: true, machine: true },
+  { code: "th", name: "Thai", play: true, machine: true },
+  { code: "tr", name: "Turkish", play: true, machine: true },
+  { code: "uk", name: "Ukrainian", play: true, machine: true },
+  { code: "ur", name: "Urdu", play: true, machine: true },
+  { code: "vi", name: "Vietnamese", play: true, machine: true }
 ];
 
 const ALIAS = new Map();
@@ -44,6 +72,17 @@ ALIAS.set("hausa", "ha");
 ALIAS.set("pidgin", "pcm");
 ALIAS.set("naija", "pcm");
 ALIAS.set("nigerian-pidgin", "pcm");
+ALIAS.set("zh-cn", "zh");
+ALIAS.set("zh-hans", "zh");
+ALIAS.set("mandarin", "zh");
+ALIAS.set("cmn", "zh");
+ALIAS.set("es-es", "es");
+ALIAS.set("es-mx", "es");
+ALIAS.set("castellano", "es");
+ALIAS.set("fil", "tl");
+ALIAS.set("filipino", "tl");
+ALIAS.set("nb", "no");
+ALIAS.set("nn", "no");
 
 const BY_CODE = new Map(LANGUAGES.map((lang) => [lang.code, lang]));
 
@@ -87,6 +126,11 @@ function finish(text, confidence) {
   };
 }
 
+function markTrained(callout, parts) {
+  if (callout?.trained) return true;
+  return Boolean(parts?.length && parts.every((part) => part.callout?.trained));
+}
+
 /**
  * One pass to the English middle. Does not include a listener payload.
  * @returns {Promise<{ src: string, clean: string, pivot: string, confidence: number, approx: boolean, callout: object|null, parts: object[]|null, mock: boolean }>}
@@ -108,11 +152,12 @@ export async function bridgeMessage(ai, text, from, opts = {}) {
       approx: scored.approx,
       callout: forced,
       parts: null,
-      mock: false
+      mock: false,
+      trained: false
     };
   }
 
-  const parts = splitCallouts(clean);
+  const parts = splitCallouts(clean, opts.entries);
   const onlyCallout = parts.length === 1 && parts[0].callout;
   if (onlyCallout) {
     const scored = finish(calloutLine(parts[0].callout, MIDDLE), 1);
@@ -124,7 +169,8 @@ export async function bridgeMessage(ai, text, from, opts = {}) {
       approx: scored.approx,
       callout: parts[0].callout,
       parts: null,
-      mock: false
+      mock: false,
+      trained: markTrained(parts[0].callout, null)
     };
   }
 
@@ -166,7 +212,8 @@ export async function bridgeMessage(ai, text, from, opts = {}) {
     approx: scored.approx,
     callout: null,
     parts,
-    mock: Boolean(opts.mock)
+    mock: Boolean(opts.mock),
+    trained: markTrained(null, parts)
   };
 }
 
@@ -213,7 +260,13 @@ export async function renderFor(ai, bridged, to, opts = {}) {
   }
 
   const text = opts.filter ? filterProfanity(rendered.text) : rendered.text;
-  return { text, lang: dst, confidence: rendered.confidence, approx: rendered.approx };
+  return {
+    text,
+    lang: dst,
+    confidence: rendered.confidence,
+    approx: rendered.approx,
+    trained: Boolean(bridged.trained)
+  };
 }
 
 export function hearPacket(fields) {
@@ -224,7 +277,9 @@ export function hearPacket(fields) {
     confidence: fields.confidence,
     approx: Boolean(fields.approx),
     name: fields.name,
-    ts: fields.ts
+    ts: fields.ts,
+    id: fields.id,
+    trained: Boolean(fields.trained)
   };
 }
 
@@ -234,7 +289,8 @@ export function sentPacket(fields) {
     id: fields.id,
     pivot: fields.pivot,
     confidence: fields.confidence,
-    approx: Boolean(fields.approx)
+    approx: Boolean(fields.approx),
+    trained: Boolean(fields.trained)
   };
 }
 
@@ -247,19 +303,20 @@ export async function forListener(ai, text, from, to, opts = {}) {
   const dst = canon(to);
   const clean = String(text || "").trim().slice(0, 500);
   if (!clean) fail("text required", 400);
-  if (src === dst && !opts.mock && !splitCallouts(clean).some((part) => part.callout)) {
+  if (src === dst && !opts.mock && !splitCallouts(clean, opts.entries).some((part) => part.callout)) {
     const line = opts.filter ? filterProfanity(clean) : clean;
-    const packet = { forListener: line, to: dst, confidence: 1, approx: false };
+    const packet = { forListener: line, to: dst, confidence: 1, approx: false, trained: false };
     if (opts.debug) packet.middle = line;
     return packet;
   }
-  const bridged = await bridgeMessage(ai, text, from, { mock: opts.mock });
+  const bridged = await bridgeMessage(ai, text, from, { mock: opts.mock, entries: opts.entries });
   const rendered = await renderFor(ai, bridged, to, { filter: opts.filter });
   const packet = {
     forListener: rendered.text,
     to: rendered.lang,
     confidence: rendered.confidence,
-    approx: rendered.approx
+    approx: rendered.approx,
+    trained: rendered.trained
   };
   if (opts.debug) packet.middle = bridged.pivot;
   return packet;

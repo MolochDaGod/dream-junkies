@@ -12,11 +12,18 @@ English is the middle language. The sender's socket gets `sent.pivot` so they ca
 
 Igbo (`ig`, `ig-NG` on the mic) is the play language. Yoruba, Hausa, French, Spanish, and Portuguese are on the same machine list. Nigerian Pidgin (`pcm`) is config too, but the model has no Pidgin code: callouts are hand-written, and a free sentence falls back through English with `approx: true`.
 
-Hand-written callouts (`gg`, `rush B`, `heal me`, `enemy left`, `push`, `retreat`, `need ammo`) are applied before the model. Quick buttons send the callout id and do not wait on a translation.
+Hand-written callouts (`gg`, `rush B`, `heal me`, `enemy left`, `push`, `retreat`, `need ammo`) are applied before the model, including Spanish and Chinese. Quick buttons send the phrase, so a trained correction of that phrase wins.
 
-The model does not return a confidence score. Machine lines are marked approx. Glossary lines are not.
+Train saves words, jargon, and expressions in the shared lexicon. English stays the middle. A saved line replaces the model for that phrase. Fix English on your own middle. Fix this on a line you heard, which writes your language only and does not reveal the other player's raw words. The lexicon is the only thing stored. Chat and audio are not.
+
+Spanish, Chinese, and the other easy M2M100 languages are on `GET /v1/languages`. Nigerian Pidgin stays glossary-only.
+
+The model does not return a confidence score. Machine lines are marked approx. Glossary and trained lines are not.
 
 - `GET /v1/languages`
+- `GET /v1/lexicon`
+- `POST /v1/lexicon` with `{ "kind", "pivot", "lines" }`
+- `DELETE /v1/lexicon/:id`
 - `GET /v1/callouts`
 - `POST /v1/rooms` returns a 6-character code
 - `POST /v1/translate` with `{ "text", "from", "to" }`

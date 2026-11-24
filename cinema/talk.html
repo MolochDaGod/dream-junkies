@@ -72,6 +72,8 @@
     body.overlay #overlay { display: block; }
     #overlay header { display: flex; justify-content: space-between; gap: 0.5rem; cursor: grab; color: var(--green); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
     .warn { color: var(--warn); font-size: 0.85rem; }
+    button.fix { margin-left: 0.45rem; padding: 0.15rem 0.45rem; font-size: 0.75rem; }
+    .entry { border-top: 1px solid var(--line); padding: 0.45rem 0; }
   </style>
 </head>
 <body>
@@ -89,7 +91,7 @@
         <button type="button" id="go-setup">Join</button>
       </div>
       <p class="status" id="home-status"></p>
-      <p><a href="./index.html">Chronicle cinema</a></p>
+      <p><button type="button" id="open-train">Train words</button> <a href="./index.html">Chronicle cinema</a></p>
     </section>
 
     <section id="setup" class="card" hidden>
@@ -117,6 +119,7 @@
         <div class="row">
           <strong id="room-label"></strong>
           <button type="button" id="copy">Copy invite</button>
+          <button type="button" id="open-train-live">Train</button>
           <button type="button" id="leave">Leave</button>
         </div>
         <div id="players" class="players"></div>
@@ -148,7 +151,43 @@
           <label><input id="mock" type="checkbox" /> Mock translation</label>
         </div>
         <p class="lede">The overlay floats inside this browser tab. A full-screen game needs a desktop wrapper to keep captions on top. Nothing here stores audio or the chat after you leave.</p>
+        <div id="fix" hidden>
+          <p id="fix-label" class="lede"></p>
+          <input id="fix-text" />
+          <button type="button" class="primary" id="fix-save">Save correction</button>
+        </div>
       </div>
+    </section>
+
+    <section id="train" class="card" hidden>
+      <h2>Train</h2>
+      <p class="lede">Save a word, a piece of jargon, or an expression. English is the middle. The next time that phrase is said, your line is used instead of the model. The other player still never sees the raw words. Chat itself is not stored.</p>
+      <div class="row">
+        <label>Kind
+          <select id="train-kind">
+            <option value="word">Word</option>
+            <option value="jargon">Jargon</option>
+            <option value="expression" selected>Expression</option>
+          </select>
+        </label>
+        <label>Phrase language
+          <select id="train-lang" class="lang"></select>
+        </label>
+      </div>
+      <label>Phrase people say
+        <input id="train-phrase" maxlength="180" />
+      </label>
+      <label>English meaning
+        <input id="train-pivot" maxlength="180" />
+      </label>
+      <div id="train-lines"></div>
+      <div class="row">
+        <button type="button" id="add-line">Add a language</button>
+        <button type="button" class="primary" id="train-save">Save</button>
+        <button type="button" id="train-back">Back</button>
+      </div>
+      <p class="status" id="train-status"></p>
+      <div id="train-list"></div>
     </section>
   </div>
 
@@ -164,17 +203,24 @@
     const SPEAK = {
       ig: "ig-NG", yo: "yo-NG", ha: "ha-NG", en: "en-US", pcm: "en-NG",
       fr: "fr-FR", es: "es-MX", pt: "pt-BR", zh: "zh-CN", ja: "ja-JP",
-      ar: "ar-SA", de: "de-DE", hi: "hi-IN", ko: "ko-KR", ru: "ru-RU", sw: "sw-KE"
+      ar: "ar-SA", de: "de-DE", hi: "hi-IN", ko: "ko-KR", ru: "ru-RU", sw: "sw-KE",
+      it: "it-IT", nl: "nl-NL", pl: "pl-PL", tr: "tr-TR", vi: "vi-VN", id: "id-ID",
+      th: "th-TH", uk: "uk-UA", ro: "ro-RO", sv: "sv-SE", el: "el-GR", cs: "cs-CZ",
+      hu: "hu-HU", bn: "bn-BD", ur: "ur-PK", fa: "fa-IR", he: "he-IL", ms: "ms-MY",
+      tl: "fil-PH", af: "af-ZA", fi: "fi-FI", da: "da-DK", no: "nb-NO", bg: "bg-BG",
+      hr: "hr-HR", ca: "ca-ES", sk: "sk-SK", ta: "ta-IN"
     };
     const FALLBACK_LANGS = [
       { code: "ig", name: "Igbo" }, { code: "en", name: "English" },
       { code: "pcm", name: "Nigerian Pidgin" }, { code: "yo", name: "Yoruba" },
-      { code: "ha", name: "Hausa" }, { code: "fr", name: "French" },
-      { code: "es", name: "Spanish" }, { code: "pt", name: "Portuguese" }
+      { code: "ha", name: "Hausa" }, { code: "es", name: "Spanish" },
+      { code: "zh", name: "Chinese" }, { code: "fr", name: "French" },
+      { code: "pt", name: "Portuguese" }
     ];
     const home = document.getElementById("home");
     const setup = document.getElementById("setup");
     const live = document.getElementById("live");
+    const train = document.getElementById("train");
     const speakSel = document.getElementById("speak");
     const hearSel = document.getElementById("hear");
     const statusEl = document.getElementById("status");
@@ -185,24 +231,34 @@
     let room = "";
     let callouts = [];
     let recognizer = null;
+    let languages = FALLBACK_LANGS;
+    let fixTarget = null;
 
     function show(which) {
       home.hidden = which !== "home";
       setup.hidden = which !== "setup";
       live.hidden = which !== "live";
+      train.hidden = which !== "train";
+      if (which === "train") loadLexicon();
+    }
+
+    function fillSelect(select, preferred) {
+      const current = preferred || select.value || "ig";
+      select.replaceChildren();
+      for (const lang of languages) {
+        const option = document.createElement("option");
+        option.value = lang.code;
+        option.textContent = lang.name;
+        select.appendChild(option);
+      }
+      select.value = [...select.options].some((option) => option.value === current) ? current : (select.options[0]?.value || "ig");
     }
 
     function fillLanguages(list) {
-      for (const select of [speakSel, hearSel]) {
-        select.replaceChildren();
-        for (const lang of list) {
-          const option = document.createElement("option");
-          option.value = lang.code;
-          option.textContent = lang.name;
-          select.appendChild(option);
-        }
-        select.value = "ig";
-      }
+      languages = list;
+      fillSelect(speakSel, "ig");
+      fillSelect(hearSel, "ig");
+      for (const select of document.querySelectorAll("select.lang")) fillSelect(select);
     }
 
     function saved(key, fallback) {
@@ -212,15 +268,37 @@
       try { localStorage.setItem(key, value); } catch { /* private mode */ }
     }
 
-    function line(parent, text, cls, approx) {
+    function line(parent, text, cls, approx, meta) {
       const p = document.createElement("p");
       p.className = cls;
       p.textContent = text;
-      if (approx) {
+      if (meta?.trained) {
+        const tag = document.createElement("span");
+        tag.className = "approx";
+        tag.textContent = "trained";
+        p.appendChild(tag);
+      } else if (approx) {
         const tag = document.createElement("span");
         tag.className = "approx";
         tag.textContent = "⚠ approx";
         p.appendChild(tag);
+      }
+      if (meta?.id && meta.role) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "fix";
+        button.textContent = meta.role === "sent" ? "Fix English" : "Fix this";
+        button.addEventListener("click", () => {
+          fixTarget = meta;
+          const box = document.getElementById("fix");
+          box.hidden = false;
+          document.getElementById("fix-label").textContent = meta.role === "sent"
+            ? "Correct the English middle. The other player still does not see your raw line."
+            : "Correct what you heard, in your language. You are not shown their raw words.";
+          document.getElementById("fix-text").value = "";
+          document.getElementById("fix-text").focus();
+        });
+        p.appendChild(button);
       }
       parent.appendChild(p);
       parent.scrollTop = parent.scrollHeight;
@@ -277,15 +355,16 @@
           }
         }
         if (msg.type === "sent") {
-          line(mineEl, "Middle: " + msg.pivot, "middle", msg.approx);
+          line(mineEl, "Middle: " + msg.pivot, "middle", msg.approx, { id: msg.id, role: "sent", trained: msg.trained });
         }
         if (msg.type === "missed") statusEl.textContent = "That line did not cross. Nothing raw was sent.";
         if (msg.type === "hear") {
           const who = (msg.name || "Player") + ": " + msg.text;
-          line(theirsEl, who, "theirs", msg.approx);
+          line(theirsEl, who, "theirs", msg.approx, { id: msg.id, role: "hear", trained: msg.trained });
           line(overlayFeed, who, "theirs", msg.approx);
           speakLine(msg.text, msg.lang);
         }
+        if (msg.type === "trained") statusEl.textContent = "Saved. Next time that phrase uses your line.";
         if (msg.type === "error") statusEl.textContent = msg.error;
       });
     }
@@ -380,7 +459,7 @@
         button.textContent = callout.text[lang] || callout.text.en;
         button.addEventListener("click", () => {
           if (!socket || socket.readyState !== 1) return;
-          socket.send(JSON.stringify({ type: "callout", id: callout.id }));
+          socket.send(JSON.stringify({ type: "say", text: button.textContent }));
           line(mineEl, "You: " + (callout.text[lang] || callout.text.en), "mine", false);
         });
         box.appendChild(button);
@@ -422,6 +501,95 @@
       panel.style.top = (dragging.top + event.clientY - dragging.y) + "px";
     });
     drag.addEventListener("pointerup", () => { dragging = null; });
+
+    function addTrainRow(lang, text) {
+      const row = document.createElement("div");
+      row.className = "row train-row";
+      const select = document.createElement("select");
+      select.className = "lang";
+      fillSelect(select, lang || "es");
+      const input = document.createElement("input");
+      input.maxLength = 180;
+      input.placeholder = "Correct line in that language";
+      input.value = text || "";
+      row.append(select, input);
+      document.getElementById("train-lines").appendChild(row);
+    }
+
+    async function loadLexicon() {
+      const list = document.getElementById("train-list");
+      list.replaceChildren();
+      let body;
+      try {
+        body = await (await fetch("/v1/lexicon")).json();
+      } catch {
+        document.getElementById("train-status").textContent = "Could not load saved phrases.";
+        return;
+      }
+      for (const entry of body.entries || []) {
+        const block = document.createElement("div");
+        block.className = "entry";
+        const title = document.createElement("p");
+        title.textContent = entry.kind + " · " + (entry.text.en || "");
+        const lines = document.createElement("p");
+        lines.className = "lede";
+        lines.textContent = Object.entries(entry.text).map(([lang, text]) => lang + ": " + text).join(" · ");
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.textContent = "Delete";
+        remove.addEventListener("click", async () => {
+          await fetch("/v1/lexicon/" + entry.id, { method: "DELETE" });
+          loadLexicon();
+        });
+        block.append(title, lines, remove);
+        list.appendChild(block);
+      }
+    }
+
+    document.getElementById("open-train").addEventListener("click", () => show("train"));
+    document.getElementById("open-train-live").addEventListener("click", () => show("train"));
+    document.getElementById("train-back").addEventListener("click", () => show(socket && socket.readyState === 1 ? "live" : "home"));
+    document.getElementById("add-line").addEventListener("click", () => addTrainRow("es", ""));
+    document.getElementById("train-save").addEventListener("click", async () => {
+      const lines = {};
+      lines[document.getElementById("train-lang").value] = document.getElementById("train-phrase").value;
+      for (const row of document.querySelectorAll(".train-row")) {
+        const lang = row.querySelector("select").value;
+        const text = row.querySelector("input").value;
+        if (text.trim()) lines[lang] = text;
+      }
+      const res = await fetch("/v1/lexicon", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          kind: document.getElementById("train-kind").value,
+          pivot: document.getElementById("train-pivot").value,
+          lines
+        })
+      });
+      const body = await res.json();
+      document.getElementById("train-status").textContent = body.error || "Saved.";
+      if (!body.error) {
+        document.getElementById("train-phrase").value = "";
+        document.getElementById("train-pivot").value = "";
+        document.getElementById("train-lines").replaceChildren();
+        loadLexicon();
+      }
+    });
+    document.getElementById("fix-save").addEventListener("click", () => {
+      if (!fixTarget || !socket || socket.readyState !== 1) {
+        statusEl.textContent = "That line expired. Add it in Train.";
+        return;
+      }
+      const text = document.getElementById("fix-text").value.trim();
+      if (!text) return;
+      const payload = { type: "correct", id: fixTarget.id, kind: "expression" };
+      if (fixTarget.role === "sent") payload.pivot = text;
+      else payload.text = text;
+      socket.send(JSON.stringify(payload));
+      document.getElementById("fix").hidden = true;
+      fixTarget = null;
+    });
 
     const params = new URLSearchParams(location.search);
     if (params.get("mock") === "1") document.getElementById("mock").checked = true;

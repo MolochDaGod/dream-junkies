@@ -17,10 +17,12 @@
   },
   "durable_objects": {
     "bindings": [
-      { "name": "TALK", "class_name": "TalkRoom" }
+      { "name": "TALK", "class_name": "TalkRoom" },
+      { "name": "LEXICON", "class_name": "Lexicon" }
     ]
   },
   "migrations": [
-    { "tag": "v1", "new_sqlite_classes": ["TalkRoom"] }
+    { "tag": "v1", "new_sqlite_classes": ["TalkRoom"] },
+    { "tag": "v2", "new_sqlite_classes": ["Lexicon"] }
   ]
 }
