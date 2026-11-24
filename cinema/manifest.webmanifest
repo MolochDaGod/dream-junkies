@@ -5,5 +5,5 @@
   "display": "standalone",
   "background_color": "#07110c",
   "theme_color": "#07110c",
-  "description": "Live game translator. Other players receive only their language."
+  "description": "Live chat. The room reads in English. Each player hears their own language."
 }

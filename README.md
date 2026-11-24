@@ -33,4 +33,4 @@ The model does not return a confidence score. Machine lines are marked approx. G
 - `POST /v1/translate?mock=1` skips the model
 - `GET /v1/talk/:room?speak=ig&hear=en` WebSocket upgrade
 
-Open `/talk` on the worker host. Two browsers, one room code, two languages. Captions default to English. The overlay shows that caption track and stays inside the browser tab. Voice is the browser recognizer plus text. Igbo speech-to-text is weak, so typing and the callout buttons are the reliable path. Audio and lines are not stored.
+Open `/talk` on the worker host. That page is the chat app: create or join a room, then one thread. Your lines sit on the right. Everyone else's sit on the left, in English until you change Captions. The overlay shows that same track and stays inside the browser tab. Voice is the browser recognizer plus text. Igbo speech-to-text is weak, so typing and the callout buttons are the reliable path. Audio and lines are not stored.

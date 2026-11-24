@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#07110c" />
-  <meta name="description" content="BridgeTalk live translator. Captions in English, with a language switch. Other players hear only their language." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="description" content="BridgeTalk live chat. The room reads in English. Each player hears their own language." />
   <link rel="manifest" href="./manifest.webmanifest" />
   <title>BridgeTalk</title>
   <style>
@@ -19,42 +20,104 @@
       --warn: #ffb020;
     }
     * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; background: var(--ink); color: var(--paper); }
-    body { font-family: "Segoe UI", system-ui, sans-serif; }
+    html, body { margin: 0; height: 100%; background: var(--ink); color: var(--paper); }
+    body { font-family: "Segoe UI", system-ui, sans-serif; display: flex; justify-content: center; }
     button, input, select, textarea { font: inherit; color: inherit; }
     button, input, select, textarea {
       background: #0b1912;
       border: 1px solid var(--line);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 0.65rem 0.75rem;
     }
     button { cursor: pointer; }
-    button.primary, button.ptt { background: #123222; color: var(--green); border-color: var(--green); }
-    button.ptt { width: 100%; min-height: 4.6rem; font-size: 1.15rem; letter-spacing: 0.08em; text-transform: uppercase; }
-    button.ptt[aria-pressed="true"] { background: var(--green); color: #06210f; }
+    button.primary { background: #123222; color: var(--green); border-color: var(--green); }
+    button.mic {
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 999px;
+      padding: 0;
+      background: #123222;
+      color: var(--green);
+      border-color: var(--green);
+      flex: 0 0 auto;
+    }
+    button.mic[aria-pressed="true"] { background: var(--green); color: #06210f; }
+    button.icon { padding: 0.4rem 0.55rem; font-size: 0.78rem; }
     a { color: var(--gold); }
     h1 { font-size: 1.7rem; letter-spacing: 0.14em; text-transform: uppercase; margin: 0.2rem 0; }
     h1 span { color: var(--green); }
-    .wrap { max-width: 760px; margin: 0 auto; padding: 1.2rem 1rem 2.5rem; }
+    .app {
+      width: min(440px, 100%);
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      background: #0c1812;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+    }
+    .screen { display: flex; flex-direction: column; flex: 1; min-height: 0; padding: 1.1rem 1rem 1.4rem; }
+    .screen[hidden] { display: none !important; }
+    #home, #setup, #train { justify-content: center; gap: 0.75rem; }
     .mark { color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase; font-size: 0.72rem; margin: 0; }
-    .lede { color: var(--dim); line-height: 1.45; }
-    .row { display: flex; flex-wrap: wrap; gap: 0.55rem; align-items: center; }
+    .lede { color: var(--dim); line-height: 1.45; margin: 0; }
+    .row { display: flex; flex-wrap: wrap; gap: 0.55rem; align-items: end; }
     label { display: grid; gap: 0.25rem; color: var(--dim); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
     label input, label select { text-transform: none; letter-spacing: 0; color: var(--paper); }
-    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 0.9rem; margin-top: 0.8rem; }
-    .players { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 0.2rem 0.55rem; color: var(--gold); font-size: 0.82rem; }
-    .feed p { margin: 0.45rem 0; line-height: 1.35; }
-    .mine { color: var(--gold); }
-    .middle { color: var(--dim); font-size: 0.92rem; }
-    .theirs, .cc { color: var(--paper); }
-    #cc-feed { max-height: 14rem; overflow: auto; }
-    .approx { color: var(--warn); font-size: 0.75rem; margin-left: 0.35rem; }
-    .callouts { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .callouts button { padding: 0.45rem 0.6rem; }
-    .status { color: var(--dim); min-height: 1.2rem; }
-    textarea { width: 100%; min-height: 4.2rem; }
-    body.overlay .wrap { display: none; }
+    .code-big { font-size: 1.8rem; letter-spacing: 0.28em; color: var(--gold); margin: 0; }
+    .players { display: flex; gap: 0.35rem; overflow-x: auto; padding: 0.35rem 0.75rem 0; }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 0.15rem 0.5rem; color: var(--gold); font-size: 0.75rem; white-space: nowrap; }
+    .top {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.7rem 0.7rem 0.45rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .top .grow { flex: 1; min-width: 0; }
+    .top strong { letter-spacing: 0.14em; }
+    #live { padding: 0; }
+    #cc-feed {
+      flex: 1;
+      overflow: auto;
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .bubble {
+      max-width: 84%;
+      margin: 0.2rem 0;
+      padding: 0.5rem 0.7rem;
+      border-radius: 16px;
+      line-height: 1.35;
+      word-break: break-word;
+    }
+    .bubble.out { margin-left: auto; background: #164832; border-bottom-right-radius: 5px; }
+    .bubble.in { margin-right: auto; background: #18261e; border: 1px solid var(--line); border-bottom-left-radius: 5px; }
+    .who { display: block; color: var(--gold); font-size: 0.72rem; letter-spacing: 0.04em; margin-bottom: 0.12rem; }
+    .sub { display: block; color: var(--dim); font-size: 0.78rem; margin-top: 0.28rem; }
+    .approx { color: var(--warn); font-size: 0.72rem; margin-left: 0.3rem; }
+    .dock {
+      border-top: 1px solid var(--line);
+      padding: 0.45rem 0.65rem calc(0.7rem + env(safe-area-inset-bottom));
+      display: grid;
+      gap: 0.4rem;
+      background: #0c1812;
+    }
+    .callouts { display: flex; gap: 0.35rem; overflow-x: auto; }
+    .callouts button { padding: 0.35rem 0.55rem; white-space: nowrap; font-size: 0.82rem; }
+    .composer { display: flex; gap: 0.4rem; align-items: center; }
+    #say { flex: 1; min-width: 0; }
+    .cc-pick { display: flex; align-items: center; gap: 0.45rem; }
+    .cc-pick select { padding: 0.35rem 0.5rem; }
+    #settings { margin: 0 0.65rem 0.65rem; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 0.75rem; }
+    #settings[hidden] { display: none !important; }
+    .status { color: var(--dim); min-height: 1.1rem; margin: 0.15rem 0 0; font-size: 0.82rem; }
+    .warn { color: var(--warn); font-size: 0.85rem; margin: 0; }
+    button.fix { margin-left: 0.35rem; padding: 0.12rem 0.4rem; font-size: 0.72rem; }
+    .entry { border-top: 1px solid var(--line); padding: 0.45rem 0; }
+    #mine, #theirs { display: none; }
+    body.overlay .app { display: none; }
     #overlay {
       display: none;
       position: fixed;
@@ -64,96 +127,81 @@
       max-height: 46vh;
       overflow: auto;
       z-index: 20;
-      background: rgba(7, 17, 12, 0.78);
+      background: rgba(7, 17, 12, 0.88);
       border: 1px solid rgba(61, 255, 154, 0.45);
       border-radius: 14px;
       padding: 0.55rem 0.7rem 0.7rem;
-      backdrop-filter: blur(6px);
     }
     body.overlay #overlay { display: block; }
     #overlay header { display: flex; justify-content: space-between; gap: 0.5rem; cursor: grab; color: var(--green); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
-    .warn { color: var(--warn); font-size: 0.85rem; }
-    button.fix { margin-left: 0.45rem; padding: 0.15rem 0.45rem; font-size: 0.75rem; }
-    .entry { border-top: 1px solid var(--line); padding: 0.45rem 0; }
+    #overlay .feed p { margin: 0.35rem 0; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <p class="mark">Dream Junkies</p>
-    <h1>Bridge<span>Talk</span></h1>
-    <p class="lede">You speak your language. The other player receives only theirs. English is the middle, and only you see it, so you can check the meaning. Your raw line is not sent across.</p>
-
-    <section id="home" class="card">
+  <div class="app">
+    <section id="home" class="screen">
+      <p class="mark">Dream Junkies</p>
+      <h1>Bridge<span>Talk</span></h1>
+      <p class="lede">Live chat. You write in your language. The room reads in English, and you can switch that. The other player only hears their language.</p>
+      <button type="button" class="primary" id="create">Create room</button>
+      <label>Room code
+        <input id="code" maxlength="6" autocomplete="off" placeholder="6 letters" enterkeyhint="go" />
+      </label>
       <div class="row">
-        <button type="button" class="primary" id="create">Create room</button>
-        <label>Room code
-          <input id="code" maxlength="6" autocomplete="off" placeholder="6 letters" />
-        </label>
         <button type="button" id="go-setup">Join</button>
+        <button type="button" id="open-train">Train words</button>
       </div>
       <p class="status" id="home-status"></p>
-      <p><button type="button" id="open-train">Train words</button> <a href="./index.html">Chronicle cinema</a></p>
+      <p class="lede"><a href="./index.html">Chronicle cinema</a></p>
     </section>
 
-    <section id="setup" class="card" hidden>
-      <div class="row">
-        <label>Name
-          <input id="name" maxlength="24" value="Player" />
-        </label>
-        <label>I speak
-          <select id="speak"></select>
-        </label>
-        <label>I hear
-          <select id="hear"></select>
-        </label>
-      </div>
+    <section id="setup" class="screen" hidden>
+      <p class="mark">Room</p>
+      <p class="code-big" id="setup-code"></p>
+      <label>Name
+        <input id="name" maxlength="24" value="Player" autocomplete="nickname" />
+      </label>
+      <label>I speak
+        <select id="speak"></select>
+      </label>
+      <label>I hear
+        <select id="hear"></select>
+      </label>
       <p class="warn" id="pcm-note" hidden>Nigerian Pidgin has hand-written callouts. A free sentence uses the English middle and shows approx, because the translation model has no Pidgin.</p>
-      <p class="warn">Igbo voice recognition is patchy. Callout buttons and typing stay exact when the mic misses.</p>
+      <p class="warn">Igbo voice recognition is patchy. Typing and the callout buttons stay exact when the mic misses.</p>
       <div class="row">
-        <button type="button" class="primary" id="enter">Enter room</button>
+        <button type="button" class="primary" id="enter">Enter chat</button>
         <button type="button" id="back-home">Back</button>
       </div>
     </section>
 
-    <section id="live" hidden>
-      <div class="card">
-        <div class="row">
+    <section id="live" class="screen" hidden>
+      <header class="top">
+        <div class="grow">
           <strong id="room-label"></strong>
-          <button type="button" id="copy">Copy invite</button>
-          <button type="button" id="open-train-live">Train</button>
-          <button type="button" id="leave">Leave</button>
+          <p class="status" id="status">Connecting…</p>
         </div>
-        <div id="players" class="players"></div>
-        <p class="status" id="status">Connecting…</p>
-      </div>
-      <div class="card">
-        <button type="button" class="ptt" id="ptt" aria-pressed="false">Hold to talk</button>
-        <form id="say-form">
-          <textarea id="say" placeholder="Or type. The other party does not see this text."></textarea>
-          <div class="row" style="margin-top:0.5rem">
-            <button type="submit" class="primary">Send</button>
-          </div>
+        <button type="button" class="icon" id="copy">Invite</button>
+        <button type="button" class="icon" id="open-train-live">Train</button>
+        <button type="button" class="icon" id="open-settings">Settings</button>
+        <button type="button" class="icon" id="leave">Leave</button>
+      </header>
+      <div id="players" class="players"></div>
+      <div id="cc-feed" class="feed" aria-live="polite"></div>
+      <div id="mine"></div>
+      <div id="theirs"></div>
+      <div class="dock">
+        <div id="callouts" class="callouts"></div>
+        <form id="say-form" class="composer">
+          <button type="button" class="mic" id="ptt" aria-pressed="false" aria-label="Hold to talk">Mic</button>
+          <input id="say" placeholder="Message" maxlength="500" autocomplete="off" enterkeyhint="send" />
+          <button type="submit" class="primary">Send</button>
         </form>
-        <div id="callouts" class="callouts" style="margin-top:0.7rem"></div>
+        <label class="cc-pick">Captions
+          <select id="cc-lang" class="lang"></select>
+        </label>
       </div>
-      <div class="card">
-        <div class="row">
-          <h2>Captions</h2>
-          <label>Caption language
-            <select id="cc-lang" class="lang"></select>
-          </label>
-        </div>
-        <p class="lede">Every line in the room, written in English. Change the language to read that same track another way. The other party still only hears their language.</p>
-        <div id="cc-feed" class="feed"></div>
-      </div>
-      <div class="card">
-        <h2>You</h2>
-        <div id="mine" class="feed"></div>
-        <h2>From the other party</h2>
-        <div id="theirs" class="feed"></div>
-      </div>
-      <div class="card" id="settings">
-        <h2>Settings</h2>
+      <div id="settings" hidden>
         <div class="row">
           <label><input id="tts" type="checkbox" checked /> Speak incoming lines</label>
           <label>Volume <input id="volume" type="range" min="0" max="1" step="0.05" value="0.8" /></label>
@@ -161,7 +209,7 @@
           <label><input id="overlay-toggle" type="checkbox" /> Caption overlay</label>
           <label><input id="mock" type="checkbox" /> Mock translation</label>
         </div>
-        <p class="lede">The overlay floats inside this browser tab and shows the caption track. A full-screen game needs a desktop wrapper to keep captions on top. Nothing here stores audio or the chat after you leave.</p>
+        <p class="lede">The overlay floats inside this tab and shows the same captions. Chat is not saved after you leave.</p>
         <div id="fix" hidden>
           <p id="fix-label" class="lede"></p>
           <input id="fix-text" />
@@ -170,9 +218,9 @@
       </div>
     </section>
 
-    <section id="train" class="card" hidden>
+    <section id="train" class="screen" hidden>
       <h2>Train</h2>
-      <p class="lede">Save a word, a piece of jargon, or an expression. English is the middle. The next time that phrase is said, your line is used instead of the model. The other player still never sees the raw words. Chat itself is not stored.</p>
+      <p class="lede">Save a word, a piece of jargon, or an expression. English is the middle. The next time that phrase is said, your line is used instead of the model. Chat itself is not stored.</p>
       <div class="row">
         <label>Kind
           <select id="train-kind">
@@ -241,6 +289,13 @@
     const ccSel = document.getElementById("cc-lang");
     const overlayFeed = document.getElementById("overlay-feed");
     const captions = new Map();
+    const mineIds = new Set();
+    const said = new Map();
+    const middles = new Map();
+    const hears = new Map();
+    const localQueue = [];
+    let localSeq = 0;
+    let myName = "Player";
     let socket = null;
     let room = "";
     let callouts = [];
@@ -279,21 +334,6 @@
       fillSelect(ccSel, ccSel.value || saved("bt-cc", "en"));
     }
 
-    function paintCaptions() {
-      const lang = ccSel.value || "en";
-      const paint = (parent) => {
-        parent.replaceChildren();
-        for (const row of captions.values()) {
-          const useEn = lang === "en" || row.lang !== lang;
-          const text = useEn ? row.en : row.text;
-          const approx = useEn ? row.enApprox : row.approx;
-          line(parent, (row.name || "Player") + ": " + text, "cc", approx, { trained: row.trained });
-        }
-      };
-      paint(ccFeed);
-      paint(overlayFeed);
-    }
-
     function saved(key, fallback) {
       try { return localStorage.getItem(key) || fallback; } catch { return fallback; }
     }
@@ -301,40 +341,110 @@
       try { localStorage.setItem(key, value); } catch { /* private mode */ }
     }
 
+    function tag(parent, text) {
+      const span = document.createElement("span");
+      span.className = "approx";
+      span.textContent = text;
+      parent.appendChild(span);
+    }
+
+    function fixButton(role, id) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "fix";
+      button.textContent = role === "sent" ? "Fix English" : "Fix this";
+      button.addEventListener("click", () => {
+        fixTarget = { id, role };
+        const box = document.getElementById("settings");
+        box.hidden = false;
+        document.getElementById("fix").hidden = false;
+        document.getElementById("fix-label").textContent = role === "sent"
+          ? "Correct the English middle. The other player still does not see your raw line."
+          : "Correct what you heard, in your language. You are not shown their raw words.";
+        document.getElementById("fix-text").value = "";
+        document.getElementById("fix-text").focus();
+      });
+      return button;
+    }
+
     function line(parent, text, cls, approx, meta) {
       const p = document.createElement("p");
       p.className = cls;
       p.textContent = text;
-      if (meta?.trained) {
-        const tag = document.createElement("span");
-        tag.className = "approx";
-        tag.textContent = "trained";
-        p.appendChild(tag);
-      } else if (approx) {
-        const tag = document.createElement("span");
-        tag.className = "approx";
-        tag.textContent = "⚠ approx";
-        p.appendChild(tag);
-      }
-      if (meta?.id && meta.role) {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "fix";
-        button.textContent = meta.role === "sent" ? "Fix English" : "Fix this";
-        button.addEventListener("click", () => {
-          fixTarget = meta;
-          const box = document.getElementById("fix");
-          box.hidden = false;
-          document.getElementById("fix-label").textContent = meta.role === "sent"
-            ? "Correct the English middle. The other player still does not see your raw line."
-            : "Correct what you heard, in your language. You are not shown their raw words.";
-          document.getElementById("fix-text").value = "";
-          document.getElementById("fix-text").focus();
-        });
-        p.appendChild(button);
-      }
+      if (meta?.trained) tag(p, "trained");
+      else if (approx) tag(p, "⚠ approx");
       parent.appendChild(p);
       parent.scrollTop = parent.scrollHeight;
+    }
+
+    function captionText(row) {
+      const lang = ccSel.value || "en";
+      const useEn = !row || row.local || lang === "en" || row.lang !== lang;
+      if (!row) return { text: "", approx: false, trained: false };
+      return {
+        text: useEn ? row.en : row.text,
+        approx: useEn ? row.enApprox : row.approx,
+        trained: row.trained
+      };
+    }
+
+    function paintCaptions() {
+      const ids = [];
+      for (const id of captions.keys()) ids.push(id);
+      for (const id of hears.keys()) if (!captions.has(id)) ids.push(id);
+      ccFeed.replaceChildren();
+      overlayFeed.replaceChildren();
+      for (const id of ids) {
+        const row = captions.get(id);
+        const heard = hears.get(id);
+        const mid = middles.get(id);
+        const mine = mineIds.has(id);
+        const shown = row ? captionText(row) : { text: heard.text, approx: heard.approx, trained: heard.trained };
+        const bubble = document.createElement("p");
+        bubble.className = "bubble " + (mine ? "out" : "in");
+        if (!mine) {
+          const who = document.createElement("span");
+          who.className = "who";
+          who.textContent = (row && row.name) || (heard && heard.name) || "Player";
+          bubble.appendChild(who);
+        }
+        bubble.append(document.createTextNode(shown.text || ""));
+        if (shown.trained) tag(bubble, "trained");
+        else if (shown.approx) tag(bubble, "⚠ approx");
+        const raw = said.get(id);
+        if (mine && raw && raw !== shown.text) {
+          const sub = document.createElement("span");
+          sub.className = "sub";
+          sub.textContent = "You said: " + raw;
+          bubble.appendChild(sub);
+        }
+        if (mine && mid && mid.pivot && mid.pivot !== shown.text) {
+          const sub = document.createElement("span");
+          sub.className = "sub";
+          sub.textContent = "English: " + mid.pivot;
+          if (mid.trained) tag(sub, "trained");
+          else if (mid.approx) tag(sub, "⚠ approx");
+          sub.appendChild(fixButton("sent", id));
+          bubble.appendChild(sub);
+        } else if (mine && mid && !String(id).startsWith("local-")) {
+          bubble.appendChild(fixButton("sent", id));
+        }
+        if (!mine && heard) {
+          if (heard.text && heard.text !== shown.text) {
+            const sub = document.createElement("span");
+            sub.className = "sub";
+            sub.textContent = "Heard: " + heard.text;
+            sub.appendChild(fixButton("hear", id));
+            bubble.appendChild(sub);
+          } else {
+            bubble.appendChild(fixButton("hear", id));
+          }
+        }
+        ccFeed.appendChild(bubble);
+        const overlayLine = ((row && row.name) || (heard && heard.name) || myName) + ": " + (shown.text || "");
+        line(overlayFeed, overlayLine, "cc", shown.approx, { trained: shown.trained });
+      }
+      ccFeed.scrollTop = ccFeed.scrollHeight;
     }
 
     function speakLine(text, lang) {
@@ -358,13 +468,22 @@
       }));
     }
 
-    function connect() {
-      if (socket) socket.close();
+    function clearChat() {
+      captions.clear();
+      mineIds.clear();
+      said.clear();
+      middles.clear();
+      hears.clear();
+      localQueue.length = 0;
       mineEl.replaceChildren();
       theirsEl.replaceChildren();
-      captions.clear();
       ccFeed.replaceChildren();
       overlayFeed.replaceChildren();
+    }
+
+    function connect() {
+      if (socket) socket.close();
+      clearChat();
       const params = new URLSearchParams({
         speak: speakSel.value,
         hear: hearSel.value,
@@ -383,7 +502,7 @@
       socket.addEventListener("close", () => { statusEl.textContent = "Left the room."; });
       socket.addEventListener("message", (event) => {
         const msg = JSON.parse(event.data);
-        if (msg.type === "joined") statusEl.textContent = "Joined as " + msg.speak + " → " + msg.hear + ". Captions in " + (msg.cc || "en") + ".";
+        if (msg.type === "joined") statusEl.textContent = msg.speak + " → " + msg.hear;
         if (msg.type === "roster") {
           const box = document.getElementById("players");
           box.replaceChildren();
@@ -395,15 +514,28 @@
           }
         }
         if (msg.type === "sent") {
-          line(mineEl, "Middle: " + msg.pivot, "middle", msg.approx, { id: msg.id, role: "sent", trained: msg.trained });
+          const localId = localQueue.shift();
+          const raw = localId ? said.get(localId) : "";
+          if (localId) {
+            const row = captions.get(localId);
+            captions.delete(localId);
+            mineIds.delete(localId);
+            said.delete(localId);
+            if (row) captions.set(msg.id, row);
+          }
+          if (raw) said.set(msg.id, raw);
+          mineIds.add(msg.id);
+          middles.set(msg.id, msg);
+          paintCaptions();
         }
         if (msg.type === "missed") statusEl.textContent = "That line did not cross. Nothing raw was sent.";
         if (msg.type === "hear") {
-          const who = (msg.name || "Player") + ": " + msg.text;
-          line(theirsEl, who, "theirs", msg.approx, { id: msg.id, role: "hear", trained: msg.trained });
+          hears.set(msg.id, msg);
+          paintCaptions();
           speakLine(msg.text, msg.lang);
         }
         if (msg.type === "cc") {
+          const prev = captions.get(msg.id);
           captions.set(msg.id, {
             name: msg.name,
             text: msg.text,
@@ -411,7 +543,8 @@
             en: msg.en,
             enApprox: msg.enApprox,
             approx: msg.approx,
-            trained: msg.trained
+            trained: msg.trained,
+            raw: (prev && prev.raw) || said.get(msg.id) || ""
           });
           paintCaptions();
         }
@@ -423,8 +556,23 @@
     function sendText(text) {
       const clean = text.trim();
       if (!clean || !socket || socket.readyState !== 1) return;
+      const localId = "local-" + (++localSeq);
+      localQueue.push(localId);
+      mineIds.add(localId);
+      said.set(localId, clean);
+      captions.set(localId, {
+        name: myName,
+        raw: clean,
+        en: clean,
+        text: clean,
+        lang: "local",
+        local: true,
+        enApprox: false,
+        approx: false,
+        trained: false
+      });
+      paintCaptions();
       socket.send(JSON.stringify({ type: "say", text: clean }));
-      line(mineEl, "You: " + clean, "mine", false);
     }
 
     document.getElementById("create").addEventListener("click", async () => {
@@ -432,6 +580,7 @@
       const body = await res.json();
       document.getElementById("code").value = body.code;
       room = body.code;
+      document.getElementById("setup-code").textContent = body.code.toUpperCase();
       show("setup");
     });
 
@@ -442,12 +591,14 @@
         return;
       }
       document.getElementById("code").value = room;
+      document.getElementById("setup-code").textContent = room.toUpperCase();
       show("setup");
     });
 
     document.getElementById("back-home").addEventListener("click", () => show("home"));
     document.getElementById("enter").addEventListener("click", () => {
-      store("bt-name", document.getElementById("name").value);
+      myName = document.getElementById("name").value.trim() || "Player";
+      store("bt-name", myName);
       store("bt-speak", speakSel.value);
       store("bt-hear", hearSel.value);
       document.getElementById("room-label").textContent = room.toUpperCase();
@@ -463,9 +614,7 @@
 
     document.getElementById("leave").addEventListener("click", () => {
       if (socket) socket.close();
-      captions.clear();
-      ccFeed.replaceChildren();
-      overlayFeed.replaceChildren();
+      clearChat();
       show("home");
     });
 
@@ -511,11 +660,7 @@
         const button = document.createElement("button");
         button.type = "button";
         button.textContent = callout.text[lang] || callout.text.en;
-        button.addEventListener("click", () => {
-          if (!socket || socket.readyState !== 1) return;
-          socket.send(JSON.stringify({ type: "say", text: button.textContent }));
-          line(mineEl, "You: " + (callout.text[lang] || callout.text.en), "mine", false);
-        });
+        button.addEventListener("click", () => sendText(button.textContent));
         box.appendChild(button);
       }
     }
@@ -532,11 +677,18 @@
         sendSetup();
       });
     }
-    document.getElementById("name").addEventListener("change", sendSetup);
+    document.getElementById("name").addEventListener("change", () => {
+      myName = document.getElementById("name").value.trim() || "Player";
+      sendSetup();
+    });
     ccSel.addEventListener("change", () => {
       store("bt-cc", ccSel.value);
       paintCaptions();
       sendSetup();
+    });
+    document.getElementById("open-settings").addEventListener("click", () => {
+      const box = document.getElementById("settings");
+      box.hidden = !box.hidden;
     });
 
     document.getElementById("overlay-toggle").addEventListener("change", () => {
@@ -653,6 +805,7 @@
     const params = new URLSearchParams(location.search);
     if (params.get("mock") === "1") document.getElementById("mock").checked = true;
     document.getElementById("name").value = saved("bt-name", "Player");
+    myName = document.getElementById("name").value.trim() || "Player";
     fillLanguages(FALLBACK_LANGS);
 
     Promise.all([
@@ -671,6 +824,7 @@
       if (preset.length === 6) {
         room = preset;
         document.getElementById("code").value = preset;
+        document.getElementById("setup-code").textContent = preset.toUpperCase();
         show("setup");
       }
     });
