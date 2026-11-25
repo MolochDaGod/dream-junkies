@@ -17,6 +17,7 @@ Miners add $DREAM while they live. The win is the enemy statue at 0.
 - Captain book: `data/captains.json`. The worker serves it at `GET /v1/captains`. Local Vite also serves `/data/captains.json`.
 - Third person: the orbit in `cinema/play.js` follows Grudge `Controller.ts`. Yaw, positive pitch so the camera stays above the floor, distance 2.5–10, camera-relative WASD, screen-right is `(-forward.z, 0, forward.x)`. It is the camera and the walk. It is not a second combat controller, mixer, or physics world.
 - Rules: `cinema/play-sim.js`. Three.js only draws positions. Humans are about 1.8 m. The statue is about 2.5 m. The lane is 36 m.
+- Body: one img2threejs rig, `cinema/bodies/dream-human.js`, from `models/dream-human.json`. The lane tints it and hangs the troop prop on the bones. It is not a second mixer or a Warlords play body.
 
 ## Controls
 

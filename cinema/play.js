@@ -1,4 +1,6 @@
-import * as THREE from "three";
+import * as THREE from "https://unpkg.com/three@0.185.0/build/three.module.js";
+import * as SkeletonUtils from "https://unpkg.com/three@0.185.0/examples/jsm/utils/SkeletonUtils.js";
+import { createDreamHumanModel } from "./bodies/dream-human.js";
 import { ENEMY_Z, PLAYER_Z, cameraOffset, castRite, createMatch, moveCaptain, step, train, upgradeNearest, walkBasis } from "./play-sim.js";
 
 const canvas = document.querySelector("#view");
@@ -30,6 +32,23 @@ for (const x of [-3.8, 3.8]) {
 }
 
 const ROLE_COLOR = { miner: 0xc4a15a, swordwrath: 0xd7e7df, archidon: 0x7dcea0, spearton: 0x8aa0b8 };
+const LOOKS = {
+  oze: { skin: 0x8d5a3c, hair: 0x1a120e, shirt: 0x6b4a2a, pants: 0x2a2420, shoes: 0x14110e, eye: 0xe4c36a, lips: 0x8a4a42, metal: 0.35 },
+  wu: { skin: 0xe0b090, hair: 0x140e0c, shirt: 0x6e1d3a, pants: 0x3a1424, shoes: 0xc6a15a, eye: 0xf2eee4, lips: 0xa85a62, metal: 0.08 },
+  "bloom-mind": { skin: 0xf0c8a8, hair: 0x2a3a28, shirt: 0x7d9a62, pants: 0x3d4a38, shoes: 0x6a5a3a, eye: 0xd7efc4, lips: 0xc47a86, metal: 0.04 },
+  "memory-core": { skin: 0xc49a74, hair: 0x101014, shirt: 0x1a1c28, pants: 0x12131a, shoes: 0x2a2a30, eye: 0xc5d4e8, lips: 0x8a5a58, metal: 0.28 },
+  trea: { skin: 0xc4a07a, hair: 0x1c140e, shirt: 0x1f4a3a, pants: 0x142820, shoes: 0x3a3228, eye: 0xe7f0dc, lips: 0x9a5a52, metal: 0.16 },
+  sury: { skin: 0xd0a884, hair: 0x1a120c, shirt: 0x243a5c, pants: 0x1a2438, shoes: 0x3a3228, eye: 0xe4e8c8, lips: 0x9a5a52, metal: 0.12 },
+  "paradox-vein": { skin: 0xe0b896, hair: 0x2a1848, shirt: 0xc6a15a, pants: 0x4a2a78, shoes: 0x2a2030, eye: 0xe4c36a, lips: 0x8a5070, metal: 0.4 },
+  "abyss-echo": { skin: 0xb98a6a, hair: 0x0c1a22, shirt: 0x0e2a3a, pants: 0x0a1c28, shoes: 0x101418, eye: 0x9fd4e0, lips: 0x6a4050, metal: 0.14 },
+  "light-sector": { skin: 0xf0d2b4, hair: 0xe8d7a8, shirt: 0xc6b07a, pants: 0x8a7a58, shoes: 0xe4c36a, eye: 0xfff6d8, lips: 0xc48a80, metal: 0.55 },
+  "fear-pool": { skin: 0x6a4038, hair: 0x2a100c, shirt: 0x3a1a14, pants: 0x1a0e0c, shoes: 0x2a1612, eye: 0xff6a3a, lips: 0x6a3030, metal: 0.32 },
+  tengu: { skin: 0xc4a484, hair: 0x0c0c0c, shirt: 0x141414, pants: 0x101010, shoes: 0x1a1a1a, eye: 0xe4c36a, lips: 0x5a3030, metal: 0.22 },
+  miner: { skin: 0xc4a484, hair: 0x2a2118, shirt: 0x8a6a3a, pants: 0x4a3a28, shoes: 0x2a241c, eye: 0xf2eee4, lips: 0x9a685c, metal: 0.06 },
+  swordwrath: { skin: 0xd0b090, hair: 0x241c16, shirt: 0xc5d0c8, pants: 0x8a9390, shoes: 0x3a342c, eye: 0xf4f1e8, lips: 0xa07068, metal: 0.35 },
+  archidon: { skin: 0xd0b090, hair: 0x241c16, shirt: 0x5d9a78, pants: 0x2e4a3c, shoes: 0x3a342c, eye: 0xf4f1e8, lips: 0xa07068, metal: 0.08 },
+  spearton: { skin: 0xc4a484, hair: 0x1c1814, shirt: 0x7e92a8, pants: 0x3e4a58, shoes: 0x2a3038, eye: 0xf4f1e8, lips: 0x9a685c, metal: 0.45 }
+};
 
 function figure(color, tall) {
   const group = new THREE.Group();
@@ -53,9 +72,174 @@ function figure(color, tall) {
   return group;
 }
 
-const captainMesh = figure(0x3dff9a, false);
-const playerStatue = figure(0xe4c36a, true);
-const enemyStatue = figure(0x8b3a4a, true);
+let bodyProto = null;
+let bodyHeight = 0;
+let bodyMinY = 0;
+const bodyCache = new Map();
+
+function prepareBodies() {
+  if (bodyProto) return true;
+  try {
+    const proto = createDreamHumanModel({
+      castShadow: false,
+      receiveShadow: false,
+      flatMaterials: true,
+      qualityPriority: "lane-readability"
+    });
+    proto.traverse((obj) => {
+      if (!obj.isMesh) return;
+      const slot = obj.userData.sculptComponent && obj.userData.sculptComponent.material;
+      if (slot === "hidden" && obj.material) {
+        obj.material.depthWrite = false;
+        obj.material.colorWrite = false;
+      }
+    });
+    proto.updateMatrixWorld(true);
+    const box = new THREE.Box3();
+    proto.traverse((obj) => {
+      if (!obj.isMesh) return;
+      const slot = obj.userData.sculptComponent && obj.userData.sculptComponent.material;
+      if (slot === "hidden") return;
+      box.expandByObject(obj);
+    });
+    const height = box.max.y - box.min.y;
+    if (!(height > 0.4 && height < 8)) return false;
+    bodyProto = proto;
+    bodyHeight = height;
+    bodyMinY = box.min.y;
+    return true;
+  } catch (error) {
+    console.warn(error);
+    return false;
+  }
+}
+
+function tintModel(model, look, darken) {
+  const swaps = new Map();
+  model.traverse((obj) => {
+    if (!obj.isMesh || !obj.material) return;
+    let next = swaps.get(obj.material);
+    if (!next) {
+      next = obj.material.clone();
+      const slot = obj.userData.sculptComponent && obj.userData.sculptComponent.material;
+      if (typeof look[slot] === "number") next.color.setHex(look[slot]);
+      if (slot === "shirt" || slot === "shoes") next.metalness = look.metal || 0;
+      if (darken) next.color.multiplyScalar(0.62);
+      next.depthWrite = slot !== "hidden";
+      swaps.set(obj.material, next);
+    }
+    obj.material = next;
+  });
+}
+
+function addProps(model, lookId, role) {
+  const bones = model.userData.rig && model.userData.rig.bones;
+  if (!bones) return;
+  const wood = new THREE.MeshStandardMaterial({ color: 0x6b4a2a, roughness: 0.8 });
+  const iron = new THREE.MeshStandardMaterial({ color: 0xc5ccd4, roughness: 0.35, metalness: 0.6 });
+  const gold = new THREE.MeshStandardMaterial({ color: 0xe4c36a, roughness: 0.4, metalness: 0.5 });
+  const ink = new THREE.MeshStandardMaterial({ color: 0x120e0c, roughness: 0.55 });
+  if (role === "miner" && bones["hand-r"]) {
+    const pick = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.72, 6), wood);
+    pick.rotation.z = 0.8;
+    pick.position.set(0.04, -0.22, 0.04);
+    bones["hand-r"].add(pick);
+  } else if (role === "swordwrath" && bones["hand-r"]) {
+    const sword = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.95, 0.015), iron);
+    sword.position.set(0, -0.42, 0.03);
+    bones["hand-r"].add(sword);
+  } else if (role === "archidon" && bones["chest"]) {
+    const bow = new THREE.Mesh(new THREE.TorusGeometry(0.28, 0.012, 6, 12, Math.PI), wood);
+    bow.position.set(0.05, 0.05, -0.12);
+    bow.rotation.y = Math.PI / 2;
+    bones["chest"].add(bow);
+  } else if (role === "spearton") {
+    if (bones["hand-r"]) {
+      const spear = new THREE.Mesh(new THREE.CylinderGeometry(0.016, 0.016, 1.35, 6), wood);
+      spear.position.set(0.04, -0.15, 0.05);
+      bones["hand-r"].add(spear);
+    }
+    if (bones["hand-l"]) {
+      const shield = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.5, 0.04), iron);
+      shield.position.set(0, -0.05, 0.1);
+      bones["hand-l"].add(shield);
+    }
+  } else if (lookId === "wu" && bones.head) {
+    const circlet = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.012, 6, 16), gold);
+    circlet.rotation.x = Math.PI / 2;
+    circlet.position.set(0, 0.22, 0.03);
+    bones.head.add(circlet);
+  } else if (lookId === "tengu" && bones.head) {
+    const mask = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.18, 0.04), ink);
+    mask.position.set(0, 0.02, 0.14);
+    const beak = new THREE.Mesh(new THREE.ConeGeometry(0.03, 0.16, 5), gold);
+    beak.rotation.x = Math.PI / 2;
+    beak.position.set(0, -0.02, 0.1);
+    mask.add(beak);
+    bones.head.add(mask);
+  }
+}
+
+function rebindRig(model) {
+  const rig = model.userData && model.userData.rig;
+  if (!rig) return;
+  let skeleton = null;
+  model.traverse((obj) => {
+    if (!skeleton && obj.isSkinnedMesh && obj.skeleton) skeleton = obj.skeleton;
+  });
+  if (!skeleton) return;
+  const bones = {};
+  for (const bone of skeleton.bones) {
+    if (bone && bone.name) bones[bone.name] = bone;
+  }
+  rig.bones = bones;
+  rig.skeleton = skeleton;
+}
+
+function makeBody(lookId, role, height, darken) {
+  const key = lookId + "|" + (role || "") + "|" + (darken ? "d" : "n");
+  let cached = bodyCache.get(key);
+  if (!cached) {
+    cached = SkeletonUtils.clone(bodyProto);
+    rebindRig(cached);
+    tintModel(cached, LOOKS[lookId] || LOOKS.oze, darken);
+    addProps(cached, role ? null : lookId, role);
+    bodyCache.set(key, cached);
+  }
+  const model = SkeletonUtils.clone(cached);
+  rebindRig(model);
+  const wrap = new THREE.Group();
+  const scale = height / bodyHeight;
+  model.scale.setScalar(scale);
+  model.position.y = -bodyMinY * scale;
+  wrap.add(model);
+  wrap.userData.model = model;
+  wrap.userData.shared = true;
+  wrap.userData.phase = 0;
+  return wrap;
+}
+
+function stepGait(wrap, dt, moving) {
+  const model = wrap && wrap.userData.model;
+  const bones = model && model.userData.rig && model.userData.rig.bones;
+  if (!bones) return;
+  wrap.userData.phase = (wrap.userData.phase || 0) + dt * (moving ? 7.5 : 0);
+  const swing = moving ? Math.sin(wrap.userData.phase) : 0;
+  const set = (id, angle) => {
+    const bone = bones[id];
+    if (bone) bone.rotation.x = angle;
+  };
+  set("thigh-l", swing * 0.7);
+  set("thigh-r", -swing * 0.7);
+  set("shin-l", Math.max(0, -swing) * 1.05);
+  set("shin-r", Math.max(0, swing) * 1.05);
+  set("upper-arm-l", -swing * 0.5);
+  set("upper-arm-r", swing * 0.5);
+}
+
+let captainMesh = figure(0x3dff9a, false);
+let playerStatue = figure(0xe4c36a, true);
+let enemyStatue = figure(0x8b3a4a, true);
 playerStatue.position.set(0, 0, PLAYER_Z);
 enemyStatue.position.set(0, 0, ENEMY_Z);
 enemyStatue.rotation.y = Math.PI;
@@ -140,39 +324,74 @@ function paintHud() {
   }
 }
 
-function syncUnits() {
+function releaseFigure(mesh) {
+  scene.remove(mesh);
+  if (!mesh.userData.shared) {
+    mesh.traverse((child) => {
+      if (child.geometry) child.geometry.dispose();
+      if (child.material) child.material.dispose();
+    });
+    return;
+  }
+  let skeleton = null;
+  mesh.traverse((child) => {
+    if (!skeleton && child.isSkinnedMesh && child.skeleton) skeleton = child.skeleton;
+  });
+  if (skeleton) skeleton.dispose();
+}
+
+function syncUnits(dt) {
   const live = new Set();
   for (const unit of match.units) {
     live.add(unit.id);
     let mesh = meshes.get(unit.id);
     if (!mesh) {
-      mesh = figure(unit.side === "enemy" ? 0x6e2433 : ROLE_COLOR[unit.role] || 0xd7e7df, false);
+      const enemy = unit.side === "enemy";
+      mesh = bodyProto
+        ? makeBody(unit.role, unit.role, 1.8, enemy)
+        : figure(enemy ? 0x6e2433 : ROLE_COLOR[unit.role] || 0xd7e7df, false);
       scene.add(mesh);
       meshes.set(unit.id, mesh);
     }
+    const moved = Math.abs(unit.z - (mesh.userData.lastZ ?? unit.z)) > 0.002
+      || Math.abs(unit.x - (mesh.userData.lastX ?? unit.x)) > 0.002;
+    mesh.userData.lastZ = unit.z;
+    mesh.userData.lastX = unit.x;
     mesh.position.set(unit.x, 0, unit.z);
     mesh.rotation.y = unit.facing;
     mesh.scale.setScalar(0.9 + unit.rank * 0.08);
+    stepGait(mesh, dt || 0, moved);
   }
   for (const [id, mesh] of meshes) {
     if (live.has(id)) continue;
-    scene.remove(mesh);
-    mesh.traverse((child) => {
-      if (child.geometry) child.geometry.dispose();
-      if (child.material) child.material.dispose();
-    });
+    releaseFigure(mesh);
     meshes.delete(id);
   }
 }
 
 function clearField() {
-  for (const mesh of meshes.values()) scene.remove(mesh);
+  for (const mesh of meshes.values()) releaseFigure(mesh);
   meshes.clear();
+}
+
+function mountAnchors() {
+  if (!prepareBodies()) return;
+  releaseFigure(captainMesh);
+  releaseFigure(playerStatue);
+  releaseFigure(enemyStatue);
+  captainMesh = makeBody(match.player.id, null, 1.8, false);
+  playerStatue = makeBody(match.player.id, null, 2.5, false);
+  enemyStatue = makeBody(match.enemy.id, null, 2.5, false);
+  scene.add(captainMesh, playerStatue, enemyStatue);
+  playerStatue.position.set(0, 0, PLAYER_Z);
+  enemyStatue.position.set(0, 0, ENEMY_Z);
+  enemyStatue.rotation.y = Math.PI;
 }
 
 function start(captainId) {
   clearField();
   match = createMatch(book, captainId);
+  mountAnchors();
   document.querySelector("#gate").hidden = true;
   document.querySelector("#hud").hidden = false;
   document.querySelector("#end").hidden = true;
@@ -251,6 +470,7 @@ for (const captain of book.captains) {
   button.addEventListener("click", () => start(captain.id));
   roster.appendChild(button);
 }
+requestAnimationFrame(() => prepareBodies());
 
 let last = performance.now();
 function loop(now) {
@@ -270,7 +490,8 @@ function loop(now) {
     step(match, dt);
     captainMesh.position.set(match.captain.x, 0, match.captain.z);
     captainMesh.rotation.y = match.captain.facing;
-    syncUnits();
+    stepGait(captainMesh, dt, len > 0);
+    syncUnits(dt);
     paintHud();
   }
   frameCamera();
