@@ -30,7 +30,7 @@ Production is Cloudflare Worker `dream-junkies-talk`, account Grudge. Config is 
 | https://dream-junkies-talk.grudge.workers.dev/talk | BridgeTalk |
 | https://dream-junkies-talk.grudge.workers.dev/v1/captains | Army book |
 
-Checked 2026-11-24: those four URLs returned 200. `/`, `/play`, and `/talk` are HTML. `/v1/captains` and `/v1/languages` are JSON.
+Current production version is `0809bb70-66e4-4daa-b764-1149e5fa48d2`, from commit `e9036a2`. That bundle includes `cinema/bodies/dream-human.js`. Checked 2026-11-25: `/`, `/play`, `/talk`, `/play.js`, `/bodies/dream-human.js`, and `/v1/captains` returned 200. The live lane script imports the body. `/v1/languages` is JSON.
 
 The asset directory is `cinema/`. `run_worker_first` is only `/v1/*`, so pages and voice files come from the asset binding and the API is the Worker. Talk rooms and the lexicon are Durable Objects `TalkRoom` (migration `v1`) and `Lexicon` (migration `v2`). Workers AI is binding `AI`. There is no API key in the repo.
 
@@ -42,7 +42,7 @@ wrangler deploy
 
 `npm run dev` in the repo root previews the lane with Vite on `http://127.0.0.1:5179/cinema/play.html`. That static preview has no Worker, so `/v1/captains` 404s and the lane reads `/data/captains.json`. `npm test` runs `cinema/play-sim.test.mjs` and `worker/src/wire.test.mjs`.
 
-GitHub Deployments is a record of that worker, environment `production`, site `https://dream-junkies-talk.grudge.workers.dev/`. Wrangler does not write that record by itself.
+GitHub Deployments environment `production` records that worker. The successful record is commit `e9036a2`, environment URL `https://dream-junkies-talk.grudge.workers.dev/`. Wrangler does not write that record by itself.
 
 ## GitHub Pages
 
@@ -64,7 +64,7 @@ The four opening films have no audio stream. The player speaks `cinema/voice/ope
 
 `/play` is the lane. One statue is the captain you hold, from `data/captains.json`. The far statue is Tengu Legends, unless you hold Tengu, in which case it is Oze. Training spends $DREAM. An upgrade spends Dream Essence, a little $DREAM, and one of that captain's lore items. The tier-5 rite does not summon a body.
 
-This repository is the OhMyGrudge web game. The live lane is `/play` on the worker in Deployment. `GET /v1/captains` is the army book. The camera is the Grudge third-person orbit: click the field to look, WASD walks with the camera, 1–4 train, U upgrades the nearest troop, R is the rite. Captains, both statues, and the four troop roles share one img2threejs body, `cinema/bodies/dream-human.js`, built from `models/dream-human.json`. Chronicle colors and the hand or head props tell them apart. Troops and the captain are 1.8 m. Statues are 2.5 m. If that body fails to build, the lane falls back to the marker figures. They are not a Warlords play body. The worker that is live today still has the markers until the next deploy.
+This repository is the OhMyGrudge web game. The live lane is `/play` on the worker in Deployment. `GET /v1/captains` is the army book. The camera is the Grudge third-person orbit: click the field to look, WASD walks with the camera, 1–4 train, U upgrades the nearest troop, R is the rite. Captains, both statues, and the four troop roles share one img2threejs body, `cinema/bodies/dream-human.js`, built from `models/dream-human.json`. Chronicle colors and the hand or head props tell them apart. Troops and the captain are 1.8 m. Statues are 2.5 m. If that body fails to build, the lane falls back to the marker figures. They are not a Warlords play body. That body is in the live worker version named above.
 
 ## BridgeTalk
 
