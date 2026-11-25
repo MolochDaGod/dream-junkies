@@ -1,10 +1,56 @@
 # Dream Junkies
 
-Chronicle cinema and live match talk.
+Chronicle cinema, the Dream Lane, and BridgeTalk.
 
 The cinema plays the published manga from dreamjunkies.site. Captains are the generation characters for a Stick Wars: Legacy retelling.
 
 World and biome law is not this repository. That catalog lives in ObjectStore (`F:\GitHub\ObjectStore`), on `info.grudge-studio.com` and `objectstore.grudge-studio.com`.
+
+## About
+
+GitHub About for [MolochDaGod/dream-junkies](https://github.com/MolochDaGod/dream-junkies):
+
+| Field | Value |
+| --- | --- |
+| Description | Chronicle cinema, Dream Lane, and BridgeTalk. Live on the dream-junkies-talk worker. |
+| Website | https://dream-junkies-talk.grudge.workers.dev/ |
+| Topics | `dream-junkies`, `cloudflare-workers`, `threejs` |
+| Visibility | Public. `main` is the default branch. |
+
+The website field is the worker root, which is the cinema. Dream Lane is `/play`. BridgeTalk is `/talk`.
+
+## Deployment
+
+Production is Cloudflare Worker `dream-junkies-talk`, account Grudge. Config is `worker/wrangler.jsonc`. There is no custom domain on that config. The workers.dev host is the live site.
+
+| URL | What it is |
+| --- | --- |
+| https://dream-junkies-talk.grudge.workers.dev/ | Chronicle cinema |
+| https://dream-junkies-talk.grudge.workers.dev/play | Dream Lane |
+| https://dream-junkies-talk.grudge.workers.dev/talk | BridgeTalk |
+| https://dream-junkies-talk.grudge.workers.dev/v1/captains | Army book |
+
+Checked 2026-11-24: those four URLs returned 200. `/`, `/play`, and `/talk` are HTML. `/v1/captains` and `/v1/languages` are JSON.
+
+The asset directory is `cinema/`. `run_worker_first` is only `/v1/*`, so pages and voice files come from the asset binding and the API is the Worker. Talk rooms and the lexicon are Durable Objects `TalkRoom` (migration `v1`) and `Lexicon` (migration `v2`). Workers AI is binding `AI`. There is no API key in the repo.
+
+Deploy from `worker/` with Wrangler 4, when a deploy is intended:
+
+```text
+wrangler deploy
+```
+
+`npm run dev` in the repo root previews the lane with Vite on `http://127.0.0.1:5179/cinema/play.html`. That static preview has no Worker, so `/v1/captains` 404s and the lane reads `/data/captains.json`. `npm test` runs `cinema/play-sim.test.mjs` and `worker/src/wire.test.mjs`.
+
+GitHub Deployments is a record of that worker, environment `production`, site `https://dream-junkies-talk.grudge.workers.dev/`. Wrangler does not write that record by itself.
+
+## GitHub Pages
+
+GitHub Pages is off. `GET /repos/MolochDaGod/dream-junkies/pages` returns 404, and `has_pages` is false. Leave it off.
+
+Pages would publish files from the repository and would not run this Worker. `/v1/*`, the talk room, the lexicon, and Workers AI would be missing, while `/` and `/play` would look like the product. The cinema, the lane, and BridgeTalk stay on one host: the worker above.
+
+A local preview is `npm run dev`. It is not a second public site.
 
 ## Chronicle voice
 
@@ -18,7 +64,7 @@ The four opening films have no audio stream. The player speaks `cinema/voice/ope
 
 `/play` is the lane. One statue is the captain you hold, from `data/captains.json`. The far statue is Tengu Legends, unless you hold Tengu, in which case it is Oze. Training spends $DREAM. An upgrade spends Dream Essence, a little $DREAM, and one of that captain's lore items. The tier-5 rite does not summon a body.
 
-This repository is the OhMyGrudge web game. `npm run dev` previews `cinema/play.html`. The same page is served by worker `dream-junkies-talk`, and `GET /v1/captains` is the army book. The camera is the Grudge third-person orbit: click the field to look, WASD walks with the camera, 1–4 train, U upgrades the nearest troop, R is the rite. The figures are lane markers about 1.8 m tall. They are not a Warlords play body.
+This repository is the OhMyGrudge web game. The live lane is `/play` on the worker in Deployment. `GET /v1/captains` is the army book. The camera is the Grudge third-person orbit: click the field to look, WASD walks with the camera, 1–4 train, U upgrades the nearest troop, R is the rite. The figures on `main` are lane markers about 1.8 m tall. The statues are about 2.5 m. They are not a Warlords play body.
 
 ## BridgeTalk
 
